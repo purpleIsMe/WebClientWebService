@@ -3,10 +3,9 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Web.UI.WebControls;
 
-
 namespace Model.EF
 {
-    [Table("Questions")]
+    [Table("Question")]
     public class Question
     {
         [Key]

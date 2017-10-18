@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using WebClient.Model.Abstract;
+using WebClientService.Model.Abstract;
 
 namespace Model.EF
 {

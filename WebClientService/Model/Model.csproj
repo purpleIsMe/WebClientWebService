@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{22C5FF48-A2C5-48EE-9B08-E44EA4BEAC07}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Model</RootNamespace>
+    <AssemblyName>Model</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Abstract\Auditable.cs" />
+    <Compile Include="Abstract\IAuditable.cs" />
+    <Compile Include="EF\Administration.cs" />
+    <Compile Include="EF\Answer.cs" />
+    <Compile Include="EF\AnswerSheet.cs" />
+    <Compile Include="EF\ContactDetail.cs" />
+    <Compile Include="EF\DECHUAN.cs" />
+    <Compile Include="EF\DECHUAN_QUESTION.cs" />
+    <Compile Include="EF\DETRON.cs" />
+    <Compile Include="EF\DETRON_QUESTION.cs" />
+    <Compile Include="EF\Error.cs" />
+    <Compile Include="EF\Feedback.cs" />
+    <Compile Include="EF\FOOTER.cs" />
+    <Compile Include="EF\HoanVi.cs" />
+    <Compile Include="EF\LOG_IN.cs" />
+    <Compile Include="EF\MENU.cs" />
+    <Compile Include="EF\MENUGROUP.cs" />
+    <Compile Include="EF\Order.cs" />
+    <Compile Include="EF\OrderDetail.cs" />
+    <Compile Include="EF\PAGE.cs" />
+    <Compile Include="EF\PHANQUYEN.cs" />
+    <Compile Include="EF\POST.cs" />
+    <Compile Include="EF\PostCategory.cs" />
+    <Compile Include="EF\POSTTAG.cs" />
+    <Compile Include="EF\QClass.cs" />
+    <Compile Include="EF\Question.cs" />
+    <Compile Include="EF\QUESTION_BUY.cs" />
+    <Compile Include="EF\SLIDE.cs" />
+    <Compile Include="EF\Subject.cs" />
+    <Compile Include="EF\SUPPORT_ONLINE.cs" />
+    <Compile Include="EF\SYSTEMCONFIG.cs" />
+    <Compile Include="EF\TAG.cs" />
+    <Compile Include="EF\User.cs" />
+    <Compile Include="EF\VISITOR_STATISTIC.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="DAO\" />
+    <Folder Include="ModelView\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,33 +1,45 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
 namespace Model.EF
 {
-    [Table("DECHUAN")]
-    public class DECHUAN
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Data.Entity.Spatial;
+
+    [Table("DeChuan")]
+    public partial class DeChuan
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public DeChuan()
+        {
+            DeChuanQuestions = new HashSet<DeChuanQuestion>();
+            DeTrons = new HashSet<DeTron>();
+        }
+
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int MaDeChuan { set; get; }
+        public int MaDeChuan { get; set; }
 
-        [MaxLength(50)]
-        public string TenDeChuan { set; get; }
+        [StringLength(50)]
+        public string TenDeChuan { get; set; }
 
-        [Required]
-        public Guid MaMon { set; get; }
+        public Guid MaMon { get; set; }
 
-        [Required]
-        public int MaCaThi { set; get; }
+        public int MaCaThi { get; set; }
 
-        [Required]
-        public int SoDeHoanVi { set; get; }
+        public int SoDeHoanVi { get; set; }
 
-        public bool TrangThaiTron { set; get; }
+        public bool? TrangThaiTron { get; set; }
 
-        [Required]
-        public int ThoiGian { set; get; }
+        public int ThoiGian { get; set; }
 
-        public bool Lock { set; get; }
+        public bool? Lock { get; set; }
+
+        public virtual Cathi Cathi { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DeChuanQuestion> DeChuanQuestions { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DeTron> DeTrons { get; set; }
     }
 }

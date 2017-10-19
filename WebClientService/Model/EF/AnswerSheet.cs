@@ -1,31 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace Model.EF
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Data.Entity.Spatial;
+
     [Table("AnswerSheet")]
-    public class AnswerSheet
+    public partial class AnswerSheet
     {
         [Key]
-        public int IDAnswer { set; get; }
-        
+        [Column(Order = 0)]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public int IDAnswer { get; set; }
+
         [Key]
-        public int ThuTuCauHoi { set; get; }
+        [Column(Order = 1)]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public int ThuTuCauHoi { get; set; }
 
-        [Required]
-        public int Answer { set; get; }
+        public int Answer { get; set; }
 
-        public Guid QuestionID { set; get; }
+        public Guid? QuestionID { get; set; }
 
-        public int DapAn { set; get; }
-
-        [ForeignKey("IDAnswer")]
-        public virtual Answer ID { set; get; }
-
+        public int? DapAn { get; set; }
     }
 }

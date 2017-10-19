@@ -1,25 +1,24 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
 namespace Model.EF
 {
-    [Table("SYSTEMCONFIG")]
-    public class SYSTEMCONFIG
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Data.Entity.Spatial;
+
+    [Table("SystemConfig")]
+    public partial class SystemConfig
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int ID { set; get; }
-
+        public int ID { get; set; }
 
         [Required]
-        [MaxLength(50)]
-        public string Code { set; get; }
+        [StringLength(50)]
+        public string Code { get; set; }
 
         [Required]
-        [MaxLength(50)]
-        public string ValueString { set; get; }
+        [StringLength(50)]
+        public string ValueString { get; set; }
 
-        [Required]
-        public int ValueInt { set; get; }
+        public int ValueInt { get; set; }
     }
 }

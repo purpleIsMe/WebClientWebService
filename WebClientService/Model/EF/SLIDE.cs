@@ -1,31 +1,28 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
 namespace Model.EF
 {
-    [Table("SLIDE")]
-    public class SLIDE
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Data.Entity.Spatial;
+
+    [Table("Slide")]
+    public partial class Slide
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int ID { set; get; }
+        public int ID { get; set; }
 
         [Required]
-        [MaxLength(256)]
-        public string Name { set; get; }
+        [StringLength(256)]
+        public string Name { get; set; }
 
         [Required]
-        public string Description { set; get; }
+        [StringLength(200)]
+        public string Image { get; set; }
 
         [Required]
-        [MaxLength(200)]
-        public string Image { set; get; }
+        [StringLength(500)]
+        public string Description { get; set; }
 
-        [Required]
-        [MaxLength(500)]
-        public string URL { set; get; }
-
-        [Required]
-        public bool Active { set; get; }
+        public bool Active { get; set; }
     }
 }

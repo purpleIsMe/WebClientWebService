@@ -1,172 +1,173 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
 namespace Model.EF
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Data.Entity.Spatial;
+
     [Table("Subject")]
-    public class Subject
+    public partial class Subject
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public Guid SubjectID { set; get; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Subject()
+        {
+            QClasses = new HashSet<QClass>();
+        }
+
+        public Guid SubjectID { get; set; }
 
         [Required]
-        [MaxLength(50)]
-        public string SubjectNbr { set; get; }
+        [StringLength(50)]
+        public string SubjectNbr { get; set; }
 
-        public Guid ParentID { set; get; }
+        public Guid? ParentID { get; set; }
 
-        [MaxLength(200)]
-        public string Descr { set; get; }
+        [StringLength(200)]
+        public string Descr { get; set; }
 
-        [MaxLength(20)]
-        public string Prefix { set; get; }
+        [StringLength(20)]
+        public string Prefix { get; set; }
 
-        [MaxLength(100)]
-        public string Author { set; get; }
+        [StringLength(100)]
+        public string Author { get; set; }
 
-        [MaxLength(100)]
-        public string Office { set; get; }
+        [StringLength(100)]
+        public string Office { get; set; }
 
-        public DateTime CreateDate { set; get; }
+        public DateTime? CreateDate { get; set; }
 
-        [Required]
-        public bool AnswerOption { set; get; }
+        public bool AnswerOption { get; set; }
 
-        public int RoundMode { set; get; }
+        public int? RoundMode { get; set; }
 
-        [MaxLength(255)]
-        public string Path { set; get; }
+        [StringLength(255)]
+        public string Path { get; set; }
 
-        [MaxLength(255)]
-        public string filemau { set; get; }
+        [StringLength(255)]
+        public string filemau { get; set; }
 
-        public int NoOfAnswers { set; get; }
+        public int? NoOfAnswers { get; set; }
 
-        public int NoOfQuestions { set; get; }
+        public int? NoOfQuestions { get; set; }
 
-        public int From1 { set; get; }
+        public int? From1 { get; set; }
 
-        public int NoQuest1 { set; get; }
+        public int? NoQuest1 { get; set; }
 
-        public int From2 { set; get; }
+        public int? From2 { get; set; }
 
-        public int NoQuest2 { set; get; }
+        public int? NoQuest2 { get; set; }
 
-        public int From3 { set; get; }
+        public int? From3 { get; set; }
 
-        public int NoQuest3 { set; get; }
+        public int? NoQuest3 { get; set; }
 
-        public int MarkOpt { set; get; } //SQL: smallint
+        public short? MarkOpt { get; set; }
 
-        public float Minus { set; get; } //SQL: real
+        public float? Minus { get; set; }
 
-        [MaxLength(255)]
-        public string Text1 { set; get; }
+        [StringLength(255)]
+        public string Text1 { get; set; }
 
-        [MaxLength(255)]
-        public string Text2 { set; get; }
+        [StringLength(255)]
+        public string Text2 { get; set; }
 
-        [MaxLength(255)]
-        public string Text3 { set; get; }
+        [StringLength(255)]
+        public string Text3 { get; set; }
 
-        [MaxLength(255)]
-        public string Text4 { set; get; }
+        [StringLength(255)]
+        public string Text4 { get; set; }
 
-        public string Text5 { set; get; }
+        [StringLength(255)]
+        public string Text5 { get; set; }
 
-        public DateTime ExecuteDate { set; get; }
+        public DateTime? ExecuteDate { get; set; }
 
-        public DateTime ExecuteTime { set; get; }
-        
-        public int ExecutingTimeAmt { set; get; }
+        public DateTime? ExecuteTime { get; set; }
 
-        public Guid HeaderID { set; get; }
+        public int? ExecutingTimeAmt { get; set; }
 
-        public Guid FooterID { set; get; }
+        public Guid? HeaderID { get; set; }
 
-        public Guid TemplateID { set; get; }
+        public Guid? FooterID { get; set; }
 
-        [Required]
-        public bool Locked { set; get; }
+        public Guid? TemplateID { get; set; }
 
-        public int GroupCount { set; get; }
+        public bool Locked { get; set; }
 
-        public int ParQSpaceBefore { set; get; }
-        
-        public int ParMQSpaceBefore { set; get; }
-        
-        public float ParQLeftIndent { set; get; }
-        
-        public float ParMQLeftIndent { set; get; }
-        
-        public int ParFontSize { set; get; }
+        public int? GroupCount { get; set; }
 
-        [MaxLength(100)]
-        public string ParFontName { set; get; }
-        
-        public float Double1 { set; get; } //SLQ: Double1(real, null)
+        public int? ParQSpaceBefore { get; set; }
 
-        public float Double2 { set; get; }
-        
-        public float Double3 { set; get; }
-        
-        public float Double4 { set; get; }
-        
-        public bool SkipSwap { set; get; }
+        public int? ParMQSpaceBefore { get; set; }
 
-        public int cblank { set; get; }
+        public double? ParQLeftIndent { get; set; }
 
-        public int cdouble { set; get; }
+        public double? ParMQLeftIndent { get; set; }
 
-        [Required]
-        public bool clogic { set; get; }
+        public int? ParFontSize { get; set; }
 
-        [Required]
-        public int pfsbd { set; get; }
+        [StringLength(100)]
+        public string ParFontName { get; set; }
 
-        [Required]
-        public int pnsbd { set; get; }
+        public float? Double1 { get; set; }
 
-        public int pfmade { set; get; }
+        public float? Double2 { get; set; }
 
-        public int pnmade { set; get; }
+        public float? Double3 { get; set; }
 
-        public int pftraloi { set; get; }
+        public float? Double4 { get; set; }
 
-        public int pntraloi { set; get; }
+        public bool SkipSwap { get; set; }
 
-        public int pflo { set; get; }
+        public int? cblank { get; set; }
 
-        public int pnlo { set; get; }
+        public int? cdouble { get; set; }
 
-        public int pfimage    { set; get; }
+        public bool clogic { get; set; }
 
-        [Required]
-        public int pnimage { set; get; }
+        public int? pfsbd { get; set; }
 
-        [MaxLength(50)]
-        public string pblank { set; get; }
+        public int? pnsbd { get; set; }
 
-        [MaxLength(50)]
-        public string pdouble { set; get; }
+        public int? pfmade { get; set; }
 
-        [Required]
-        public bool roundToZero { set; get; }
+        public int? pnmade { get; set; }
 
-        [Required]
-        public bool skipMinus { set; get; }
+        public int? pftraloi { get; set; }
 
-        public float MaxPoint { set; get; }//Real
+        public int? pntraloi { get; set; }
 
-        public float MinPoint { set; get; } //Real
+        public int? pflo { get; set; }
 
-        [Required]
-        public bool qBack { set; get; }
+        public int? pnlo { get; set; }
 
-        public int loop { set; get; }
+        public int? pfimage { get; set; }
 
-        public int MaxUsed { set; get; }
+        public int? pnimage { get; set; }
+
+        [StringLength(50)]
+        public string pblank { get; set; }
+
+        [StringLength(50)]
+        public string pdouble { get; set; }
+
+        public bool roundToZero { get; set; }
+
+        public bool skipMinus { get; set; }
+
+        public float? MaxPoint { get; set; }
+
+        public float? MinPoint { get; set; }
+
+        public bool qBack { get; set; }
+
+        public int? loop { get; set; }
+
+        public int? MaxUsed { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<QClass> QClasses { get; set; }
     }
 }

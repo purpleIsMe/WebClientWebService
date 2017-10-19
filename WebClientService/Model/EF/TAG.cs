@@ -1,21 +1,22 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
 namespace Model.EF
 {
-    [Table("TAG")]
-    public class TAG
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Data.Entity.Spatial;
+
+    [Table("Tag")]
+    public partial class Tag
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int ID { set; get; }
+        public int ID { get; set; }
 
         [Required]
-        [MaxLength(50)]
-        public string Name { set; get; }
+        [StringLength(50)]
+        public string Name { get; set; }
 
         [Required]
-        [MaxLength(50)]
-        public string Type { set; get; }
+        [StringLength(50)]
+        public string Type { get; set; }
     }
 }

@@ -1,29 +1,27 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
 namespace Model.EF
 {
-    [Table("Feedback")]
-    public class Feedback
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Data.Entity.Spatial;
+
+    [Table("FeedBack")]
+    public partial class FeedBack
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int ID { set; get; }
+        public int ID { get; set; }
 
         [StringLength(250)]
-        [Required]
-        public string Name { set; get; }
-
-        [StringLength(250)]
-        public string Email { set; get; }
+        public string Name { get; set; }
 
         [StringLength(500)]
-        public string Message { set; get; }
+        public string Email { get; set; }
 
-        public DateTime CreatedDate { set; get; }
+        [StringLength(500)]
+        public string Messages { get; set; }
 
-        [Required]
-        public bool Status { set; get; }
+        public DateTime? CreateDate { get; set; }
+
+        public bool Status { get; set; }
     }
 }

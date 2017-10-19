@@ -1,29 +1,50 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using WebClientService.Model.Abstract;
-
 namespace Model.EF
 {
-    [Table("PAGE")]
-    public class PAGE:Auditable
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Data.Entity.Spatial;
+
+    [Table("Page")]
+    public partial class Page
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int ID { set; get; }
+        public int ID { get; set; }
 
         [Required]
-        [MaxLength(200)]
-        public string Name { set; get; }
+        [StringLength(200)]
+        public string Name { get; set; }
 
         [Required]
-        public string Alias { set; get; }
+        [StringLength(100)]
+        public string Alias { get; set; }
 
         [Required]
-        [MaxLength(500)]
-        public string PContent { set; get; }
+        [StringLength(500)]
+        public string PContent { get; set; }
+
+        public DateTime CreateDate { get; set; }
 
         [Required]
-        public bool Active { set; get; }
+        [StringLength(100)]
+        public string CreateBy { get; set; }
 
+        public DateTime UpdateDate { get; set; }
+
+        [Required]
+        [StringLength(100)]
+        public string UpdateBy { get; set; }
+
+        public bool Active { get; set; }
+
+        [Required]
+        [StringLength(100)]
+        public string MetaKeyword { get; set; }
+
+        [Required]
+        [StringLength(100)]
+        public string MetaDescription { get; set; }
+
+        public bool? Status { get; set; }
     }
 }

@@ -1,29 +1,30 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
 namespace Model.EF
 {
-    [Table("MENU")]
-    public class MENU
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Data.Entity.Spatial;
+
+    [Table("Menu")]
+    public partial class Menu
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int ID { set; get; }
+        public int ID { get; set; }
 
         [Required]
-        [MaxLength(50)]
-        public string Name { set; get; }
+        [StringLength(50)]
+        public string Name { get; set; }
 
-        [MaxLength(256)]
-        public string URL { set; get; }
+        [StringLength(256)]
+        public string URL { get; set; }
 
-        [Required]
-        public int IDGroup { set; get; }
+        public int IDGroup { get; set; }
 
-        [MaxLength(10)]
-        public string Target { set; get; }
+        [StringLength(10)]
+        public string Target { get; set; }
 
-        [Required]
-        public bool Active { set; get; }
+        public bool Active { get; set; }
+
+        public virtual MenuGroup MenuGroup { get; set; }
     }
 }

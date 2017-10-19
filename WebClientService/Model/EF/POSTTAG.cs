@@ -1,24 +1,18 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
 namespace Model.EF
 {
-    [Table("POSTTAG")]
-    public class POSTTAG
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Data.Entity.Spatial;
+
+    [Table("PostTag")]
+    public partial class PostTag
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Column(Order = 1)]
-        public int IDPost { set; get; }
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public int IDPost { get; set; }
 
-        [Key]
-        [Column(TypeName = "int", Order = 2)]
-        public int IDTag { set; get; }
-
-        [ForeignKey("IDPost")]
-        public virtual POST Post { set; get; }
-
-        [ForeignKey("IDTag")]
-        public virtual TAG Tag { set; get; }
+        public int? IDTag { get; set; }
     }
 }

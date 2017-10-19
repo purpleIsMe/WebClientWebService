@@ -41,6 +41,8 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Xml.Linq" />
@@ -53,43 +55,39 @@
   <ItemGroup>
     <Compile Include="Abstract\Auditable.cs" />
     <Compile Include="Abstract\IAuditable.cs" />
+    <Compile Include="DAO\UserDAO.cs" />
     <Compile Include="EF\Administration.cs" />
     <Compile Include="EF\Answer.cs" />
     <Compile Include="EF\AnswerSheet.cs" />
-    <Compile Include="EF\ContactDetail.cs" />
-    <Compile Include="EF\DECHUAN.cs" />
-    <Compile Include="EF\DECHUAN_QUESTION.cs" />
-    <Compile Include="EF\DETRON.cs" />
-    <Compile Include="EF\DETRON_QUESTION.cs" />
+    <Compile Include="EF\Cathi.cs" />
+    <Compile Include="EF\DeChuan.cs" />
+    <Compile Include="EF\DeChuanQuestion.cs" />
+    <Compile Include="EF\DeTron.cs" />
+    <Compile Include="EF\DeTronQuestion.cs" />
     <Compile Include="EF\Error.cs" />
-    <Compile Include="EF\Feedback.cs" />
-    <Compile Include="EF\FOOTER.cs" />
-    <Compile Include="EF\HoanVi.cs" />
-    <Compile Include="EF\LOG_IN.cs" />
-    <Compile Include="EF\MENU.cs" />
-    <Compile Include="EF\MENUGROUP.cs" />
-    <Compile Include="EF\Order.cs" />
-    <Compile Include="EF\OrderDetail.cs" />
-    <Compile Include="EF\PAGE.cs" />
-    <Compile Include="EF\PHANQUYEN.cs" />
-    <Compile Include="EF\POST.cs" />
-    <Compile Include="EF\PostCategory.cs" />
-    <Compile Include="EF\POSTTAG.cs" />
+    <Compile Include="EF\FeedBack.cs" />
+    <Compile Include="EF\Footer.cs" />
+    <Compile Include="EF\LogIn.cs" />
+    <Compile Include="EF\Menu.cs" />
+    <Compile Include="EF\MenuGroup.cs" />
+    <Compile Include="EF\Page.cs" />
+    <Compile Include="EF\PhanQuyen.cs" />
+    <Compile Include="EF\Post.cs" />
+    <Compile Include="EF\PostTag.cs" />
     <Compile Include="EF\QClass.cs" />
     <Compile Include="EF\Question.cs" />
-    <Compile Include="EF\QUESTION_BUY.cs" />
-    <Compile Include="EF\SLIDE.cs" />
+    <Compile Include="EF\QuestionBuy.cs" />
+    <Compile Include="EF\Slide.cs" />
     <Compile Include="EF\Subject.cs" />
-    <Compile Include="EF\SUPPORT_ONLINE.cs" />
-    <Compile Include="EF\SYSTEMCONFIG.cs" />
-    <Compile Include="EF\TAG.cs" />
-    <Compile Include="EF\Users.cs" />
-    <Compile Include="EF\VISITOR_STATISTIC.cs" />
+    <Compile Include="EF\SupportOnline.cs" />
+    <Compile Include="EF\SystemConfig.cs" />
+    <Compile Include="EF\Tag.cs" />
+    <Compile Include="EF\User.cs" />
+    <Compile Include="EF\VisitorStatictis.cs" />
     <Compile Include="EF\WebClientDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="DAO\" />
     <Folder Include="ModelView\" />
   </ItemGroup>
   <ItemGroup>

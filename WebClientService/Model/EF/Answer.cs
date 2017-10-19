@@ -1,26 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace Model.EF
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Data.Entity.Spatial;
+
     [Table("Answer")]
-    public class Answer
+    public partial class Answer
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int ID { set; get; }
+        [Column(Order = 0)]
+        public int ID { get; set; }
 
         [Key]
-        public int IDUser { set; get; }
+        [Column(Order = 1)]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public int IDUser { get; set; }
 
-        [Required]
-        public int DiemSo { set; get; }
+        public int DiemSo { get; set; }
 
-        public float DiemThuc { set; get; }
+        public double? DiemThuc { get; set; }
+
+        public virtual User User { get; set; }
     }
 }

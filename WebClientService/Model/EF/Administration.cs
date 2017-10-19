@@ -1,49 +1,46 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
 namespace Model.EF
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Data.Entity.Spatial;
+
     [Table("Administration")]
-    public class Administration
+    public partial class Administration
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int ID { set; get; }
+        public int ID { get; set; }
 
         [Required]
-        [MaxLength(200)]
-        public string Name { set; get; }
+        [StringLength(200)]
+        public string Name { get; set; }
+
+        public DateTime Born { get; set; }
 
         [Required]
-        public DateTime Born { set; get; }
+        [StringLength(200)]
+        public string Address { get; set; }
 
         [Required]
-        [MaxLength(200)]
-        public string Address { set; get; }
+        [StringLength(100)]
+        public string Position { get; set; }
 
         [Required]
-        [MaxLength(100)]
-        public string Position { set; get; }
+        [StringLength(15)]
+        public string Mobile { get; set; }
 
-        [Required]
-        [MaxLength(15)]
-        public string Mobile { set; get; }
+        [StringLength(100)]
+        public string Skype { get; set; }
 
-        [MaxLength(100)]
-        public string Skype { set; get; }
+        [StringLength(100)]
+        public string Email { get; set; }
 
-        public string Email { set; get; }
-
-        [MaxLength(100)]
-        public string Zalo { set; get; }
+        [StringLength(100)]
+        public string Zalo { get; set; }
 
         [MaxLength(100)]
-        public string Facebook { set; get; }
+        public byte[] Facebook { get; set; }
 
-        [Required]
-        public bool Active { set; get; }
-
-        
+        public bool Active { get; set; }
     }
 }

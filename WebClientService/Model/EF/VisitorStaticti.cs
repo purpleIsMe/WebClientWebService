@@ -6,7 +6,7 @@ namespace Model.EF
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class VisitorStatictis
+    public partial class VisitorStaticti
     {
         public Guid ID { get; set; }
 

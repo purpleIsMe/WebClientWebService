@@ -83,7 +83,7 @@
     <Compile Include="EF\SystemConfig.cs" />
     <Compile Include="EF\Tag.cs" />
     <Compile Include="EF\User.cs" />
-    <Compile Include="EF\VisitorStatictis.cs" />
+    <Compile Include="EF\VisitorStaticti.cs" />
     <Compile Include="EF\WebClientDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

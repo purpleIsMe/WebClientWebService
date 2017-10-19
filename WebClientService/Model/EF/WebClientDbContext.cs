@@ -39,7 +39,7 @@ namespace Model.EF
         public virtual DbSet<SystemConfig> SystemConfigs { get; set; }
         public virtual DbSet<Tag> Tags { get; set; }
         public virtual DbSet<User> Users { get; set; }
-        public virtual DbSet<VisitorStatictis> VisitorStatictis { get; set; }
+        public virtual DbSet<VisitorStaticti> VisitorStatictis { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -151,6 +151,10 @@ namespace Model.EF
 
             modelBuilder.Entity<User>()
                 .Property(e => e.Password)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<User>()
+                .Property(e => e.UserName)
                 .IsUnicode(false);
 
             modelBuilder.Entity<User>()

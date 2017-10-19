@@ -13,12 +13,9 @@ namespace Model.EF
         {
             Answers = new HashSet<Answer>();
         }
-
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
-
-        [Required]
-        [StringLength(50)]
-        public string UserName { get; set; }
 
         [Required]
         [StringLength(200)]
@@ -57,7 +54,10 @@ namespace Model.EF
         [StringLength(100)]
         public string Password { get; set; }
 
-        public bool Status { get; set; }
+        [StringLength(50)]
+        public string UserName { get; set; }
+
+        public bool? Status { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Answer> Answers { get; set; }

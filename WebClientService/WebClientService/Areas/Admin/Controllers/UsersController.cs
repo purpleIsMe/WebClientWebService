@@ -6,6 +6,10 @@ using System.Web.Mvc;
 using Model.EF;
 using Model.DAO;
 using WebClientService.Common;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.AspNet.Identity;
+using Microsoft.Owin;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace WebClientService.Areas.Admin.Controllers
 {
@@ -16,6 +20,12 @@ namespace WebClientService.Areas.Admin.Controllers
         {
             return View();
         }
+        [HttpGet]
+        public ActionResult Create()
+        {
+            return View();
+        }
+        [HttpPost]
         // GET: Admin/Users/Create
         public ActionResult Create(User user)
         {
@@ -31,10 +41,11 @@ namespace WebClientService.Areas.Admin.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Thêm user thành công");
+                    ModelState.AddModelError("", "Thêm user thất bại");
                 }
             }
             return View("Index");
         }
+
     }
 }

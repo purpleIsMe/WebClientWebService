@@ -1,24 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using Model.EF;
 using Model.DAO;
 using WebClientService.Common;
-using Microsoft.AspNet.Identity.Owin;
-using Microsoft.AspNet.Identity;
-using Microsoft.Owin;
-using Microsoft.AspNet.Identity.EntityFramework;
+using System;
 
 namespace WebClientService.Areas.Admin.Controllers
 {
     public class UsersController : BaseController
     {
         // GET: Admin/Users
-        public ActionResult Index()
+        public ActionResult Index(int page = 1, int pageSize = 10)
         {
-            return View();
+            var dao = new UserDAO();
+            var model = dao.ListAllPaging(page, pageSize);
+            return View(model);
         }
         [HttpGet]
         public ActionResult Create()
@@ -34,10 +29,12 @@ namespace WebClientService.Areas.Admin.Controllers
                 var dao = new UserDAO();
                 var encrypted = Encryptor.MD5Hash(user.Password);
                 user.Password = encrypted;
+                user.CreateDate = DateTime.Now;
+
                 long id = dao.AddUser(user);
                 if (id > 0)
                 {
-                    return RedirectToAction("Index", "User");
+                    return RedirectToAction("Index", "Users");
                 }
                 else
                 {
@@ -46,6 +43,37 @@ namespace WebClientService.Areas.Admin.Controllers
             }
             return View("Index");
         }
+        [HttpGet]
+        public ActionResult Edit(int id)
+        {
+            var result = new UserDAO().ViewDetailAll(id);
+            return View(result);
+        }
+        [HttpPost]
+        // GET: Admin/Users/Edit
+        public ActionResult Edit(User user)
+        {
+            if (ModelState.IsValid)
+            {
+                var dao = new UserDAO();
+                if (!String.IsNullOrEmpty(user.Password))
+                {
+                    var encrypted = Encryptor.MD5Hash(user.Password);
+                    user.Password = encrypted;
+                }
+                user.CreateDate = DateTime.Now;
 
+                var result = dao.UpdateUser(user);
+                if (result)
+                {
+                    return RedirectToAction("Index", "Users");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Cập nhật user thất bại");
+                }
+            }
+            return View("Index");
+        }
     }
 }

@@ -1,9 +1,12 @@
 ﻿using Model.EF;
 using System;
+using System.Collections.Generic;
 using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Validation;
 using System.Diagnostics;
 using System.Linq;
+using PagedList.Mvc;
+using PagedList;
 
 namespace Model.DAO
 {
@@ -14,7 +17,10 @@ namespace Model.DAO
         {
             db = new WebClientDbContext();
         }
-
+        public IEnumerable<User> ListAllPaging(int page, int pageSize)
+        {
+            return db.Users.OrderBy(m=>m.ID).ToPagedList(page,pageSize);
+        }
         public int AddUser(User user)
         {
             try
@@ -59,6 +65,7 @@ namespace Model.DAO
                 u.Email = userDAO.Email;
                 u.Facebook = userDAO.Facebook;
                 u.Active = userDAO.Active;
+                u.CreateDate = DateTime.Now;
                 db.SaveChanges();
                 return true;
             }
@@ -115,6 +122,14 @@ namespace Model.DAO
         public User getIDByUserName(string user)
         {
             return db.Users.SingleOrDefault(p => p.UserName == user);
+        }
+        public User ViewDetailAll(int id)
+        {
+            return db.Users.Find(id);
+        }
+        public User ViewDetailSingle(int id)
+        {
+            return db.Users.SingleOrDefault(p => p.ID == id);
         }
     }
 }

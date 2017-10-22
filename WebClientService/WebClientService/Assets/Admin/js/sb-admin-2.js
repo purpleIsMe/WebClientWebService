@@ -1,7 +1,12 @@
 $(function() {
     $('#side-menu').metisMenu();
 });
-
+$(function color()
+{
+    var i = Math.random() % 4;
+    var arrayColor = ["success", "info", "warning", "danger"];
+    return arrayColor[i];
+});
 //Loads the correct sidebar on window load,
 //collapses the sidebar on window resize.
 // Sets the min-height of #page-wrapper to window size

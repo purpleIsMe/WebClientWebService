@@ -7,7 +7,7 @@ namespace WebClientService.Areas.Admin.Controllers
 {
     public class LoginController : Controller
     {
-        // GET: Admin/Login
+        //GET: Admin/Login
         public ActionResult Index()
         {
             return View();
@@ -34,19 +34,19 @@ namespace WebClientService.Areas.Admin.Controllers
                     Session.Add(Constants.USER_SESSION, userSession);
                     return RedirectToAction("Index", "Home");
                 }
-                if(result == 4)
+                if (result == 4)
                 {
-                    ModelState.AddModelError("Fail","Tài khoản này đã bị khóa");
+                    ModelState.AddModelError("Fail", "Tài khoản này đã bị khóa");
                 }
-                if(result == 3)
+                if (result == 3)
                 {
                     ModelState.AddModelError("Fail", "Tài khoản này không tồn tại");
                 }
-                if(result == 2)
+                if (result == 2)
                 {
                     ModelState.AddModelError("Fail", "Tài khoản này đang sử dụng ở một thiết bị khác");
                 }
-                if(result == 5)
+                if (result == 5)
                 {
                     ModelState.AddModelError("Fail", "Mật khẩu không đúng. Xin vui lòng nhập lại");
                 }

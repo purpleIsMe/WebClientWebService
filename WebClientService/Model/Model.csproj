@@ -69,6 +69,15 @@
   <ItemGroup>
     <Compile Include="Abstract\Auditable.cs" />
     <Compile Include="Abstract\IAuditable.cs" />
+    <Compile Include="DAO\AnswerDAO.cs" />
+    <Compile Include="DAO\CaThiDAO.cs" />
+    <Compile Include="DAO\DeChuanDAO.cs" />
+    <Compile Include="DAO\DeChuanQuestionDAO.cs" />
+    <Compile Include="DAO\ErrorDAO.cs" />
+    <Compile Include="DAO\PhanQuyenDAO.cs" />
+    <Compile Include="DAO\QClassDAO.cs" />
+    <Compile Include="DAO\QuestionDAO.cs" />
+    <Compile Include="DAO\SubjectDAO.cs" />
     <Compile Include="DAO\UserDAO.cs" />
     <Compile Include="EF\Administration.cs" />
     <Compile Include="EF\Answer.cs" />

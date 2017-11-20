@@ -11,7 +11,6 @@ namespace Model.EF
             : base("name=WebClientDbContext")
         {
         }
-
         public virtual DbSet<Administration> Administrations { get; set; }
         public virtual DbSet<Answer> Answers { get; set; }
         public virtual DbSet<AnswerSheet> AnswerSheets { get; set; }

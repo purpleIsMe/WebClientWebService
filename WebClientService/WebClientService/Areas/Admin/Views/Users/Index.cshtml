@@ -1,8 +1,8 @@
-﻿@model PagedList.IPagedList<Model.EF.User>
+﻿@Model PagedList.IPagedList<Model.EF.User>
 @using PagedList.Mvc;
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    Layout = "/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 @section Header
 {
@@ -27,33 +27,34 @@
                             <th>Email</th>
                          </tr>
                     </thead>
-                                <tbody>
-
-                                    @foreach (var item in Model)
-                                    {
-                                        <tr class="odd gradeX">
-                                            <td>
-                                                <a href="/Admin/Users/Edit/@item.ID">Sửa</a>
-                                                |
-                                                <a href="/Admin/Users/Delete/@item.ID">Xóa</a>
-                                            </td>
-                                            <td>@item.UserName</td>
-                                            <td>@item.Name</td>
-                                            <td>@item.Address</td>
-                                            <td>@item.Position</td>
-                                            <td>@item.Mobile</td>
-                                            <td>@item.Email</td>
-                                        </tr>
-                                    }
-                                </tbody>
-                            </table>
-                            @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
-                        </div>
+                    <tbody>
+                        @if (Model != null)
+                        {                   
+                            foreach (var item in Model)
+                            {
+                                 <tr class="odd gradeX">
+                                     <td>
+                                         <a href = "/Admin/Users/Edit/@item.ID" > Sửa </a>
+                                                    |
+                                         <a href="/Admin/Users/Delete/@item.ID">Xóa</a>
+                                     </td>
+                                     <td>@item.UserName</td>
+                                     <td>@item.Name</td>
+                                     <td>@item.Address</td>
+                                     <td>@item.Position</td>
+                                     <td>@item.Mobile</td>
+                                     <td>@item.Email</td>
+                                 </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+                            @*@Html.PagedListPager(Model, page => Url.Action("Index", new { page }))*@
+             </div>
                         <!-- /.table-responsive -->
-                    </div>
+         </div>
                     <!-- /.panel-body -->
-            </div>
+   </div>
             <!-- /.panel -->
-        </div>
 </div>
-<script src="~/Assets/Admin/js/sb-admin-2.js"></script>
+<script src="/Assets/Admin/js/sb-admin-2.js"></script>

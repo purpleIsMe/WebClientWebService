@@ -1,0 +1,42 @@
+﻿@using Model.EF
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Client/Views/Shared/_Layout.cshtml";
+}
+@section hotnews
+{
+    <asp:Repeater id="rptRSS" runat="server">
+        <ItemTemplate>
+            <div class="wedo_content_area">
+                @foreach (Post item in (List<Post>)ViewData["HotNews"])
+                {
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <div class="single_wedo wow fadeIn" data-wow-duration="1s">
+                            <div class="single_left_icon">
+                                <img src="@item.Image" />
+                            </div>
+
+                            <div class="single_right_text">
+                                <h5>@item.Name</h5>
+                                <div class="separetor2"></div>
+                                <p>@item.Description</p>
+                                <p>Ngày tạo: @item.CreatedDate</p>
+                                <a href="@item.Alias">Xem chi tiết>></a>
+                            </div>
+                        </div>
+                    </div>
+                }
+           </div>
+</ItemTemplate>
+    </asp:Repeater>
+    
+}
+
+
+@*@Html.Label(LayTieuDe(GetWebContent("http://vnexpress.net/gl/xa-hoi/2012/08/phu-nu-chet-loa-the-trong-khach-san/"))
+    + "<br /><br />"
+    + LayMoTa(GetWebContent("http://vnexpress.net/gl/xa-hoi/2012/08/phu-nu-chet-loa-the-trong-khach-san/"))
+    + "<br /><br />"
+    + LayNoiDung(GetWebContent("http://vnexpress.net/gl/xa-hoi/2012/08/phu-nu-chet-loa-the-trong-khach-san/"))
+    + "")*@
+

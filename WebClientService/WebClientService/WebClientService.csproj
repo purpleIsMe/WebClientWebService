@@ -44,6 +44,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="HtmlAgilityPack, Version=1.6.5.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlAgilityPack.1.6.5\lib\Net45\HtmlAgilityPack.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=2.0.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.2.0.6\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
       <Private>True</Private>
@@ -201,12 +205,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\BaseController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\LoginController.cs" />
     <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
     <Compile Include="Areas\Admin\Models\LoginModel.cs" />
+    <Compile Include="Areas\Client\ClientAreaRegistration.cs" />
+    <Compile Include="Areas\Client\Controllers\HomeController.cs" />
     <Compile Include="Common\Constants.cs" />
     <Compile Include="Common\Encryptor.cs" />
     <Compile Include="Common\UserLogin.cs" />
@@ -221,6 +228,7 @@
     <Content Include="Assets\Admin\dist\js\sb-admin-2.js" />
     <Content Include="Assets\Admin\dist\js\sb-admin-2.min.js" />
     <Content Include="Assets\Admin\js\sb-admin-2.js" />
+    <Content Include="Assets\Admin\js\testpass.js" />
     <Content Include="Assets\Admin\vendor\bootstrap-social\bootstrap-social.css" />
     <Content Include="Assets\Admin\vendor\bootstrap\css\bootstrap.css" />
     <Content Include="Assets\Admin\vendor\bootstrap\css\bootstrap.min.css" />
@@ -310,6 +318,69 @@
     <Content Include="Assets\Admin\vendor\morrisjs\morris.min.js" />
     <Content Include="Assets\Admin\vendor\raphael\raphael.js" />
     <Content Include="Assets\Admin\vendor\raphael\raphael.min.js" />
+    <Content Include="Assets\Client\css\animat\animate.min.css" />
+    <Content Include="Assets\Client\css\bootstrap\bootstrap.min.css" />
+    <Content Include="Assets\Client\css\fancybox\jquery.fancybox.css" />
+    <Content Include="Assets\Client\css\font-awesome\css\font-awesome.min.css" />
+    <Content Include="Assets\Client\css\font-awesome\fonts\fontawesome-webfont.svg" />
+    <Content Include="Assets\Client\css\fonts\fonts.css" />
+    <Content Include="Assets\Client\css\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Assets\Client\css\fonts\stylesheet.css" />
+    <Content Include="Assets\Client\css\nivo-lightbox\nivo-lightbox.css" />
+    <Content Include="Assets\Client\css\owl-carousel\owl.carousel.css" />
+    <Content Include="Assets\Client\css\owl-carousel\owl.theme.css" />
+    <Content Include="Assets\Client\css\owl-carousel\owl.transitions.css" />
+    <Content Include="Assets\Client\css\responsive.css" />
+    <Content Include="Assets\Client\css\style.css" />
+    <Content Include="Assets\Client\css\themes\default\close%402x.png" />
+    <Content Include="Assets\Client\css\themes\default\close.png" />
+    <Content Include="Assets\Client\css\themes\default\default.css" />
+    <Content Include="Assets\Client\css\themes\default\loading%402x.gif" />
+    <Content Include="Assets\Client\css\themes\default\loading.gif" />
+    <Content Include="Assets\Client\css\themes\default\next%402x.png" />
+    <Content Include="Assets\Client\css\themes\default\next.png" />
+    <Content Include="Assets\Client\css\themes\default\prev%402x.png" />
+    <Content Include="Assets\Client\css\themes\default\prev.png" />
+    <Content Include="Assets\Client\images\ab.jpg" />
+    <Content Include="Assets\Client\images\bannerbg.jpg" />
+    <Content Include="Assets\Client\images\blog1.jpg" />
+    <Content Include="Assets\Client\images\businessbg.jpg" />
+    <Content Include="Assets\Client\images\counterbg.jpg" />
+    <Content Include="Assets\Client\images\f1.jpg" />
+    <Content Include="Assets\Client\images\f2.jpg" />
+    <Content Include="Assets\Client\images\f3.jpg" />
+    <Content Include="Assets\Client\images\loading.gif" />
+    <Content Include="Assets\Client\images\logo.png" />
+    <Content Include="Assets\Client\images\scroll.gif" />
+    <Content Include="Assets\Client\images\service1.jpg" />
+    <Content Include="Assets\Client\images\service2.jpg" />
+    <Content Include="Assets\Client\images\service3.jpg" />
+    <Content Include="Assets\Client\images\subcribecebg.jpg" />
+    <Content Include="Assets\Client\images\testbg.jpg" />
+    <Content Include="Assets\Client\images\tm1.jpg" />
+    <Content Include="Assets\Client\images\tm2.jpg" />
+    <Content Include="Assets\Client\images\tm3.jpg" />
+    <Content Include="Assets\Client\images\tm4.jpg" />
+    <Content Include="Assets\Client\images\tst1.jpg" />
+    <Content Include="Assets\Client\js\bootstrap\bootstrap.min.js" />
+    <Content Include="Assets\Client\js\counterup\counterup.min.js" />
+    <Content Include="Assets\Client\js\fancybox\jquery.fancybox.pack.js" />
+    <Content Include="Assets\Client\js\isotop\isotop.function.js" />
+    <Content Include="Assets\Client\js\isotop\isotope.min.js" />
+    <Content Include="Assets\Client\js\jquery-easing\human-user-account-profile-128.png" />
+    <Content Include="Assets\Client\js\jquery-easing\jquery.easing.1.3.js" />
+    <Content Include="Assets\Client\js\jquery-easing\profile2-128.png" />
+    <Content Include="Assets\Client\js\jquery-easing\user-128.png" />
+    <Content Include="Assets\Client\js\jquery-easing\user_male2-128.png" />
+    <Content Include="Assets\Client\js\jquery\jquery.js" />
+    <Content Include="Assets\Client\js\masonry\masonry.min.js" />
+    <Content Include="Assets\Client\js\masonry\masonry.pkgd.min.js" />
+    <Content Include="Assets\Client\js\mixitup\jquery.mixitup.min.js" />
+    <Content Include="Assets\Client\js\nivo-lightbox\nivo-lightbox.min.js" />
+    <Content Include="Assets\Client\js\owl-carousel\owl.carousel.min.js" />
+    <Content Include="Assets\Client\js\plugins.js" />
+    <Content Include="Assets\Client\js\script.js" />
+    <Content Include="Assets\Client\js\wow\wow.min.js" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\PagedList.css" />
@@ -379,6 +450,30 @@
     <Content Include="Assets\Admin\vendor\font-awesome\scss\_variables.scss" />
     <Content Include="Areas\Admin\Views\Users\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Users\Edit.cshtml" />
+    <Content Include="Assets\Client\css\font-awesome\fonts\fontawesome-webfont.eot" />
+    <Content Include="Assets\Client\css\font-awesome\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Assets\Client\css\font-awesome\fonts\fontawesome-webfont.woff" />
+    <Content Include="Assets\Client\css\font-awesome\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Assets\Client\css\font-awesome\fonts\FontAwesome.otf" />
+    <Content Include="Assets\Client\css\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Assets\Client\css\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Assets\Client\css\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Assets\Client\css\fonts\opensans-bold.ttf" />
+    <Content Include="Assets\Client\css\fonts\opensans-light.ttf" />
+    <Content Include="Assets\Client\css\fonts\opensans-lightitalic.ttf" />
+    <Content Include="Assets\Client\css\fonts\opensans-regular.ttf" />
+    <Content Include="Assets\Client\css\fonts\Roboto-Black.ttf" />
+    <Content Include="Assets\Client\css\fonts\Roboto-Bold.ttf" />
+    <Content Include="Assets\Client\css\fonts\Roboto-Light.ttf" />
+    <Content Include="Assets\Client\css\fonts\Roboto-Medium.ttf" />
+    <Content Include="Assets\Client\css\fonts\Roboto-Thin.ttf" />
+    <Content Include="Assets\Client\css\fonts\RobotoCondensed-Bold.ttf" />
+    <Content Include="Assets\Client\css\fonts\RobotoCondensed-Light.ttf" />
+    <Content Include="Areas\Client\Views\Home\Index.cshtml" />
+    <Content Include="Areas\Client\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Client\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Client\Views\web.config" />
+    <Content Include="Areas\Client\Views\Exam\Exam.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -401,9 +496,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="App_Start\" />
     <Folder Include="Areas\Admin\Views\Base\" />
-    <Folder Include="Assets\Client\" />
+    <Folder Include="Areas\Client\LoginModel\" />
     <Folder Include="Controllers\" />
     <Folder Include="Models\" />
   </ItemGroup>
@@ -413,6 +507,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -13,11 +13,13 @@ namespace WebClientService.Areas.Admin.Controllers
         {
             var dao = new UserDAO();
             var model = dao.ListAllPaging(page, pageSize);
+           
             return View(model);
         }
         [HttpGet]
         public ActionResult Create()
         {
+            GetListPQ();
             return View();
         }
         [HttpPost]
@@ -74,6 +76,12 @@ namespace WebClientService.Areas.Admin.Controllers
                 }
             }
             return View("Index");
+        }
+        [HttpGet]
+        public void GetListPQ(int idpqchoose = -1)
+        {
+            var dao = new PhanQuyenDAO();
+            ViewBag.IDPhanQuyen = new SelectList(dao.GetListAll(),"ID","TenPQ", idpqchoose);
         }
     }
 }

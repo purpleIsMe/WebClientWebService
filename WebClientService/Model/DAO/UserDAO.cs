@@ -19,13 +19,16 @@ namespace Model.DAO
         }
         public IEnumerable<User> ListAllPaging(int page, int pageSize)
         {
-            return db.Users.OrderBy(m=>m.ID).ToPagedList(page,pageSize);
+            IEnumerable<User> x =  db.Users.OrderBy(m=>m.ID).ToPagedList(page,pageSize);
+            CloseConnect();
+            return x;
         }
         public int AddUser(User user)
         {
             try
             {
                 db.Users.Add(user);
+                CloseConnect();
                 db.SaveChanges();
             }
             catch (DbEntityValidationException e)
@@ -67,6 +70,7 @@ namespace Model.DAO
                 u.Active = userDAO.Active;
                 u.CreateDate = DateTime.Now;
                 db.SaveChanges();
+                CloseConnect();
                 return true;
             }
             catch
@@ -80,12 +84,17 @@ namespace Model.DAO
             {
                 User u = db.Users.Single(p => p.ID == id);
                 db.Users.Remove(u);
+                CloseConnect();
                 return true;
             }
             catch
             {
                 return false;
             }
+        }
+        public void CloseConnect()
+        {
+            db.Dispose();
         }
         //dang nhap bang usernam or mail
         public int LogIn(string UserName, string passWord, string loaiUser)
@@ -112,24 +121,32 @@ namespace Model.DAO
                 else
                     return 5; // mat khau khong dung
             }
+            CloseConnect();
             return 0;
         }
         public User getByUsername(string username)
         {
             var res = db.Users.Where(x => x.UserName == username).SingleOrDefault();
+            CloseConnect();
             return res;
         }
         public User getIDByUserName(string user)
         {
-            return db.Users.SingleOrDefault(p => p.UserName == user);
+            User x = db.Users.SingleOrDefault(p => p.UserName == user);
+            CloseConnect();
+            return x;
         }
         public User ViewDetailAll(int id)
         {
-            return db.Users.Find(id);
+            User x= db.Users.Find(id);
+            CloseConnect();
+            return x;
         }
         public User ViewDetailSingle(int id)
         {
-            return db.Users.SingleOrDefault(p => p.ID == id);
+            User x = db.Users.SingleOrDefault(p => p.ID == id);
+            CloseConnect();
+            return x;
         }
     }
 }

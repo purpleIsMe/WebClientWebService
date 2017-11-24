@@ -2,6 +2,7 @@
 using WebClientService.Areas.Admin.Models;
 using Model.DAO;
 using WebClientService.Common;
+using Model.EF;
 
 namespace WebClientService.Areas.Admin.Controllers
 {
@@ -14,6 +15,7 @@ namespace WebClientService.Areas.Admin.Controllers
         }
         public ActionResult Login(LoginModel model)
         {
+            User us = new User();
             if (ModelState.IsValid)
             {
                 var dao = new UserDAO();
@@ -32,6 +34,8 @@ namespace WebClientService.Areas.Admin.Controllers
                     userSession.UserName = user.UserName;
                     userSession.UserID = user.ID;
                     Session.Add(Constants.USER_SESSION, userSession);
+                    us.Active = true;
+                    dao.UpdateUser(us);
                     return RedirectToAction("Index", "Home");
                 }
                 if (result == 4)

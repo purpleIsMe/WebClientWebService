@@ -20,7 +20,6 @@ namespace Model.DAO
         public IEnumerable<User> ListAllPaging(int page, int pageSize)
         {
             IEnumerable<User> x =  db.Users.OrderBy(m=>m.ID).ToPagedList(page,pageSize);
-            CloseConnect();
             return x;
         }
         public int AddUser(User user)
@@ -28,7 +27,6 @@ namespace Model.DAO
             try
             {
                 db.Users.Add(user);
-                CloseConnect();
                 db.SaveChanges();
             }
             catch (DbEntityValidationException e)
@@ -70,7 +68,6 @@ namespace Model.DAO
                 u.Active = userDAO.Active;
                 u.CreateDate = DateTime.Now;
                 db.SaveChanges();
-                CloseConnect();
                 return true;
             }
             catch
@@ -84,7 +81,6 @@ namespace Model.DAO
             {
                 User u = db.Users.Single(p => p.ID == id);
                 db.Users.Remove(u);
-                CloseConnect();
                 return true;
             }
             catch
@@ -127,26 +123,28 @@ namespace Model.DAO
         public User getByUsername(string username)
         {
             var res = db.Users.Where(x => x.UserName == username).SingleOrDefault();
-            CloseConnect();
             return res;
         }
         public User getIDByUserName(string user)
         {
             User x = db.Users.SingleOrDefault(p => p.UserName == user);
-            CloseConnect();
             return x;
         }
         public User ViewDetailAll(int id)
         {
             User x= db.Users.Find(id);
-            CloseConnect();
             return x;
         }
         public User ViewDetailSingle(int id)
         {
             User x = db.Users.SingleOrDefault(p => p.ID == id);
-            CloseConnect();
             return x;
         }
+        public List<User> ViewListForIDPQ(int idphanquyen)
+        {
+            List<User> x = db.Users.Where(p => p.IDPhanQuyen == idphanquyen).ToList();
+            return x;
+        }
+
     }
 }

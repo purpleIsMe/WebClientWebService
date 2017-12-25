@@ -30,6 +30,7 @@ namespace WebClientService.Areas.Admin.Controllers
                 if (result == 1)
                 {
                     var user = dao.getByUsername(model.UserName);
+                    //ktra xem co check remember me chua
                     var userSession = new UserLogin();
                     userSession.UserName = user.UserName;
                     userSession.UserID = user.ID;
@@ -40,26 +41,27 @@ namespace WebClientService.Areas.Admin.Controllers
                 }
                 if (result == 4)
                 {
-                    ModelState.AddModelError("Fail", "Tài khoản này đã bị khóa");
+                    ModelState.AddModelError("", "Tài khoản này đã bị khóa");
                 }
                 if (result == 3)
                 {
-                    ModelState.AddModelError("Fail", "Tài khoản này không tồn tại");
+                    ModelState.AddModelError("", "Tài khoản này không tồn tại");
                 }
                 if (result == 2)
                 {
-                    ModelState.AddModelError("Fail", "Tài khoản này đang sử dụng ở một thiết bị khác");
+                    ModelState.AddModelError("", "Tài khoản này đang sử dụng ở một thiết bị khác");
                 }
                 if (result == 5)
                 {
-                    ModelState.AddModelError("Fail", "Mật khẩu không đúng. Xin vui lòng nhập lại");
+                    ModelState.AddModelError("", "Mật khẩu không đúng. Xin vui lòng nhập lại");
                 }
                 else
                 {
-                    ModelState.AddModelError("Fail", "Đăng nhập không thành công");
+                    ModelState.AddModelError("", "Đăng nhập không thành công");
                 }
             }
             return View("Index");
         }
+       
     }
 }

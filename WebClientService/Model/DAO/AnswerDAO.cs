@@ -32,8 +32,8 @@ namespace Model.DAO
             try
             {
                 db.Answers.Add(Answer);
-                CloseConnect();
                 db.SaveChanges();
+                CloseConnect();
             }
             catch (DbEntityValidationException e)
             {

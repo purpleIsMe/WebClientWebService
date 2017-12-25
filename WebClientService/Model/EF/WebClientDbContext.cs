@@ -11,10 +11,12 @@ namespace Model.EF
             : base("name=WebClientDbContext")
         {
         }
+
         public virtual DbSet<Administration> Administrations { get; set; }
         public virtual DbSet<Answer> Answers { get; set; }
         public virtual DbSet<AnswerSheet> AnswerSheets { get; set; }
         public virtual DbSet<Cathi> Cathis { get; set; }
+        public virtual DbSet<Class> Classes { get; set; }
         public virtual DbSet<DeChuan> DeChuans { get; set; }
         public virtual DbSet<DeChuanQuestion> DeChuanQuestions { get; set; }
         public virtual DbSet<DeTron> DeTrons { get; set; }
@@ -31,8 +33,8 @@ namespace Model.EF
         public virtual DbSet<PostTag> PostTags { get; set; }
         public virtual DbSet<QClass> QClasses { get; set; }
         public virtual DbSet<Question> Questions { get; set; }
-        public virtual DbSet<QuestionBuy> QuestionBuys { get; set; }
-        public virtual DbSet<Slide> Slides { get; set; }
+        public virtual DbSet<QuestionTemp> QuestionTemps { get; set; }
+        public virtual DbSet<Student> Students { get; set; }
         public virtual DbSet<Subject> Subjects { get; set; }
         public virtual DbSet<SupportOnline> SupportOnlines { get; set; }
         public virtual DbSet<SystemConfig> SystemConfigs { get; set; }
@@ -122,6 +124,30 @@ namespace Model.EF
                 .WithRequired(e => e.Question1)
                 .HasForeignKey(e => e.QuestionID)
                 .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Student>()
+                .Property(e => e.Mobile)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Student>()
+                .Property(e => e.Skype)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Student>()
+                .Property(e => e.Email)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Student>()
+                .Property(e => e.Zalo)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Student>()
+                .Property(e => e.Password)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Student>()
+                .Property(e => e.UserName)
+                .IsUnicode(false);
 
             modelBuilder.Entity<Subject>()
                 .HasMany(e => e.QClasses)

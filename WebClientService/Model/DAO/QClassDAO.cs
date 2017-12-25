@@ -34,8 +34,8 @@ namespace Model.DAO
             try
             {
                 db.QClasses.Add(PQ);
-                CloseConnect();
                 db.SaveChanges();
+                CloseConnect();
             }
             catch (DbEntityValidationException e)
             {

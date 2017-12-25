@@ -32,8 +32,8 @@ namespace Model.DAO
             try
             {
                 db.PhanQuyens.Add(PQ);
-                CloseConnect();
                 db.SaveChanges();
+                CloseConnect();
             }
             catch (DbEntityValidationException e)
             {

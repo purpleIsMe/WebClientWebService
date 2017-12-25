@@ -1,8 +1,16 @@
-﻿@Model PagedList.IPagedList<Model.EF.User>
-@using PagedList.Mvc;
-@{
+﻿@{
     ViewBag.Title = "Index";
     Layout = "/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+@section js
+{
+    <script>
+        $(document).ready(function() {
+            $('#dataTables-example').DataTable({
+                responsive: true
+            });
+        });
+    </script>   
 }
 @section Header
 {
@@ -15,7 +23,7 @@
                 DANH SÁCH NGƯỜI DÙNG
             </div>
             <div class="panel-body">
-                <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+                <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                     <thead>
                         <tr>
                             <th>Tác vụ</th>
@@ -25,31 +33,36 @@
                             <th>Chức vụ</th>
                             <th>Điện thoại</th>
                             <th>Email</th>
-                         </tr>
+                        </tr>
                     </thead>
                     <tbody>
                         @if (Model != null)
-                        {                   
+                        {
                             foreach (var item in Model)
                             {
-                                 <tr class="odd gradeX">
-                                     <td>
-                                         <a href = "/Admin/Users/Edit/@item.ID" > Sửa </a>
-                                                    |
-                                         <a href="/Admin/Users/Delete/@item.ID">Xóa</a>
-                                     </td>
-                                     <td>@item.UserName</td>
-                                     <td>@item.Name</td>
-                                     <td>@item.Address</td>
-                                     <td>@item.Position</td>
-                                     <td>@item.Mobile</td>
-                                     <td>@item.Email</td>
-                                 </tr>
+                                <tr class="odd gradeX" id="row_@item.ID">
+                                    <td>
+                                        <a href="/Admin/Users/Edit/@item.ID"> Sửa </a>
+                                        |
+                                        @Ajax.ActionLink("Xóa", "Delete", new { @id = item.ID }, new AjaxOptions
+                                    {
+                                        Confirm = "Bạn có muốn xóa bản ghi này không?",
+                                        OnComplete = "$('#row_" + @item.ID + "').remove()",
+                                        HttpMethod = "Delete"
+                                    })
+                                    </td>
+                                    <td>@item.UserName</td>
+                                    <td>@item.Name</td>
+                                    <td>@item.Address</td>
+                                    <td>@item.Position</td>
+                                    <td>@item.Mobile</td>
+                                    <td>@item.Email</td>
+                                </tr>
                             }
                         }
                     </tbody>
                 </table>
-                            @*@Html.PagedListPager(Model, page => Url.Action("Index", new { page }))*@
+
              </div>
                         <!-- /.table-responsive -->
          </div>
@@ -57,4 +70,3 @@
    </div>
             <!-- /.panel -->
 </div>
-<script src="/Assets/Admin/js/sb-admin-2.js"></script>

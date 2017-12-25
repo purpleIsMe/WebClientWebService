@@ -34,8 +34,8 @@ namespace Model.DAO
             try
             {
                 db.Cathis.Add(Cathi);
-                CloseConnect();
                 db.SaveChanges();
+                CloseConnect();
             }
             catch (DbEntityValidationException e)
             {

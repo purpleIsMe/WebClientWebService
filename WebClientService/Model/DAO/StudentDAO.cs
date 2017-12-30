@@ -127,5 +127,10 @@ namespace Model.DAO
             List<Student> x = dataContext.Students.Where(i => i.idlecturer == idlecturer).ToList();
             return x;
         }
+        public Student ViewDetailStudent(int id)
+        {
+            Student y = dataContext.Students.Where(i => i.ID == id).SingleOrDefault();
+            return y;
+        }
     }
 }

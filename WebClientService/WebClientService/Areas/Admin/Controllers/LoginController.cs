@@ -3,6 +3,7 @@ using WebClientService.Areas.Admin.Models;
 using Model.DAO;
 using WebClientService.Common;
 using Model.EF;
+using System.Web;
 
 namespace WebClientService.Areas.Admin.Controllers
 {
@@ -12,6 +13,20 @@ namespace WebClientService.Areas.Admin.Controllers
         public ActionResult Index()
         {
             return View();
+        }
+
+        public ActionResult Logout()
+        {
+            User us = new User();
+            var dao = new UserDAO();
+            UserLogin user = (UserLogin)Session[Constants.USER_SESSION];
+            us.ID = user.UserID;
+            us.Active = true;
+            us.Status = true;
+            if (!dao.UpdateActive(us))
+                ModelState.AddModelError("", "Không thể update dữ liệu");
+            Session[Constants.USER_SESSION] = null;
+            return View("Index");
         }
         public ActionResult Login(LoginModel model)
         {
@@ -29,14 +44,19 @@ namespace WebClientService.Areas.Admin.Controllers
                 int result = dao.LogIn(model.UserName, Encryptor.MD5Hash(model.Password), loaiUser);
                 if (result == 1)
                 {
-                    var user = dao.getByUsername(model.UserName);
+                    var user = dao.getByUsername(model.UserName, loaiUser);
                     //ktra xem co check remember me chua
+
                     var userSession = new UserLogin();
                     userSession.UserName = user.UserName;
                     userSession.UserID = user.ID;
                     Session.Add(Constants.USER_SESSION, userSession);
-                    us.Active = true;
-                    dao.UpdateUser(us);
+
+                    us.ID = user.ID;
+                    us.Active = false;
+                    us.Status = true;
+                    if (!dao.UpdateActive(us))
+                        ModelState.AddModelError("", "Không thể update dữ liệu");
                     return RedirectToAction("Index", "Home");
                 }
                 if (result == 4)
@@ -62,6 +82,6 @@ namespace WebClientService.Areas.Admin.Controllers
             }
             return View("Index");
         }
-       
+
     }
 }

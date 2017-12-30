@@ -3,15 +3,21 @@ using Model.EF;
 using Model.DAO;
 using WebClientService.Common;
 using System;
+using System.Collections.Generic;
 
 namespace WebClientService.Areas.Admin.Controllers
 {
     public class UsersController : BaseController
     {
         // GET: Admin/Users
-        public ActionResult Index(int page = 1, int pageSize = 10)
+        public ActionResult Index()
         {
+            DSUser();
             return View();
+        }
+        public void DSUser()
+        {
+            ViewBag.DSU = new UserDAO().ViewAll();
         }
         [HttpGet]
         public ActionResult Create()
@@ -42,9 +48,9 @@ namespace WebClientService.Areas.Admin.Controllers
             }
             return View("Index");
         }
-        [HttpGet]
         public ActionResult Edit(int id)
         {
+            GetListPQ();
             var result = new UserDAO().ViewDetailAll(id);
             return View(result);
         }

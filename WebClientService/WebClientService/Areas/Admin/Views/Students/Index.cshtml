@@ -1,4 +1,4 @@
-﻿@model Model.EF.Class
+﻿@model Model.EF.Student
 @using Model.DAO
 @using System
 @using System.Collections.Generic
@@ -105,7 +105,7 @@
                             {
                                 <tr class="odd gradeX" id="row_@item.ID" onload="loadstt()">
                                     <td>
-                                        <a href="/Admin/Users/Edit/@item.ID"> Sửa </a>
+                                        <a href="/Admin/Students/Edit/@item.ID"> Sửa </a>
                                         |
                                         @Ajax.ActionLink("Xóa", "Delete", new { @id = item.ID }, new AjaxOptions
                                    {

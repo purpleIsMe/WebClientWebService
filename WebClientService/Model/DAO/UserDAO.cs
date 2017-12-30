@@ -22,6 +22,11 @@ namespace Model.DAO
             IEnumerable<User> x =  db.Users.OrderBy(m=>m.ID).ToPagedList(page,pageSize);
             return x;
         }
+        public List<User> ViewAll()
+        {
+            List<User> x = db.Users.ToList();
+            return x;
+        }
         public int AddUser(User user)
         {
             try
@@ -67,6 +72,7 @@ namespace Model.DAO
                 u.Facebook = userDAO.Facebook;
                 u.Active = userDAO.Active;
                 u.CreateDate = DateTime.Now;
+                u.Status = userDAO.Status;
                 db.SaveChanges();
                 return true;
             }
@@ -92,18 +98,18 @@ namespace Model.DAO
         {
             db.Dispose();
         }
+        
         //dang nhap bang usernam or mail
         public int LogIn(string UserName, string passWord, string loaiUser)
         {
             var result = db.Users.Where(x => x.UserName == UserName).SingleOrDefault();
-            if(result == null)
+            if (loaiUser == "Mail")
+                result = db.Users.Where(x => x.Email == UserName).SingleOrDefault();                 
+            if (result == null)
             {
                 return 3;//tai khoan khong ton tai
             }
-            if(loaiUser == "Mail")
-                  result = db.Users.Where(x => x.Email == UserName).SingleOrDefault();
-
-            if(result != null)
+            if (result != null)
             {
                 if (result.Status == false)
                     return 4;//tai khoan dang bi khoa
@@ -117,12 +123,13 @@ namespace Model.DAO
                 else
                     return 5; // mat khau khong dung
             }
-            CloseConnect();
             return 0;
         }
-        public User getByUsername(string username)
+        public User getByUsername(string username, string loaiuser)
         {
             var res = db.Users.Where(x => x.UserName == username).SingleOrDefault();
+            if (loaiuser == "Mail")
+                res = db.Users.Where(x => x.Email == username).SingleOrDefault();
             return res;
         }
         public User getIDByUserName(string user)
@@ -144,6 +151,18 @@ namespace Model.DAO
         {
             List<User> x = db.Users.Where(p => p.IDPhanQuyen == idphanquyen).ToList();
             return x;
+        }
+        public bool UpdateActive(User dao)
+        {
+            User x = db.Users.Where(l => l.ID == dao.ID).SingleOrDefault();
+            if(x!=null)
+            {
+                x.Active = dao.Active;
+                x.Status = dao.Status;
+                db.SaveChanges();
+                return true;
+            }
+            return false;
         }
 
     }

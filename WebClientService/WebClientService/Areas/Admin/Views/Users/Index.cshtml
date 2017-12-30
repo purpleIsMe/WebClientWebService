@@ -1,4 +1,6 @@
-﻿@{
+﻿@using Model.EF
+@{
+    List<User> us = ViewBag.DSU;
     ViewBag.Title = "Index";
     Layout = "/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
@@ -36,9 +38,9 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @if (Model != null)
+                        @if (us != null)
                         {
-                            foreach (var item in Model)
+                            foreach (var item in us)
                             {
                                 <tr class="odd gradeX" id="row_@item.ID">
                                     <td>

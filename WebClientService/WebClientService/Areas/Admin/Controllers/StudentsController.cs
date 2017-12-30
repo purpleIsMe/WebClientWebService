@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Model.EF;
 using System.Data.OleDb;
 using System.Data;
-using LinqToExcel;
 using WebClientService.Common;
 using System.Data.Entity.Validation;
 using Model.DAO;
-using System.Xml;
 
 namespace WebClientService.Areas.Admin.Controllers
 {
@@ -18,31 +15,33 @@ namespace WebClientService.Areas.Admin.Controllers
     {
         // GET: Admin/Students
         [HttpGet]
-        public ActionResult Index(int page = 1, int pageSize = 10)
+        public ActionResult Index()
         {
             if (!GetListPQ())
             {
                 return RedirectToAction("Index", "Login");
             }
-            //var dao = new StudentDAO();
-            //var model = dao.ListAllPaging(page, pageSize);
-
-            //return View(model);
-
             return View();
         }
-        //public void GetFiltStudent(int idclass)
-        //{
-        //    var dao1 = new StudentDAO();
-        //    ViewBag.ListStu = new List<Student>(dao1.FiltStudent(idclass));
-        //}
+
+        [HttpGet]
+        public ActionResult Edit(int id)
+        {
+            GetListClass();
+            var model = new StudentDAO().ViewDetailStudent(id);
+            ViewBag.editstu = model;
+            return View(model);
+            //return View();
+        }
+
         public bool GetListPQ(int idclasschoose = -1)
         {
             var x = (UserLogin)Session[Constants.USER_SESSION];
+
             if (x != null)
             {
                 var dao = new ClassDAO();
-               
+
                 ViewBag.ID = new SelectList(dao.ClassesOfLecturer(x.UserID), "IDClass", "NameClass", idclasschoose);
                 var dao1 = new StudentDAO();
                 ViewBag.ListStu = new List<Student>(dao1.FiltStudent(x.UserID));
@@ -54,10 +53,11 @@ namespace WebClientService.Areas.Admin.Controllers
             }
         }
 
-        public void GetListClass(int idpqchoose = -1)
+        public void GetListClass(int idclass = -1)
         {
-            var dao = new UserDAO();
-            ViewBag.ID = new SelectList(dao.ViewListForIDPQ(4), "ID", "Name", idpqchoose);
+            var session = (UserLogin)Session[Constants.USER_SESSION];
+            var dao = new ClassDAO();
+            ViewBag.IDClass = new SelectList(dao.ClassesOfLecturer(session.UserID), "IDClass", "NameClass", idclass);
         }
 
         [HttpPost]
@@ -104,7 +104,7 @@ namespace WebClientService.Areas.Admin.Controllers
                                 TU.Mobile = ds.Tables[0].Rows[i][5].ToString();
                                 TU.Facebook = ds.Tables[0].Rows[i][6].ToString();
                                 TU.Zalo = ds.Tables[0].Rows[i][7].ToString();
-                                TU.Skype = ds.Tables[0].Rows[i][8].ToString();                             
+                                TU.Skype = ds.Tables[0].Rows[i][8].ToString();
                                 TU.UserName = ds.Tables[0].Rows[i][9].ToString();
                                 if (!String.IsNullOrEmpty(ds.Tables[0].Rows[i][10].ToString()))
                                 {
@@ -147,7 +147,7 @@ namespace WebClientService.Areas.Admin.Controllers
                         System.IO.File.Delete(pathToExcelFile);
                     }
                     ModelState.AddModelError("", "Import thành công tất cả sinh viên");
-                    return RedirectToAction("Index","Students");
+                    return RedirectToAction("Index", "Students");
                 }
                 else
                 {
@@ -161,6 +161,46 @@ namespace WebClientService.Areas.Admin.Controllers
                     ModelState.AddModelError("", "Xin vui lòng chọn file Excel");
                 return RedirectToAction("Index", "Students");
             }
+        }
+
+        [HttpPost]
+        public ActionResult Edit(Student stu)
+        {
+            if (ModelState.IsValid)
+            {
+                var dao = new StudentDAO();
+                if (!String.IsNullOrEmpty(stu.Password))
+                {
+                    var encrypted = Encryptor.MD5Hash(stu.Password);
+                    stu.Password = encrypted;
+                }
+                stu.CreateDate = DateTime.Now;
+                stu.Active = true;
+                stu.Status = true;
+                var result = dao.UpdateStudent(stu);
+                if (result)
+                {
+                    return RedirectToAction("Index", "Students");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Cập nhật sinh viên thất bại");
+                }
+            }
+            return View("Index");
+        }
+
+        [HttpDelete]
+        public ActionResult Delete(int id)
+        {
+            if (ModelState.IsValid)
+            {
+                if (new StudentDAO().DeleteStudent(id))
+                {
+                    return RedirectToAction("Index", "Students");
+                }
+            }
+            return View("Index");
         }
 
         public FileResult DownloadExcel()

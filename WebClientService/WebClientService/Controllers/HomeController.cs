@@ -23,7 +23,7 @@ namespace WebClientService.Controllers
             GetContent();
             return View();
         }
-   
+
         [HttpGet]
         public void GetContent()
         {

@@ -298,6 +298,7 @@
     <Compile Include="Areas\Admin\Controllers\StudentsController.cs" />
     <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
     <Compile Include="Areas\Admin\Models\LoginModel.cs" />
+    <Compile Include="Areas\Admin\Controllers\SubjectController.cs" />
     <Compile Include="Controllers\ExamController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Common\Constants.cs" />
@@ -565,6 +566,9 @@
     <Content Include="Areas\Admin\Views\Shared\_NavbarTop.cshtml" />
     <Content Include="Areas\Admin\Views\Email\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Students\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Subject\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Subject\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Subject\Edit.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

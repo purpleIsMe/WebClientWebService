@@ -23,13 +23,14 @@ namespace WebClientService.Areas.Admin.Controllers
             }
             return View();
         }
-
+        string pass;
         [HttpGet]
         public ActionResult Edit(int id)
         {
             GetListClass();
             var model = new StudentDAO().ViewDetailStudent(id);
             ViewBag.editstu = model;
+            pass = model.Password;
             return View(model);
             //return View();
         }
@@ -169,11 +170,13 @@ namespace WebClientService.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 var dao = new StudentDAO();
-                if (!String.IsNullOrEmpty(stu.Password))
-                {
-                    var encrypted = Encryptor.MD5Hash(stu.Password);
-                    stu.Password = encrypted;
-                }
+                //if (!String.IsNullOrEmpty(stu.Password))
+                //{
+                //    var encrypted = Encryptor.MD5Hash(stu.Password);
+                //    stu.Password = encrypted;
+                //}
+                //stu.Password = pass;
+                //stu.idlecturer = 1;
                 stu.CreateDate = DateTime.Now;
                 stu.Active = true;
                 stu.Status = true;

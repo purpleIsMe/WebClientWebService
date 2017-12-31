@@ -61,11 +61,6 @@ namespace WebClientService.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 var dao = new UserDAO();
-                if (!String.IsNullOrEmpty(user.Password))
-                {
-                    var encrypted = Encryptor.MD5Hash(user.Password);
-                    user.Password = encrypted;
-                }
                 user.CreateDate = DateTime.Now;
 
                 var result = dao.UpdateUser(user);

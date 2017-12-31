@@ -15,17 +15,19 @@ namespace Model.DAO
         {
             db = new WebClientDbContext();
         }
-        public IEnumerable<Subject> GetListAll()
+        public List<Subject> GetListAll()
         {
-            IEnumerable<Subject> y = db.Subjects.ToList();
-            CloseConnect();
+            List<Subject> y = db.Subjects.ToList();
             return y;
         }
-        public IEnumerable<Subject> ListAllPaging(int page, int pageSize)
+        public List<Subject> ListAllPaging(int page, int pageSize)
         {
-            IEnumerable<Subject> x = db.Subjects.OrderBy(m => m.SubjectID).ToPagedList(page, pageSize);
-            CloseConnect();
+            List<Subject> x = db.Subjects.OrderBy(m => m.SubjectID).ToPagedList(page, pageSize).ToList();
             return x;
+        }
+        public List<Subject> ShowAllSubID(Guid id)
+        {
+            return db.Subjects.Where(i => i.SubjectID == id).ToList();
         }
         public Guid AddSubject(Subject PQ)
         {
@@ -33,7 +35,6 @@ namespace Model.DAO
             {
                 db.Subjects.Add(PQ);
                 db.SaveChanges();
-                CloseConnect();
             }
             catch (DbEntityValidationException e)
             {
@@ -71,7 +72,6 @@ namespace Model.DAO
                 u.loop = PQ.loop;
                 u.MaxUsed = PQ.MaxUsed;
                 db.SaveChanges();
-                CloseConnect();
                 return true;
             }
             catch
@@ -85,7 +85,6 @@ namespace Model.DAO
             {
                 Subject u = db.Subjects.Single(p => p.SubjectID == id);
                 db.Subjects.Remove(u);
-                CloseConnect();
                 return true;
             }
             catch

@@ -71,7 +71,7 @@ namespace Model.DAO
                 u.IDClass = StudentDAO.IDClass;
                 u.Status = StudentDAO.Status;
                 dataContext.SaveChanges();
-             
+                return true;
             }
             catch (DbEntityValidationException e)
             {

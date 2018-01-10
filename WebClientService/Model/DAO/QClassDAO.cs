@@ -17,16 +17,26 @@ namespace Model.DAO
         {
             db = new WebClientDbContext();
         }
-        public IEnumerable<QClass> GetListAll()
+        public List<QClass> GetListAll()
         {
-            IEnumerable<QClass> y = db.QClasses.ToList();
-            CloseConnect();
+            List<QClass> y = db.QClasses.ToList();
             return y;
+        }
+        public List<QClass> ShowAllClassNbr(int classnbr)
+        {
+            return db.QClasses.Where(i => i.ClassNbr == classnbr).ToList();
+        }
+        public List<QClass> listWithIDSub(int idsub)
+        {
+            return db.QClasses.Where(l => l.idsu == idsub).ToList();
+        }
+        public QClass singleIDQClass(int idqclass)
+        {
+            return db.QClasses.Where(p => p.IDQClass == idqclass).SingleOrDefault();
         }
         public IEnumerable<QClass> ListAllPaging(int page, int pageSize)
         {
             IEnumerable<QClass> x = db.QClasses.OrderBy(m => m.ClassID).ToPagedList(page, pageSize);
-            CloseConnect();
             return x;
         }
         public Guid AddQClass(QClass PQ)
@@ -60,14 +70,13 @@ namespace Model.DAO
         {
             try
             {
-                QClass u = db.QClasses.Where(p => p.ClassID == PQ.ClassID).SingleOrDefault();
+                QClass u = db.QClasses.Where(p => p.ClassID == PQ.ClassID || p.IDQClass == PQ.IDQClass).SingleOrDefault();
                 u.SubjectID = PQ.SubjectID;
                 u.ClassNbr = PQ.ClassNbr;
                 u.Descr = PQ.Descr;
                 u.ChuThich = PQ.ChuThich;
                 u.TrangThai = PQ.TrangThai;
                 db.SaveChanges();
-                CloseConnect();
                 return true;
             }
             catch
@@ -81,7 +90,20 @@ namespace Model.DAO
             {
                 QClass u = db.QClasses.Single(p => p.ClassID == id);
                 db.QClasses.Remove(u);
-                CloseConnect();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+        public bool DeleteQClassID(int id)
+        {
+            try
+            {
+                QClass u = db.QClasses.Single(p => p.IDQClass == id);
+                db.QClasses.Remove(u);
+                db.SaveChanges();
                 return true;
             }
             catch

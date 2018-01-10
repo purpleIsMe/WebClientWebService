@@ -13,6 +13,7 @@ namespace Model.EF
         public QClass()
         {
             Questions = new HashSet<Question>();
+            QuestionTemps = new HashSet<QuestionTemp>();
         }
 
         [Key]
@@ -28,11 +29,17 @@ namespace Model.EF
         [StringLength(100)]
         public string ChuThich { get; set; }
 
-        public bool? TrangThai { get; set; }
-
-        public virtual Subject Subject { get; set; }
+        public bool TrangThai { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Question> Questions { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<QuestionTemp> QuestionTemps { get; set; }
+
+        public int idsu { get; set; }
+
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int IDQClass { get; set; }
     }
 }

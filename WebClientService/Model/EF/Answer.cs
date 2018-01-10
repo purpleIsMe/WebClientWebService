@@ -21,7 +21,5 @@ namespace Model.EF
         public int DiemSo { get; set; }
 
         public double? DiemThuc { get; set; }
-
-        public virtual User User { get; set; }
     }
 }

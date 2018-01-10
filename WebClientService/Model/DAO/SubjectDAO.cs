@@ -25,14 +25,23 @@ namespace Model.DAO
             List<Subject> x = db.Subjects.OrderBy(m => m.SubjectID).ToPagedList(page, pageSize).ToList();
             return x;
         }
-        public List<Subject> ShowAllSubID(Guid id)
+        public List<Subject> ShowAllSubID(int id)
         {
-            return db.Subjects.Where(i => i.SubjectID == id).ToList();
+            return db.Subjects.Where(i => i.ID == id).ToList();
+        }
+        public List<Subject> showWithGuidID(Guid id)
+        {
+            return db.Subjects.Where(o => o.SubjectID == id).ToList();
+        }
+        public string DescrSub(int id)
+        {
+            return db.Subjects.Where(k => k.ID == id).Select(m => m.Descr).SingleOrDefault();
         }
         public Guid AddSubject(Subject PQ)
         {
             try
             {
+                PQ.SubjectID = Guid.NewGuid();
                 db.Subjects.Add(PQ);
                 db.SaveChanges();
             }
@@ -84,6 +93,19 @@ namespace Model.DAO
             try
             {
                 Subject u = db.Subjects.Single(p => p.SubjectID == id);
+                db.Subjects.Remove(u);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+        public bool DeleteSubjectInt(int id)
+        {
+            try
+            {
+                Subject u = db.Subjects.Single(p => p.ID == id);
                 db.Subjects.Remove(u);
                 return true;
             }

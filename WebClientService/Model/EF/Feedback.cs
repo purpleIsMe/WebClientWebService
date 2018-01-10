@@ -20,7 +20,7 @@ namespace Model.EF
         [StringLength(500)]
         public string Messages { get; set; }
 
-        public DateTime? CreateDate { get; set; }
+        public DateTime CreateDate { get; set; }
 
         public bool Status { get; set; }
     }

@@ -31,7 +31,7 @@ namespace Model.DAO
                 dataContext.Students.Add(Student);
                 dataContext.SaveChanges();
             }
-            catch(DbUpdateException e)
+            catch (DbUpdateException e)
             {
                 Debug.Write(e.ToString());
                 throw;
@@ -124,7 +124,7 @@ namespace Model.DAO
         }
         public List<Student> FiltStudent(int idlecturer)
         {
-            List<Student> x = dataContext.Students.Where(i => i.idlecturer == idlecturer).ToList();
+            List<Student> x = dataContext.Students.Where(i => i.IDLecturer == idlecturer).ToList();
             return x;
         }
         public Student ViewDetailStudent(int id)

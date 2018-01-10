@@ -23,16 +23,14 @@ namespace WebClientService.Areas.Admin.Controllers
             }
             return View();
         }
-        string pass;
+
         [HttpGet]
         public ActionResult Edit(int id)
         {
             GetListClass();
             var model = new StudentDAO().ViewDetailStudent(id);
             ViewBag.editstu = model;
-            pass = model.Password;
             return View(model);
-            //return View();
         }
 
         public bool GetListPQ(int idclasschoose = -1)

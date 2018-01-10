@@ -5,6 +5,7 @@ namespace Model.EF
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
+
     [Table("Student")]
     public partial class Student
     {
@@ -57,6 +58,7 @@ namespace Model.EF
         public int? CreateBy { get; set; }
 
         public int IDClass { get; set; }
-        public int idlecturer { get; set; }
+
+        public int? IDLecturer { get; set; }
     }
 }

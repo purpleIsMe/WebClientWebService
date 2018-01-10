@@ -19,7 +19,7 @@ namespace Model.DAO
         }
         public IEnumerable<User> ListAllPaging(int page, int pageSize)
         {
-            IEnumerable<User> x =  db.Users.OrderBy(m=>m.ID).ToPagedList(page,pageSize);
+            IEnumerable<User> x = db.Users.OrderBy(m => m.ID).ToPagedList(page, pageSize);
             return x;
         }
         public List<User> ViewAll()
@@ -98,13 +98,13 @@ namespace Model.DAO
         {
             db.Dispose();
         }
-        
+
         //dang nhap bang usernam or mail
         public int LogIn(string UserName, string passWord, string loaiUser)
         {
             var result = db.Users.Where(x => x.UserName == UserName).SingleOrDefault();
             if (loaiUser == "Mail")
-                result = db.Users.Where(x => x.Email == UserName).SingleOrDefault();                 
+                result = db.Users.Where(x => x.Email == UserName).SingleOrDefault();
             if (result == null)
             {
                 return 3;//tai khoan khong ton tai
@@ -139,7 +139,7 @@ namespace Model.DAO
         }
         public User ViewDetailAll(int id)
         {
-            User x= db.Users.Find(id);
+            User x = db.Users.Find(id);
             return x;
         }
         public User ViewDetailSingle(int id)
@@ -155,7 +155,7 @@ namespace Model.DAO
         public bool UpdateActive(User dao)
         {
             User x = db.Users.Where(l => l.ID == dao.ID).SingleOrDefault();
-            if(x!=null)
+            if (x != null)
             {
                 x.Active = dao.Active;
                 x.Status = dao.Status;

@@ -9,12 +9,6 @@ namespace Model.EF
     [Table("Subject")]
     public partial class Subject
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Subject()
-        {
-            QClasses = new HashSet<QClass>();
-        }
-
         public Guid SubjectID { get; set; }
 
         [Required]
@@ -166,8 +160,6 @@ namespace Model.EF
         public int? loop { get; set; }
 
         public int? MaxUsed { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<QClass> QClasses { get; set; }
+        public int ID { get; set; }
     }
 }

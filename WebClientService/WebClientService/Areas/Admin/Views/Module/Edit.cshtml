@@ -1,0 +1,71 @@
+﻿@model Model.EF.QClass
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    SelectList listsubj = ViewBag.ListSubject;   
+}
+
+@section Header
+{
+    CHỈNH SỬA MODULE
+}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Chỉnh sửa thông tin module
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-6">
+                        @using (Html.BeginForm("Edit", "Module", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                            @Html.HiddenFor(Model => Model.ClassID)
+                            @Html.HiddenFor(Model=>Model.IDQClass)
+
+                            <div class="form-group">
+                                @Html.LabelFor(Model => Model.idsu, htmlAttributes: new { @class = "control-label col-md-6" })
+
+                                @Html.DropDownListFor(Model => Model.idsu, listsubj, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(Model => Model.idsu, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(Model => Model.ClassNbr, htmlAttributes: new { @class = "control-label col-md-6" })
+
+                                @Html.TextBoxFor(Model => Model.ClassNbr, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(Model => Model.ClassNbr, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(Model => Model.Descr, htmlAttributes: new { @class = "control-label col-md-6" })
+
+                                @Html.TextBoxFor(Model => Model.Descr, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(Model => Model.Descr, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(Model => Model.ChuThich, htmlAttributes: new { @class = "control-label col-md-6" })
+
+                                @Html.TextBoxFor(Model => Model.ChuThich, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(Model => Model.ChuThich, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(Model => Model.TrangThai, htmlAttributes: new { @class = "control-label col-md-6" })
+
+                                @Html.CheckBoxFor(Model => Model.TrangThai, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
+                                @Html.ValidationMessageFor(Model => Model.TrangThai, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <input type="submit" value="Chỉnh sửa" class="btn btn-default" />
+                                </div>
+                            </div>                       
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

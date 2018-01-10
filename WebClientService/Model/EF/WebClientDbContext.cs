@@ -37,6 +37,7 @@ namespace Model.EF
         public virtual DbSet<Student> Students { get; set; }
         public virtual DbSet<Subject> Subjects { get; set; }
         public virtual DbSet<SupportOnline> SupportOnlines { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<SystemConfig> SystemConfigs { get; set; }
         public virtual DbSet<Tag> Tags { get; set; }
         public virtual DbSet<User> Users { get; set; }
@@ -149,11 +150,6 @@ namespace Model.EF
                 .Property(e => e.UserName)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<Subject>()
-                .HasMany(e => e.QClasses)
-                .WithOptional(e => e.Subject)
-                .WillCascadeOnDelete();
-
             modelBuilder.Entity<SystemConfig>()
                 .Property(e => e.Code)
                 .IsUnicode(false);
@@ -181,12 +177,6 @@ namespace Model.EF
             modelBuilder.Entity<User>()
                 .Property(e => e.UserName)
                 .IsUnicode(false);
-
-            modelBuilder.Entity<User>()
-                .HasMany(e => e.Answers)
-                .WithRequired(e => e.User)
-                .HasForeignKey(e => e.IDUser)
-                .WillCascadeOnDelete(false);
         }
     }
 }

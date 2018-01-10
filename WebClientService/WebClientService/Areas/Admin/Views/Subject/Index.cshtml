@@ -41,14 +41,14 @@
                             {
                                 foreach (var item in listsub)
                                 {
-                                    <tr class="odd gradeX" id="row_@item.SubjectID" onload="loadstt()">
+                                    <tr class="odd gradeX" id="row_@item.ID">
                                         <td>
-                                            <a href="/Admin/Students/Edit/@item.SubjectID"> Sửa </a>
+                                            <a href="/Admin/Subject/Edit/@item.ID"> Sửa </a>
                                             |
-                                            @Ajax.ActionLink("Xóa", "Delete", new { @id = item.SubjectID }, new AjaxOptions
+                                            @Ajax.ActionLink("Xóa", "Delete", new { @id = item.ID }, new AjaxOptions
                                        {
                                            Confirm = "Bạn có muốn xóa bản ghi này không?",
-                                           OnComplete = "$('#row_" + @item.SubjectID + "').remove()",
+                                           OnComplete = "$('#row_" + @item.ID + "').remove()",
                                            HttpMethod = "Delete"
                                        })
                                         </td>

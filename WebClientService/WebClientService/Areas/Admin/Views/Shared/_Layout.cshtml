@@ -112,6 +112,22 @@
     <script src="/Assets/Admin/vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>
     <script src="/Assets/Admin/vendor/datatables-responsive/dataTables.responsive.js"></script>
    
+    <script>
+        $(document).ready(function () {
+            $('#SelectedSubject').change(function () {
+                ModuleChanged();
+            });
+        });
+
+    function ModuleChanged() {
+        var moduleId = $('#SelectedModule').val();
+
+        $.get('@Url.Action("Module","AddData")' + "? idsu=" + moduleId,
+            function (data) {
+                $('#bookContainer').html(data);
+            });
+    }
+    </script>
     @RenderSection("js", required: false)
 </body>
 

@@ -1,0 +1,99 @@
+﻿@model Model.Content.SubjectModel
+
+@{
+    ViewBag.Title = "AddData";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    SelectList listsubj = ViewBag.ListSubject;
+}
+@section js
+{
+    <script>
+        $(document).ready(function () {
+            $('#SelectedSubject').change(function () {
+                ModuleChanged();
+            });
+        });
+
+    function ModuleChanged() {
+        var moduleId = $('#SelectedModule').val();
+
+        $.get('@Url.Action("Module","AddData")' + "? idsu=" + moduleId
+            //function (data) {
+            //    $('#bookContainer').html(data);
+            //});
+            );
+    }
+    </script>
+    <script>
+    function getCityList()
+    {
+            debugger;
+            var stateId = $("#stateDropDown").val();
+            $.ajax
+            ({
+                url: '/AddData/GetModuleList',
+               type: 'POST',
+               datatype: 'application/json',
+               contentType: 'application/json',
+               data: JSON.stringify({
+               stateId: +stateId
+               }),
+               success: function(result)
+               {
+                  $("#cityDropDown").html("");
+                  $.each($.parseJSON(result), function(i, city)
+                  {
+                     $("#cityDropDown").append
+                     ($('<option></option>').val(city.CityID).html(city.CityName))
+                  })
+                },
+                error: function()
+                {
+                     alert("Whooaaa! Something went wrong..")
+                },
+            });
+        }
+    </script>
+}
+@section Header
+{
+    THÊM MỚI MODULE
+}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Nhập thông tin module
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-6">
+                        @using (Html.BeginForm("Module", "AddData", FormMethod.Get))
+                        {
+                            @Html.AntiForgeryToken()
+
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                            <div class="form-group">
+                                @Html.Label("Chọn môn thi", htmlAttributes: new { @class = "control-label col-md-6" })
+
+                                @Html.DropDownListFor(model => model.SelectedSubject, new SelectList(Model.Subjects, "ID", "Descr"), new { htmlAttributes = new { @class = "form-control" } })
+                            </div>
+                            <div class="form-group">
+                                @Html.Label("Chọn module", htmlAttributes: new { @class = "control-label col-md-6" })
+
+                                @Html.DropDownListFor(module => module.SelectedModule, new SelectList(Model.Modules, "IDQClass", "Descr"), new { htmlAttributes = new { @class = "form-control" } })
+                            </div>
+                            <div id="bookContainer"></div>
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <input type="submit" value="Tạo module" class="btn btn-default" />
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -38,7 +38,7 @@ namespace WebClientService.Areas.Admin.Controllers
                 sub.roundToZero = false;
                 sub.skipMinus = false;
                 Guid id = dao.AddSubject(sub);
-                if (id != null)
+                if (id != Guid.Empty)
                 {
                     return RedirectToAction("Index", "Subject");
                 }
@@ -47,12 +47,13 @@ namespace WebClientService.Areas.Admin.Controllers
                     ModelState.AddModelError("", "Thêm môn thi thất bại");
                 }
             }
-            return View("Index");
+            return View("Create");
         }
         [HttpGet]
-        public ActionResult Edit(Guid SubID)
+        public ActionResult Edit(int SubID)
         {
             var sub = new SubjectDAO().ShowAllSubID(SubID);
+            //return View(sub);
             return View(sub);
         }
         [HttpPost]
@@ -76,6 +77,18 @@ namespace WebClientService.Areas.Admin.Controllers
                 else
                 {
                     ModelState.AddModelError("", "Chỉnh sửa môn thi thất bại");
+                }
+            }
+            return View("Index");
+        }
+        [HttpDelete]
+        public ActionResult Delete(int id)
+        {
+            if (ModelState.IsValid)
+            {
+                if (new SubjectDAO().DeleteSubjectInt(id))
+                {
+                    return RedirectToAction("Index", "Subject");
                 }
             }
             return View("Index");

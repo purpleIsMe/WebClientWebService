@@ -9,13 +9,6 @@ namespace Model.EF
     [Table("QClass")]
     public partial class QClass
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public QClass()
-        {
-            Questions = new HashSet<Question>();
-            QuestionTemps = new HashSet<QuestionTemp>();
-        }
-
         [Key]
         public Guid ClassID { get; set; }
 
@@ -30,12 +23,6 @@ namespace Model.EF
         public string ChuThich { get; set; }
 
         public bool TrangThai { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Question> Questions { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<QuestionTemp> QuestionTemps { get; set; }
 
         public int idsu { get; set; }
 

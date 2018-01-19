@@ -1,117 +1,132 @@
-﻿@{
-    Layout = null;
+﻿@using Model.DTO
+@{ 
+    Layout= "/Areas/Admin/Views/Shared/Exam.cshtml";
+    //byte[] ques = ViewBag.ListQues; 
+    //byte[] ans1 = ViewBag.ListAns1;
+    //byte[] ans2 = ViewBag.ListAns2;
+    //byte[] ans3 = ViewBag.ListAns3;
+    //byte[] ans4 = ViewBag.ListAns4;
+    List<AllQuestionDTO> list = ViewBag.ListQues;
 }
+@section Content
+{
+<div id="divleft">
+    @foreach (AllQuestionDTO item in list)
+    {
+        <fieldset id="field1">
+            <legend><span id="list_questions"> Câu 1</span> </legend>
+            <div id="question">                
+                <textarea name="text" id="questions" style="height:inherit;width:100%; border:hidden; resize:none" readonly="readonly">
+                    @item.quesex
+                </textarea>
+            </div>
+            
+            <!--Nội dung câu hỏi  truyền vào đây-->
+            
+        </fieldset>
+        
+        <fieldset id="field2">
+            <legend>Lựa chọn</legend>
+            <div id="answer">
+                <span id="achild">A
+                    <textarea name="text" id="answer1" style="height:inherit;width:95%; border:hidden; resize:none" readonly="readonly">
+                        @item.Answer1
+                    </textarea>
+                </span><br/>
+                <span id="achild">B
+                    <textarea name="text" id="answer2" style="height:inherit;width:95%; border:hidden; resize:none" readonly="readonly">
+                        @item.Answer2
+                    </textarea>
+                </span><br/>
+                <span id="achild">C
+                    <textarea name="text" id="answer3" style="height:inherit;width:95%; border:hidden; resize:none" readonly="readonly">
+                        @item.Answer3
+                    </textarea>
+                </span><br/>
+                <span id="achild">D
+                    <textarea name="text" id="answer4" style="height:inherit;width:95%; border:hidden; resize:none" readonly="readonly">
+                        @item.Answer4
+                    </textarea>
+                </span><br/>
+                <center class="center">
+                    <button id="back" value="" onclick="lui()"><</button>
+                    <input type="number" id="cau" value="1" min="0">
+                    <button id="next" value="" onclick="tien()">></button>
+                </center>
+            </div>
+        </fieldset>
+    }
+</div>
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-</head>
-<body>
-    <body onload="load()">
-        <div id="divleft">
-            <fieldset id="field1">
-                <legend><span id="list_questions"> Câu 1</span> </legend>
-                <div id="question">
-                    <textarea name="text" id="questions"></textarea>
-                    <!-- <label for="" id="questions"></label> -->
-                </div>
-
-                <!--Nội dung câu hỏi  truyền vào đây-->
-
-            </fieldset>
-
-            <fieldset id="field2">
-                <legend>Lựa chọn</legend>
-                <div id="answer">
-                    richtextbox
-                    <span id="answer1"></span></br>
-                    <span id="answer2"></span> </br>
-                    <span id="answer3"></span></br>
-                    <span id="answer4"></span></br>
-                    <center class="center">
-                        <button id="back" value="" onclick="lui()"><</button>
-                        <input type="number" id="cau" value="1" min="0">
-                        <button id="next" value="" onclick="tien()">></button>
-                    </center>
-                </div>
-            </fieldset>
-
+<div id="divright">
+    <!--Bảng thông tin người dự thi-->
+    <fieldset id="field3">
+        <legend>Thông tin thí sinh</legend>
+        <div id="info">
+            <table style="width:100%">
+                <tr>
+                    <td>Mã dự thi</td>
+                    <td>001</td>
+                </tr>
+                <tr>
+                    <td>Họ và tên</td>
+                    <td>Nguyễn A</td>
+                </tr>
+                <tr>
+                    <td>Môn thi</td>
+                    <td>Test</td>
+                </tr>
+                <tr>
+                    <td>Thời gian</td>
+                    <td>60</td>
+                </tr>
+                <tr>
+                    <td>phòng thi</td>
+                    <td>Phòng máy B501</td>
+                </tr>
+                <tr>
+                    <td>Ngày thi</td>
+                    <td>13/11/2007</td>
+                </tr>
+                <tr>
+                    <td>Số máy</td>
+                    <td>21</td>
+                </tr>
+                <tr>
+                    <td>Thống kê</td>
+                    <td>0/19</td>
+                </tr>
+            </table>
+            <center>
+                <label id="counttime" style="font-size: 40px">60:00</label>
+                <button id="hdsd" style="font-size: 25px; float: right;">?</button>
+            </center>
+            <center>
+                <button id="start-end" style="font-size: 25px;">Kết thúc</button>
+            </center>
         </div>
+    </fieldset>
+    <fieldset id="field4">
+        <div id="choose">
+            <table style="width:100%">
+                <tr>
+                    <th>Câu hỏi</th>
+                    <th>A</th>
+                    <th>B</th>
+                    <th>C</th>
+                    <th>D</th>
 
-        <div id="divright">
-            <!--Bảng thông tin người dự thi-->
-            <fieldset id="field3">
-                <legend>Thông tin thí sinh</legend>
-                <div id="info">
-                    <table style="width:100%">
-                        <tr>
-                            <td>Mã dự thi</td>
-                            <td>001</td>
-                        </tr>
-                        <tr>
-                            <td>Họ và tên</td>
-                            <td>Nguyễn A</td>
-                        </tr>
-                        <tr>
-                            <td>Môn thi</td>
-                            <td>Test</td>
-                        </tr>
-                        <tr>
-                            <td>Thời gian</td>
-                            <td>60</td>
-                        </tr>
-                        <tr>
-                            <td>phòng thi</td>
-                            <td>Phòng máy B501</td>
-                        </tr>
-                        <tr>
-                            <td>Ngày thi</td>
-                            <td>13/11/2007</td>
-                        </tr>
-                        <tr>
-                            <td>Số máy</td>
-                            <td>21</td>
-                        </tr>
-                        <tr>
-                            <td>Thống kê</td>
-                            <td>0/19</td>
-                        </tr>
-                    </table>
-                    <center>
-                        <label id="counttime" style="font-size: 40px">60:00</label>
-                        <button id="hdsd" style="font-size: 25px; float: right;">?</button>
-                    </center>
-                    <center>
-                        <button id="start-end" style="font-size: 25px;">Kết thúc</button>
-                    </center>
-                </div>
-            </fieldset>
-            <fieldset id="field4">
-                <div id="choose">
-                    <table style="width:100%">
-                        <tr>
-                            <th>Câu hỏi</th>
-                            <th>A</th>
-                            <th>B</th>
-                            <th>C</th>
-                            <th>D</th>
-                        </tr>
+                </tr>
 
-                        <tr>
-                            <th>1</th>
-                            <th><input type="Radio" name="'.$i.'" value="A"></th>
-                            <th><input type="Radio" name="'.$i.'" value="B"></th>
-                            <th><input type="Radio" name="'.$i.'" value="C"></th>
-                            <th><input type="Radio" name="'.$i.'" value="D"></th>
-                        </tr>
-
-                    </table>
-                </div>
-            </fieldset>
+                <tr>
+                    <th>1</th>
+                    <th><input type="Radio" name="'.$i.'" value="A"></th>
+                    <th><input type="Radio" name="'.$i.'" value="B"></th>
+                    <th><input type="Radio" name="'.$i.'" value="C"></th>
+                    <th><input type="Radio" name="'.$i.'" value="D"></th>
+                </tr>
+            </table>
         </div>
-    </body>
-</body>
-</html>
+    </fieldset>
+</div>
+}

@@ -160,6 +160,8 @@ namespace Model.EF
         public int? loop { get; set; }
 
         public int? MaxUsed { get; set; }
+
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
     }
 }

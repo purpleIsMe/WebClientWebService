@@ -1,16 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using System.Text.RegularExpressions;
 using System.Text;
-using System.Net;
-using System.IO;
 using HtmlAgilityPack;
 using Model.EF;
-using PagedList;
-//using WebClientService.Areas.Admin.Controllers;
 
 namespace WebClientService.Controllers
 {
@@ -19,13 +13,6 @@ namespace WebClientService.Controllers
         // GET: Client/Home
         [HttpGet]
         public ActionResult Index()
-        {
-            GetContent();
-            return View();
-        }
-
-        [HttpGet]
-        public void GetContent()
         {
             HtmlWeb htmlWeb = new HtmlWeb()
             {
@@ -63,6 +50,7 @@ namespace WebClientService.Controllers
                 });
             }
             ViewData["HotNews"] = items;
+            return View();
         }
     }
 }

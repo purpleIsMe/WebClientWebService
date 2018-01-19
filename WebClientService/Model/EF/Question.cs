@@ -116,7 +116,5 @@ namespace Model.EF
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DeTronQuestion> DeTronQuestions1 { get; set; }
-
-        public virtual QClass QClass { get; set; }
     }
 }

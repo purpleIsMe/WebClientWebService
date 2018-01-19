@@ -29,6 +29,10 @@ namespace Model.DAO
         {
             return db.Subjects.Where(i => i.ID == id).ToList();
         }
+        public Subject ShowAllSubIDSingle(int id)
+        {
+            return db.Subjects.Where(i => i.ID == id).SingleOrDefault();
+        }
         public List<Subject> showWithGuidID(Guid id)
         {
             return db.Subjects.Where(o => o.SubjectID == id).ToList();

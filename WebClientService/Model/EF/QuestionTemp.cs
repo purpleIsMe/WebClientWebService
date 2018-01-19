@@ -100,7 +100,5 @@ namespace Model.EF
         public string HostName { get; set; }
 
         public bool? Active { get; set; }
-
-        public virtual QClass QClass { get; set; }
     }
 }

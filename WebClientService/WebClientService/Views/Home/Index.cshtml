@@ -1,11 +1,10 @@
 ﻿@using Model.EF
     @{
-        ViewBag.Title = "Index";
-        Layout = "~/Areas/Client/Views/Shared/_Layout.cshtml";
+        Layout = "~/Views/Shared/_Layout.cshtml";
     }
     @section hotnews
     {
-        <asp:Repeater id="rptRSS" runat="server">
+        <asp:Repeater id="rptRSS">
             <ItemTemplate>
                 <section id="banner" class="banner">
                     <div class="container">
@@ -248,11 +247,4 @@
 
     }
 
-
-@*@Html.Label(LayTieuDe(GetWebContent("http://vnexpress.net/gl/xa-hoi/2012/08/phu-nu-chet-loa-the-trong-khach-san/"))
-    + "<br /><br />"
-    + LayMoTa(GetWebContent("http://vnexpress.net/gl/xa-hoi/2012/08/phu-nu-chet-loa-the-trong-khach-san/"))
-    + "<br /><br />"
-    + LayNoiDung(GetWebContent("http://vnexpress.net/gl/xa-hoi/2012/08/phu-nu-chet-loa-the-trong-khach-san/"))
-    + "")*@
 

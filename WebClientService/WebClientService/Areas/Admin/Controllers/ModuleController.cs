@@ -12,8 +12,8 @@ namespace WebClientService.Areas.Admin.Controllers
     {
         // GET: Admin/Module
         public ActionResult Index()
-        {  
-           listsubject(1);
+        {
+            listsubject(1);
             var qclassDAO = new QClassDAO();
             ViewBag.ListQC = new List<QClass>(qclassDAO.listWithIDSub(1));
             ViewBag.descr = new SubjectDAO().DescrSub(1);

@@ -1,4 +1,5 @@
-﻿using Model.EF;
+﻿using Model.DTO;
+using Model.EF;
 using PagedList;
 using System;
 using System.Collections.Generic;
@@ -15,25 +16,55 @@ namespace Model.DAO
         {
             db = new WebClientDbContext();
         }
-        public IEnumerable<Question> GetListAll()
+        public List<Question> GetListAll()
         {
-            IEnumerable<Question> y = db.Questions.ToList();
-            CloseConnect();
+            List<Question> y = db.Questions.ToList();
             return y;
+        }
+        public List<AllQuestionDTO> getAllQuestionDeTron(int iddetron)
+        {
+            List<AllQuestionDTO> o = (from a in db.DeTronQuestions
+                                      join b in db.Questions on a.QuestionID equals b.QuestionID
+                                      join c in db.DeTrons on a.IDDeTron equals c.ID
+                                      where a.IDDeTron == iddetron
+                                      orderby a.IDAuto
+                                      select new AllQuestionDTO()
+                                      {
+                                          ID = c.ID,
+                                          MaDeTron = c.MaDeTron,
+                                          QuestionID = b.QuestionID,
+                                          Question = b.Question1,
+                                          Answer1 = b.Answer1,
+                                          Answer2 = b.Answer2,
+                                          Answer3 = b.Answer3,
+                                          Answer4 = b.Answer4,
+                                          TheAnswer = (int)b.TheAnswer,
+                                          MaxAnswerLeng = (int)b.MaxAnswerLen,
+                                          HV1 = a.Answer1,
+                                          HV2 = a.Answer2,
+                                          HV3 = a.Answer3,
+                                          HV4 = a.Answer4,
+                                          DapAn = a.DapAn
+                                      }).ToList();
+            return o;
+        }
+        public List<Question> getListQuestionIDModule(int idmodule)
+        {
+            Guid idclass = new QClassDAO().GetListAll().Where(i => i.IDQClass == idmodule).Select(p => p.ClassID).SingleOrDefault();
+            List<Question> x = db.Questions.Where(o => o.ClassID == idclass).ToList();
+            return x;
         }
         public IEnumerable<Question> ListAllPaging(int page, int pageSize)
         {
             IEnumerable<Question> x = db.Questions.OrderBy(m => m.QuestionID).ToPagedList(page, pageSize);
-            CloseConnect();
             return x;
         }
-        public Guid AddPQ(Question PQ)
+        public bool AddPQ(Question PQ)
         {
             try
             {
                 db.Questions.Add(PQ);
                 db.SaveChanges();
-                CloseConnect();
             }
             catch (DbEntityValidationException e)
             {
@@ -45,14 +76,14 @@ namespace Model.DAO
                         Debug.WriteLine("- Property: \"{0}\", Error: \"{1}\"", ve.PropertyName, ve.ErrorMessage);
                     }
                 }
-                throw;
+                return false;
             }
             catch (Exception e)
             {
                 Debug.WriteLine(e.Message);
-                throw;
+                return false;
             }
-            return PQ.QuestionID;
+            return true;
         }
         public bool UpdateQuestion(Question PQ)
         {
@@ -79,7 +110,6 @@ namespace Model.DAO
                 u.UserAccess = PQ.UserAccess;
                 u.Active = PQ.Active;
                 db.SaveChanges();
-                CloseConnect();
                 return true;
             }
             catch
@@ -93,7 +123,6 @@ namespace Model.DAO
             {
                 Question u = db.Questions.Single(p => p.QuestionID == id);
                 db.Questions.Remove(u);
-                CloseConnect();
                 return true;
             }
             catch

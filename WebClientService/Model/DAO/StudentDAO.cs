@@ -90,7 +90,6 @@ namespace Model.DAO
                 Debug.WriteLine(e.Message);
                 return false;
             }
-            return true;
         }
         public bool DeleteStudent(int id)
         {

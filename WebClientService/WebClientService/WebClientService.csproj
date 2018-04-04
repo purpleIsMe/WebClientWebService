@@ -44,6 +44,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CuteEditor, Version=6.7.0.0, Culture=neutral, PublicKeyToken=3858aa6802b1223a, processorArchitecture=MSIL">
+      <HintPath>..\packages\CuteEditor.6.7.2.0\lib\CuteEditor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="CuteEditor.ImageEditor, Version=6.0.0.0, Culture=neutral, PublicKeyToken=2bb6cdd4237de7bf">
+      <HintPath>..\packages\CuteEditor.6.7.2.0\lib\CuteEditor.ImageEditor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="DevExpress.Data.v12.2, Version=12.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
       <HintPath>..\packages\DevExpress.MVC.12.2\lib\DevExpress.Data.v12.2.dll</HintPath>
       <Private>True</Private>
@@ -157,12 +165,8 @@
     <Reference Include="Model">
       <HintPath>..\Model\bin\Debug\Model.dll</HintPath>
     </Reference>
-    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
-      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
-      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
+    <Reference Include="NetSpell.SpellChecker, Version=2.1.7.24956, Culture=neutral, PublicKeyToken=318b389f0db66e46, processorArchitecture=MSIL">
+      <HintPath>..\packages\CuteEditor.6.7.2.0\lib\NetSpell.SpellChecker.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Remotion, Version=1.13.52.2, Culture=neutral, PublicKeyToken=0669cf0452175907, processorArchitecture=MSIL">
@@ -176,6 +180,10 @@
     <Reference Include="Remotion.Interfaces, Version=1.13.52.2, Culture=neutral, PublicKeyToken=0669cf0452175907, processorArchitecture=MSIL">
       <HintPath>..\packages\LinqToExcel.1.11.0\lib\Remotion.Interfaces.dll</HintPath>
       <Private>True</Private>
+    </Reference>
+    <Reference Include="RichTextEditor, Version=8.2.0.0, Culture=neutral, PublicKeyToken=3858aa6802b1223a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\RichTextEditor.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -303,6 +311,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\DevExtremeBundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AddDataController.cs" />
@@ -310,9 +319,11 @@
     <Compile Include="Areas\Admin\Controllers\EmailController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeAdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\LoginController.cs" />
+    <Compile Include="Areas\Admin\Controllers\MakeTestController.cs" />
     <Compile Include="Areas\Admin\Controllers\ModuleController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ScheduleController.cs" />
     <Compile Include="Areas\Admin\Controllers\StudentsController.cs" />
-    <Compile Include="Areas\Admin\Controllers\TestExamController.cs" />
+    <Compile Include="Controllers\TestExamController.cs" />
     <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
     <Compile Include="Areas\Admin\Models\LoginModel.cs" />
     <Compile Include="Areas\Admin\Controllers\SubjectController.cs" />
@@ -327,10 +338,12 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AdvancedTopics.htm" />
     <Content Include="Assets\Admin\dist\css\sb-admin-2.css" />
     <Content Include="Assets\Admin\dist\css\sb-admin-2.min.css" />
     <Content Include="Assets\Admin\dist\js\sb-admin-2.js" />
     <Content Include="Assets\Admin\dist\js\sb-admin-2.min.js" />
+    <Content Include="Assets\Admin\js\module.js" />
     <Content Include="Assets\Admin\js\sb-admin-2.js" />
     <Content Include="Assets\Admin\js\testpass.js" />
     <Content Include="Assets\Admin\vendor\bootstrap-social\bootstrap-social.css" />
@@ -430,6 +443,7 @@
     <Content Include="Assets\Client\css\fonts\fonts.css" />
     <Content Include="Assets\Client\css\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Assets\Client\css\fonts\stylesheet.css" />
+    <Content Include="Assets\Client\css\main\main.css" />
     <Content Include="Assets\Client\css\nivo-lightbox\nivo-lightbox.css" />
     <Content Include="Assets\Client\css\owl-carousel\owl.carousel.css" />
     <Content Include="Assets\Client\css\owl-carousel\owl.theme.css" />
@@ -468,6 +482,7 @@
     <Content Include="Assets\Client\images\tst1.jpg" />
     <Content Include="Assets\Client\js\bootstrap\bootstrap.min.js" />
     <Content Include="Assets\Client\js\counterup\counterup.min.js" />
+    <Content Include="Assets\Client\js\Exam\testExam.js" />
     <Content Include="Assets\Client\js\fancybox\jquery.fancybox.pack.js" />
     <Content Include="Assets\Client\js\isotop\isotop.function.js" />
     <Content Include="Assets\Client\js\isotop\isotope.min.js" />
@@ -485,13 +500,87 @@
     <Content Include="Assets\Client\js\plugins.js" />
     <Content Include="Assets\Client\js\script.js" />
     <Content Include="Assets\Client\js\wow\wow.min.js" />
+    <Content Include="CommonTasks.htm" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\PagedList.css" />
+    <Content Include="Content\dx.android5.light.css" />
+    <Content Include="Content\dx.common.css" />
+    <Content Include="Content\dx.contrast.compact.css" />
+    <Content Include="Content\dx.contrast.css" />
+    <Content Include="Content\dx.dark.compact.css" />
+    <Content Include="Content\dx.dark.css" />
+    <Content Include="Content\dx.ios7.default.css" />
+    <Content Include="Content\dx.light.compact.css" />
+    <Content Include="Content\dx.light.css" />
+    <Content Include="Content\dx.spa.css" />
+    <Content Include="Content\dx.win8.black.css" />
+    <Content Include="Content\dx.win8.white.css" />
+    <Content Include="default.htm" />
+    <Content Include="Deployment.htm" />
     <Content Include="favicon.ico" />
+    <Content Include="Feature-Comparison-Chart.htm" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="READ_ME.txt" />
+    <Content Include="sampleimage\120-box-formatting.gif" />
+    <Content Include="sampleimage\120-Conten_management_with_templates.gif" />
+    <Content Include="sampleimage\120-image-map.jpg" />
+    <Content Include="sampleimage\120-Max-Upload-file-size.gif" />
+    <Content Include="sampleimage\120-MaxHTMLLength.gif" />
+    <Content Include="sampleimage\120-no-java.gif" />
+    <Content Include="sampleimage\120-nofont.gif" />
+    <Content Include="sampleimage\120-online-image-editor.jpg" />
+    <Content Include="sampleimage\120-section_508.gif" />
+    <Content Include="sampleimage\120-Store-images-in-Database.gif" />
+    <Content Include="sampleimage\120-Universal-keyboard.gif" />
+    <Content Include="sampleimage\Anti-Spam-Email-Encoder.gif" />
+    <Content Include="sampleimage\asp.net-upload.gif" />
+    <Content Include="sampleimage\aspprologo.gif" />
+    <Content Include="sampleimage\capture-the-save-button-click-event.gif" />
+    <Content Include="sampleimage\check.gif" />
+    <Content Include="sampleimage\cleanup.gif" />
+    <Content Include="sampleimage\complete-web-page-editing.gif" />
+    <Content Include="sampleimage\Conten_management_with_templates.gif" />
+    <Content Include="sampleimage\copydllandlicenses.gif" />
+    <Content Include="sampleimage\copyfiles.gif" />
+    <Content Include="sampleimage\cross-browser-cross-platform.gif" />
+    <Content Include="sampleimage\Cross-Browser-Modal-Dialog-Box.gif" />
+    <Content Include="sampleimage\cuteeditorbox.jpg" />
+    <Content Include="sampleimage\dot.gif" />
+    <Content Include="sampleimage\fast-loading.gif" />
+    <Content Include="sampleimage\hp_logo.gif" />
+    <Content Include="sampleimage\ibm.gif" />
+    <Content Include="sampleimage\Insert-clean-HTML-from-Word.gif" />
+    <Content Include="sampleimage\intel.gif" />
+    <Content Include="sampleimage\investopedia.gif" />
+    <Content Include="sampleimage\liberalca.gif" />
+    <Content Include="sampleimage\logo.gif" />
+    <Content Include="sampleimage\Long-Description.gif" />
+    <Content Include="sampleimage\microsoft.gif" />
+    <Content Include="sampleimage\Multi-culture-support.gif" />
+    <Content Include="sampleimage\nofont.gif" />
+    <Content Include="sampleimage\physical-tags.gif" />
+    <Content Include="sampleimage\populate-the-dropdown-menu.gif" />
+    <Content Include="sampleimage\populate-the-treeview-dropdown-menu.gif" />
+    <Content Include="sampleimage\register-Server-Control.gif" />
+    <Content Include="sampleimage\s-image-gallery.jpg" />
+    <Content Include="sampleimage\security-access-control.gif" />
+    <Content Include="sampleimage\security.gif" />
+    <Content Include="sampleimage\small-cross-browser-support.gif" />
+    <Content Include="sampleimage\Style-Builder-Dialog.gif" />
+    <Content Include="sampleimage\tools.gif" />
+    <Content Include="sampleimage\undo-redo-feature.gif" />
+    <Content Include="sampleimage\use-CuteEditor-as-an-image-selector.gif" />
+    <Content Include="sampleimage\use-CuteEditor-as-document-selector.gif" />
+    <Content Include="sampleimage\view_details.gif" />
+    <Content Include="sampleimage\well-formed-XHTML.gif" />
+    <Content Include="Scripts\angular-route.js" />
+    <Content Include="Scripts\angular-route.min.js" />
+    <Content Include="Scripts\angular-sanitize.js" />
+    <Content Include="Scripts\angular-sanitize.min.js" />
+    <Content Include="Scripts\angular.js" />
+    <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
@@ -554,6 +643,67 @@
     <Content Include="Assets\Admin\vendor\font-awesome\scss\_variables.scss" />
     <Content Include="Areas\Admin\Views\Users\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Users\Edit.cshtml" />
+    <Content Include="Scripts\dx.all.debug.js" />
+    <Content Include="Scripts\dx.all.js" />
+    <Content Include="Scripts\dx.chartjs.debug.js" />
+    <Content Include="Scripts\dx.chartjs.js" />
+    <Content Include="Scripts\dx.phonejs.debug.js" />
+    <Content Include="Scripts\dx.phonejs.js" />
+    <Content Include="Scripts\dx.webappjs.debug.js" />
+    <Content Include="Scripts\dx.webappjs.js" />
+    <Content Include="Scripts\globalize.js" />
+    <Content Include="Scripts\globalize.min.js" />
+    <Content Include="Scripts\jquery-1.11.3.js" />
+    <Content Include="Scripts\jquery-1.11.3.min.js" />
+    <Content Include="Scripts\jquery-2.1.4.js" />
+    <Content Include="Scripts\jquery-2.1.4.min.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\jszip.js" />
+    <Content Include="Scripts\jszip.min.js" />
+    <Content Include="Scripts\knockout-3.3.0.debug.js" />
+    <Content Include="Scripts\knockout-3.3.0.js" />
+    <Content Include="Templates\template1.html" />
+    <Content Include="Templates\template2.htm" />
+    <Content Include="Templates\template3.htm" />
+    <Content Include="Uploads\10n2.jpg" />
+    <Content Include="Uploads\12.jpg" />
+    <Content Include="Uploads\150x95-online.gif" />
+    <Content Include="Uploads\asp-net-live-support.gif" />
+    <Content Include="Uploads\Cindy_Crawford.jpg" />
+    <Content Include="Uploads\clock.swf" />
+    <Content Include="Uploads\Guest\150x95-online.gif" />
+    <Content Include="Uploads\Member\compact-mode1.gif" />
+    <Content Include="Uploads\Northwind.mdb" />
+    <Content Include="Uploads\Sample_Picture01.jpg" />
+    <Content Include="Uploads\t1.jpg" />
+    <Content Include="Uploads\t10.jpg" />
+    <Content Include="Uploads\t13.jpg" />
+    <Content Include="Uploads\t18.jpg" />
+    <Content Include="Uploads\t2.jpg" />
+    <Content Include="Uploads\try-cms-now.jpg" />
+    <Content Include="Uploads\wolf2.jpg" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Users\EditTemp.cshtml" />
+    <Content Include="Areas\Admin\Views\Students\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_Sidebar.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_NavbarTop.cshtml" />
+    <Content Include="Areas\Admin\Views\Email\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Students\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Subject\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Subject\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Subject\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Module\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Module\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Email\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\AddData\Index.cshtml" />
+    <Content Include="Views\TestExam\Index.cshtml" />
+    <Content Include="Views\Shared\Exam.cshtml" />
+    <Content Include="sampleimage\Thumbs.db" />
+    <Content Include="Areas\Admin\Views\MakeTest\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Schedule\Index.cshtml" />
     <Content Include="Assets\Client\css\font-awesome\fonts\fontawesome-webfont.eot" />
     <Content Include="Assets\Client\css\font-awesome\fonts\fontawesome-webfont.ttf" />
     <Content Include="Assets\Client\css\font-awesome\fonts\fontawesome-webfont.woff" />
@@ -573,27 +723,6 @@
     <Content Include="Assets\Client\css\fonts\Roboto-Thin.ttf" />
     <Content Include="Assets\Client\css\fonts\RobotoCondensed-Bold.ttf" />
     <Content Include="Assets\Client\css\fonts\RobotoCondensed-Light.ttf" />
-    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
-    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
-    <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Users\EditTemp.cshtml" />
-    <Content Include="Areas\Admin\Views\Students\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\_Sidebar.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\_NavbarTop.cshtml" />
-    <Content Include="Areas\Admin\Views\Email\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Students\Edit.cshtml" />
-    <Content Include="Areas\Admin\Views\Subject\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Subject\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\Subject\Edit.cshtml" />
-    <Content Include="Areas\Admin\Views\Module\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Module\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\Module\Edit.cshtml" />
-    <Content Include="Areas\Admin\Views\Email\Create.cshtml" />
-    <Content Include="Areas\Admin\Views\AddData\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\TestExam\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\Exam.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -619,7 +748,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\icons\" />
     <Folder Include="Models\" />
+    <Folder Include="Scripts\localization\" />
+    <Folder Include="Scripts\modules\" />
+    <Folder Include="Scripts\vectormap-data\" />
+    <Folder Include="Scripts\vectormap-utils\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

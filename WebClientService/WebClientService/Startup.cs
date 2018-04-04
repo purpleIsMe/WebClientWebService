@@ -6,6 +6,5 @@ namespace WebClientService
 {
     public partial class Startup
     {
-      
     }
 }

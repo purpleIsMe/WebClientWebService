@@ -7,55 +7,6 @@
     SelectList listmod = ViewBag.ListModule;
     string mess = ViewBag.Message;
 }
-@section js
-{
-    @*<script>
-        $(document).ready(function () {
-            $('#SelectedSubject').change(function () {
-                ModuleChanged();
-            });
-        });
-
-    function ModuleChanged() {
-        var moduleId = $('#SelectedSubject').val();
-
-        $.get('@Url.Action("Module","AddData")' + "? idsu=" + moduleId,
-            function (data) {
-                $('#ListModule').html(data);
-            });
-    }
-    </script>*@
-    @*<script>
-    function getCityList()
-    {
-            debugger;
-            var stateId = $("#SelectedSubject").val();
-            $.ajax
-            ({
-                url: '/AddData/GetModuleList',
-               type: 'POST',
-               datatype: 'application/json',
-               contentType: 'application/json',
-               data: JSON.stringify({
-               stateId: +stateId
-               }),
-               success: function(result)
-               {
-                   $("#ListModule").html("");
-                  $.each($.parseJSON(result), function(i, city)
-                  {
-                     $("#ListModule").append
-                     ($('<option></option>').val(city.CityID).html(city.CityName))
-                  })
-                },
-                error: function()
-                {
-                     alert("Whooaaa! Something went wrong..")
-                },
-            });
-        }
-    </script>*@
-}
 @section Header
 {
     THÊM MỚI MODULE

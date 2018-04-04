@@ -148,6 +148,7 @@
   <ItemGroup>
     <Compile Include="Abstract\Auditable.cs" />
     <Compile Include="Abstract\IAuditable.cs" />
+    <Compile Include="Content\CathiModule.cs" />
     <Compile Include="Content\ModuleModel.cs" />
     <Compile Include="Content\SubjectModel.cs" />
     <Compile Include="DAO\AnswerDAO.cs" />
@@ -167,7 +168,7 @@
     <Compile Include="EF\Administration.cs" />
     <Compile Include="EF\Answer.cs" />
     <Compile Include="EF\AnswerSheet.cs" />
-    <Compile Include="EF\Cathi.cs" />
+    <Compile Include="EF\CaThi.cs" />
     <Compile Include="EF\Class.cs" />
     <Compile Include="EF\DeChuan.cs" />
     <Compile Include="EF\DeChuanQuestion.cs" />
@@ -176,11 +177,13 @@
     <Compile Include="EF\Error.cs" />
     <Compile Include="EF\FeedBack.cs" />
     <Compile Include="EF\Footer.cs" />
+    <Compile Include="EF\KHOATHI.cs" />
     <Compile Include="EF\LogIn.cs" />
     <Compile Include="EF\Menu.cs" />
     <Compile Include="EF\MenuGroup.cs" />
     <Compile Include="EF\Page.cs" />
     <Compile Include="EF\PhanQuyen.cs" />
+    <Compile Include="EF\PHONG.cs" />
     <Compile Include="EF\Post.cs" />
     <Compile Include="EF\PostTag.cs" />
     <Compile Include="EF\QClass.cs" />

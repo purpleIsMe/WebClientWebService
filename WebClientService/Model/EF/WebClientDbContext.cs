@@ -15,7 +15,7 @@ namespace Model.EF
         public virtual DbSet<Administration> Administrations { get; set; }
         public virtual DbSet<Answer> Answers { get; set; }
         public virtual DbSet<AnswerSheet> AnswerSheets { get; set; }
-        public virtual DbSet<Cathi> Cathis { get; set; }
+        public virtual DbSet<CaThi> CaThis { get; set; }
         public virtual DbSet<Class> Classes { get; set; }
         public virtual DbSet<DeChuan> DeChuans { get; set; }
         public virtual DbSet<DeChuanQuestion> DeChuanQuestions { get; set; }
@@ -24,11 +24,13 @@ namespace Model.EF
         public virtual DbSet<Error> Errors { get; set; }
         public virtual DbSet<FeedBack> FeedBacks { get; set; }
         public virtual DbSet<Footer> Footers { get; set; }
+        public virtual DbSet<KHOATHI> KHOATHIs { get; set; }
         public virtual DbSet<LogIn> LogIns { get; set; }
         public virtual DbSet<Menu> Menus { get; set; }
         public virtual DbSet<MenuGroup> MenuGroups { get; set; }
         public virtual DbSet<Page> Pages { get; set; }
         public virtual DbSet<PhanQuyen> PhanQuyens { get; set; }
+        public virtual DbSet<PHONG> PHONGs { get; set; }
         public virtual DbSet<Post> Posts { get; set; }
         public virtual DbSet<PostTag> PostTags { get; set; }
         public virtual DbSet<QClass> QClasses { get; set; }
@@ -61,11 +63,10 @@ namespace Model.EF
                 .Property(e => e.Zalo)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<Cathi>()
-                .HasMany(e => e.DeChuans)
-                .WithRequired(e => e.Cathi)
-                .HasForeignKey(e => e.MaCaThi)
-                .WillCascadeOnDelete(false);
+            modelBuilder.Entity<DeChuan>()
+                .HasMany(e => e.CaThis)
+                .WithOptional(e => e.DeChuan)
+                .HasForeignKey(e => e.IDDeChuan);
 
             modelBuilder.Entity<DeChuan>()
                 .HasMany(e => e.DeChuanQuestions)
@@ -92,6 +93,10 @@ namespace Model.EF
                 .Property(e => e.Email)
                 .IsUnicode(false);
 
+            modelBuilder.Entity<KHOATHI>()
+                .Property(e => e.MaKhoaThi)
+                .IsUnicode(false);
+
             modelBuilder.Entity<MenuGroup>()
                 .HasMany(e => e.Menus)
                 .WithRequired(e => e.MenuGroup)
@@ -107,6 +112,10 @@ namespace Model.EF
                 .WithRequired(e => e.PhanQuyen)
                 .HasForeignKey(e => e.IDPhanQuyen)
                 .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<PHONG>()
+                .Property(e => e.MaPhong)
+                .IsUnicode(false);
 
             modelBuilder.Entity<Question>()
                 .HasMany(e => e.DeChuanQuestions)

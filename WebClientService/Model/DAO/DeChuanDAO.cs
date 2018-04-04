@@ -34,7 +34,6 @@ namespace Model.DAO
                 DeChuan u = db.DeChuans.Where(p => p.MaDeChuan == DeChuanDAO.MaDeChuan).SingleOrDefault();
                 u.TenDeChuan = DeChuanDAO.TenDeChuan;
                 u.MaMon = DeChuanDAO.MaMon;
-                u.MaCaThi = DeChuanDAO.MaCaThi;
                 u.SoDeHoanVi = DeChuanDAO.SoDeHoanVi;
                 u.TrangThaiTron = DeChuanDAO.TrangThaiTron;
                 u.ThoiGian = DeChuanDAO.ThoiGian;

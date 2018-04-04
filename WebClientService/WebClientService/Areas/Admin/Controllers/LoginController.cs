@@ -57,7 +57,7 @@ namespace WebClientService.Areas.Admin.Controllers
                     us.Status = true;
                     if (!dao.UpdateActive(us))
                         ModelState.AddModelError("", "Không thể update dữ liệu");
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "HomeAdmin");
                 }
                 if (result == 4)
                 {

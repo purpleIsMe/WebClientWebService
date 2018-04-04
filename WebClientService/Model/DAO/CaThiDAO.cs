@@ -17,23 +17,23 @@ namespace Model.DAO
         {
             db = new WebClientDbContext();
         }
-        public IEnumerable<Cathi> ListAllPaging(int page, int pageSize)
+        public IEnumerable<CaThi> ListAllPaging(int page, int pageSize)
         {
-            IEnumerable<Cathi> x = db.Cathis.OrderBy(m => m.ID).ToPagedList(page, pageSize);
+            IEnumerable<CaThi> x = db.CaThis.OrderBy(m => m.ID).ToPagedList(page, pageSize);
             CloseConnect();
             return x;
         }
-        public IEnumerable<Cathi> GetListCathi()
+        public IEnumerable<CaThi> GetListCaThi()
         {
-            IEnumerable<Cathi> x = db.Cathis.ToList();
+            IEnumerable<CaThi> x = db.CaThis.ToList();
             CloseConnect();
             return x;
         }
-        public int AddCathi(Cathi Cathi)
+        public int AddCaThi(CaThi CaThi)
         {
             try
             {
-                db.Cathis.Add(Cathi);
+                db.CaThis.Add(CaThi);
                 db.SaveChanges();
                 CloseConnect();
             }
@@ -54,17 +54,22 @@ namespace Model.DAO
                 Debug.WriteLine(e.Message);
                 throw;
             }
-            return Cathi.ID;
+            return CaThi.ID;
         }
-        public bool UpdateCathi(Cathi CathiDAO)
+        public bool UpdateCaThi(CaThi CaThiDAO)
         {
             try
             {
-                Cathi u = db.Cathis.Where(p => p.ID == CathiDAO.ID).SingleOrDefault();
-                u.GioBD = CathiDAO.GioBD;
-                u.GioKT = CathiDAO.GioKT;
-                u.Ngay = CathiDAO.Ngay;
-                u.TrangThai = CathiDAO.TrangThai;
+                CaThi u = db.CaThis.Where(p => p.ID == CaThiDAO.ID).SingleOrDefault();
+                u.GioBD = CaThiDAO.GioBD;
+                u.GioKT = CaThiDAO.GioKT;
+                u.Ngay = CaThiDAO.Ngay;
+                u.TrangThai = CaThiDAO.TrangThai;
+                u.IDDeChuan = CaThiDAO.IDDeChuan;
+                u.MaGiamThi1 = CaThiDAO.MaGiamThi1;
+                u.MaGiamThi2 = CaThiDAO.MaGiamThi2;
+                u.SubjectID = CaThiDAO.SubjectID;
+                u.TenCaThi = CaThiDAO.TenCaThi;
                 db.SaveChanges();
                 CloseConnect();
                 return true;
@@ -74,12 +79,12 @@ namespace Model.DAO
                 return false;
             }
         }
-        public bool DeleteCathi(int id)
+        public bool DeleteCaThi(int id)
         {
             try
             {
-                Cathi u = db.Cathis.Single(p => p.ID == id);
-                db.Cathis.Remove(u);
+                CaThi u = db.CaThis.Single(p => p.ID == id);
+                db.CaThis.Remove(u);
                 CloseConnect();
                 return true;
             }

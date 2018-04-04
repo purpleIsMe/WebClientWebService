@@ -6,15 +6,9 @@ namespace Model.EF
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("Cathi")]
-    public partial class Cathi
+    [Table("CaThi")]
+    public partial class CaThi
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Cathi()
-        {
-            DeChuans = new HashSet<DeChuan>();
-        }
-
         public int ID { get; set; }
 
         public DateTime GioBD { get; set; }
@@ -23,9 +17,23 @@ namespace Model.EF
 
         public DateTime Ngay { get; set; }
 
+        public Guid SubjectID { get; set; }
+
         public bool TrangThai { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DeChuan> DeChuans { get; set; }
+        public bool HoanThanh { get; set; }
+
+        [StringLength(50)]
+        public string MaGiamThi1 { get; set; }
+
+        [StringLength(50)]
+        public string MaGiamThi2 { get; set; }
+
+        public int? IDDeChuan { get; set; }
+
+        [StringLength(200)]
+        public string TenCaThi { get; set; }
+
+        public virtual DeChuan DeChuan { get; set; }
     }
 }

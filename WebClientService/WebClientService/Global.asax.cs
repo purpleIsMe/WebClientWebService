@@ -15,6 +15,7 @@ namespace WebClientService
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+            DevExtremeBundleConfig.RegisterBundles(BundleTable.Bundles);
         }
     }
 }

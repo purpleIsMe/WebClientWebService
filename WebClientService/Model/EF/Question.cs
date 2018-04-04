@@ -108,6 +108,21 @@ namespace Model.EF
 
         public bool? Active { get; set; }
 
+        [Column(TypeName = "image")]
+        public byte[] PicQuestion { get; set; }
+
+        [Column(TypeName = "image")]
+        public byte[] PicAnswer1 { get; set; }
+
+        [Column(TypeName = "image")]
+        public byte[] PicAnswer2 { get; set; }
+
+        [Column(TypeName = "image")]
+        public byte[] PicAnswer3 { get; set; }
+
+        [Column(TypeName = "image")]
+        public byte[] PicAnswer4 { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DeChuanQuestion> DeChuanQuestions { get; set; }
 

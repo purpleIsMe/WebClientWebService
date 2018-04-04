@@ -21,6 +21,21 @@ namespace Model.DAO
             List<Question> y = db.Questions.ToList();
             return y;
         }
+        public AllQuestionDTO getOneQuestion(int QID)
+        {
+            AllQuestionDTO x = (from a in db.Questions
+                               where a.QID == QID
+                               select new AllQuestionDTO()
+                               {
+                                   QuestionID = a.QuestionID,
+                                   PicQues = a.PicQuestion,
+                                   PicAns1 = a.PicAnswer1,
+                                   PicAns2 = a.PicAnswer2,
+                                   PicAns3 = a.PicAnswer3,
+                                   PicAns4 = a.PicAnswer4
+                               }).SingleOrDefault();
+            return x;
+        }
         public List<AllQuestionDTO> getAllQuestionDeTron(int iddetron)
         {
             List<AllQuestionDTO> o = (from a in db.DeTronQuestions
@@ -33,18 +48,12 @@ namespace Model.DAO
                                           ID = c.ID,
                                           MaDeTron = c.MaDeTron,
                                           QuestionID = b.QuestionID,
-                                          Question = b.Question1,
-                                          Answer1 = b.Answer1,
-                                          Answer2 = b.Answer2,
-                                          Answer3 = b.Answer3,
-                                          Answer4 = b.Answer4,
-                                          TheAnswer = (int)b.TheAnswer,
-                                          MaxAnswerLeng = (int)b.MaxAnswerLen,
-                                          HV1 = a.Answer1,
-                                          HV2 = a.Answer2,
-                                          HV3 = a.Answer3,
-                                          HV4 = a.Answer4,
-                                          DapAn = a.DapAn
+                                          DapAn = a.DapAn,
+                                          PicQues = b.PicQuestion,
+                                          PicAns1 = b.PicAnswer1,
+                                          PicAns2 = b.PicAnswer2,
+                                          PicAns3 = b.PicAnswer3,
+                                          PicAns4 = b.PicAnswer4
                                       }).ToList();
             return o;
         }

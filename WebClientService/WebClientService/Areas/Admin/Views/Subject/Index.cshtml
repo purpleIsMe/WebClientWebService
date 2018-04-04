@@ -18,10 +18,21 @@
                 <div class="panel-body">
                     <div class="col-lg-3">
                         <div class="form-group">
-                                <a href="~/Admin/Subject/Create">Thêm mới môn thi</a>
+                            <a class="btn btn-primary" href="~/Admin/Subject/Create">Thêm mới môn thi</a>
                         </div>
-                       
                     </div>
+                    <div class="col-lg-4"></div>
+                    <div class="col-lg-4">
+                        <div class="col-md-7">
+                           <input type="text" class="form-control" value="@ViewBag.SearchString" name="searchString"/>
+                        </div>
+                        <div class="col-md-4">
+                           <button type="submit" class="btn btn-success">
+                                Tìm kiếm
+                           </button>
+                        </div>
+                    </div>
+                    <br/><br />
                     <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                         <thead>
                             <tr>
@@ -46,11 +57,11 @@
                                             <a href="/Admin/Subject/Edit/@item.ID"> Sửa </a>
                                             |
                                             @Ajax.ActionLink("Xóa", "Delete", new { @id = item.ID }, new AjaxOptions
-                                       {
-                                           Confirm = "Bạn có muốn xóa bản ghi này không?",
-                                           OnComplete = "$('#row_" + @item.ID + "').remove()",
-                                           HttpMethod = "Delete"
-                                       })
+                                               {
+                                                   Confirm = "Bạn có muốn xóa bản ghi này không?",
+                                                   OnComplete = "$('#row_" + @item.ID + "').remove()",
+                                                   HttpMethod = "Delete"
+                                               })
                                         </td>
                                         <td>@item.SubjectNbr</td>
                                         <td>@item.Descr</td>

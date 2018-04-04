@@ -17,7 +17,7 @@ namespace WebClientService.Areas.Admin
             context.MapRoute(
                 "Admin_default",
                 "Admin/{controller}/{action}/{id}",
-                new { action = "Index", controller="HomeAdmin", id = UrlParameter.Optional }
+                new { action = "Index", controller= "HomeAdmin", id = UrlParameter.Optional }
             );
         }
     }

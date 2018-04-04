@@ -1,0 +1,38 @@
+﻿    .content{
+        margin-top:100px;
+    }
+        #field1 #question {
+            height: 400px;
+            float: top;
+        }
+
+        #field2 #answer {
+            height: 300px;
+            float: top;
+        }
+
+        #field3 #info {
+            height: 270px;
+            float: top;
+        }
+
+        #field4 #choose {
+            height: 445px;
+            float: top;
+        }
+
+        #divright {
+            width: 25%;
+            height: 100%;
+            float: right;
+        }
+
+        #divleft {
+            width: 74%;
+            height: 100%;
+            float: left;
+        }
+
+        .center {
+            float: bottom;
+        }

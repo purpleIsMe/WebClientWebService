@@ -3,9 +3,13 @@
 @{
     ViewBag.Title = "Index";
     Layout = "/Areas/Admin/Views/Shared/_Layout.cshtml";
-    List<QClass> listqc = ViewBag.ListQC;
     SelectList listsubj = ViewBag.ListSubject;
     string tendescr = ViewBag.descr;
+}
+@section js
+{
+<script src="~/Assets/Admin/js/testpass.js"></script>
+<script src="~/Assets/Admin/js/module.js"></script>
 }
 @section Header
 {
@@ -23,19 +27,17 @@
                     <div class="form-group">
                         <a href="~/Admin/Module/Create">Thêm mới module</a>
                     </div>
-
                 </div>
-                @using (Html.BeginForm("Index", "Module", FormMethod.Post, new { enctype = "multipart/form-data", onsubmit = "return myFunction()" }))
-                {
-                    <br />
-                <div class="form-group">
+                <div class="col-lg-5">
+                    <div class="form-group">
                         @Html.Label("Xin vui lòng chọn môn cần lọc")
-                
-                        @Html.DropDownListFor(model=>model.idsu, listsubj, new { htmlAttributes = new { @class = "form-control" } })
+
+                        @Html.DropDownListFor(model => model.idsu, listsubj, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.idsu, "", new { @class = "text-danger" })
-                    <input type="submit" value="Lọc" class="btn btn-default" />
+                        <button type="submit" class="btn btn-success" id="filter">Lọc môn thi</button>
+                      
+                    </div>
                 </div>
-                }
                 <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                     <thead>
                         <tr>
@@ -48,31 +50,52 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @if (listqc != null)
-                        {
-                            foreach (var item in listqc)
-                            {
-                                <tr class="odd gradeX" id="row_@item.IDQClass" onload="loadstt()">
-                                    <td>
-                                        <a href="/Admin/Module/Edit/@item.IDQClass"> Sửa </a>
-                                        |
-                                        @Ajax.ActionLink("Xóa", "Delete", new { @id = item.IDQClass }, new AjaxOptions
-                                       {
-                                           Confirm = "Bạn có muốn xóa bản ghi này không?",
-                                           OnComplete = "$('#row_" + @item.IDQClass + "').remove()",
-                                           HttpMethod = "Delete"
-                                       })
-                                    </td>
-                                    <td>@tendescr</td>
-                                    <td>@item.Descr</td>
-                                    <td>@item.ClassNbr</td>
-                                    <td>@item.ChuThich</td>
-                                    <td>@(item.TrangThai == true ? "Cho phép sử dụng" : "Không được phép sử dụng")</td>
-                                </tr>
-                            }
-                        }
+                      
                     </tbody>
                 </table>
+
+                <div class="modal fade" id="bookModal">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title"><label id="title"></label></h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-horizontal">
+                                    <div class="form-group">
+                                        <div class="col-md-10">
+                                            <input type="hidden" class="form-control" id="Id" />
+                                            <label>Tên module</label>
+                                            <input type="text" id="NameModule" class="form-control" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-10">
+                                            <label>Số câu hỏi được lấy</label>
+                                            <input type="text" id="NumQues" class="form-control" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-10">
+                                            <label>Chú thích</label>
+                                            <input type="text" id="Note" class="form-control" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-10">
+                                            <label>Trạng thái</label>
+                                            <input type="checkbox" id="Status" class="form-control" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" id="btnClose" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                                <button type="button" id="btnSave" class="btn btn-primary">Cập nhật</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

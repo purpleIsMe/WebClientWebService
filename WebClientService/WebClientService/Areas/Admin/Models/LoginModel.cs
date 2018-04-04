@@ -8,10 +8,10 @@ namespace WebClientService.Areas.Admin.Models
 {
     public class LoginModel
     {
-        [Required(ErrorMessage ="Xin vui lòng nhập user name")]
+        [Required(ErrorMessage = "Xin vui lòng nhập user name")]
         public string UserName { set; get; }
 
-        [Required(ErrorMessage ="Xin vui lòng nhập password")]
+        [Required(ErrorMessage = "Xin vui lòng nhập password")]
         public string Password { set; get; }
 
         public bool RememberMe { set; get; }

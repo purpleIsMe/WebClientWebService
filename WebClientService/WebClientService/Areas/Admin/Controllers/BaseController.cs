@@ -8,9 +8,9 @@ namespace WebClientService.Areas.Admin.Controllers
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             var sesson = Session[Constants.USER_SESSION];
-            if(sesson == null)
+            if (sesson == null)
             {
-                filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(new { controller = "Login", action = "Index", Area = "Admin"}));
+                filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(new { controller = "Login", action = "Index", Area = "Admin" }));
             }
             base.OnActionExecuting(filterContext);
         }

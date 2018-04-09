@@ -15,7 +15,11 @@
             height: 270px;
             float: top;
         }
-
+        .timeline
+        {
+            width:70%;
+        }
+        .understand{width:30%;}
         #field4 #choose {
             height: 445px;
             float: top;

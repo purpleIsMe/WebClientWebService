@@ -18,13 +18,11 @@ namespace Model.DAO
         public IEnumerable<Answer> ListAllPaging(int page, int pageSize)
         {
             IEnumerable<Answer> x = db.Answers.OrderBy(m => m.ID).ToPagedList(page, pageSize);
-            CloseConnect();
             return x;
         }
         public IEnumerable<Answer> GetListAnswer()
         {
             IEnumerable<Answer> x = db.Answers.ToList();
-            CloseConnect();
             return x;
         }
         public int AddAnswer(Answer Answer)
@@ -33,7 +31,6 @@ namespace Model.DAO
             {
                 db.Answers.Add(Answer);
                 db.SaveChanges();
-                CloseConnect();
             }
             catch (DbEntityValidationException e)
             {
@@ -59,11 +56,10 @@ namespace Model.DAO
             try
             {
                 Answer u = db.Answers.Where(p => p.ID == AnswerDAO.ID).SingleOrDefault();
-                u.IDUser = AnswerDAO.IDUser;
+                u.IDThiSinh = AnswerDAO.IDThiSinh;
                 u.DiemSo = AnswerDAO.DiemSo;
                 u.DiemThuc = AnswerDAO.DiemThuc;
                 db.SaveChanges();
-                CloseConnect();
                 return true;
             }
             catch
@@ -77,7 +73,6 @@ namespace Model.DAO
             {
                 Answer u = db.Answers.Single(p => p.ID == id);
                 db.Answers.Remove(u);
-                CloseConnect();
                 return true;
             }
             catch

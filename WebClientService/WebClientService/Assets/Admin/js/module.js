@@ -20,7 +20,7 @@ result.init();
 
 function changeSub()
 {
-    var ke = document.getElementById("idsu");
+    var ke = document.getElementById("idSub");
     var kq = ke.options[ke.selectedIndex].value;
     var tenmon = ke.options[ke.selectedIndex].text;
 
@@ -36,8 +36,8 @@ function changeSub()
                 $.each(valitem, function (i, item) {
                     rows += "<tr>"
                     rows += "<td>" +
-                           "<button type='button' id='btnUpdate' class='btn btn-success' onclick='return getDetailQClass(" + item.IDQClass + ")'>Sửa</button>" +
-                           "<button type='button' id='btnDelete' class='btn btn-danger' onclick='return deleteQClass(" + item.IDQClass + ")'>Xóa</button>"
+                           "<button type='button' id='btnUpdate' class='btn btn-success' onclick='return getDetailQClass(" + item.idQClass + ")'>Sửa</button>" +
+                           "<button type='button' id='btnDelete' class='btn btn-danger' onclick='return deleteQClass(" + item.idQClass + ")'>Xóa</button>"
                             + "</td>"
                     rows += "<td>" + tenmon + "</td>"
                     rows += "<td>" + item.Descr + "</td>"
@@ -77,9 +77,12 @@ function getDetailQClass(id)
         }
     });
 }
-//$("#btnCreateNew").click(function () {
-//    $("#title").text("Create New");
-//})
+function createQClass()
+{
+    $("#title").text("Thông tin thêm mới module");
+    isUpdatable = false;
+    $("#bookModal").modal('show');
+}
 // hàm Insert và Update một record
 $("#btnSave").click(function (e) {
     e.preventDefault();
@@ -89,30 +92,38 @@ $("#btnSave").click(function (e) {
         sta = true;
     else
         sta = false;
-    var data = {
-        IDQClass: idmod,
-        Descr: $("#NameModule").val(),
-        ClassNbr: $("#NumQues").val(),
-        ChuThich: $("#Note").val(),
-        TrangThai: sta
+   
+    if (!isUpdatable) {
+       var data = {
+           idQClass: $("#idSub").val(),
+            Descr: $("#NameModule").val(),
+            ClassNbr: $("#NumQues").val(),
+            ChuThich: $("#Note").val(),
+            TrangThai: sta
+        }
+        $.ajax({
+            url: '/Admin/Module/Create/',
+            type: 'POST',
+            dataType: 'json',
+            data: data,
+            success: function (data) {
+                changeSub();
+                $("#bookModal").modal('hide');
+                clear();
+            },
+            error: function (err) {
+                alert("Error: " + err.responseText);
+            }
+        })
     }
-    //if (!isUpdatable) {
-    //    $.ajax({
-    //        url: '/Admin/Module/Create/',
-    //        type: 'POST',
-    //        dataType: 'json',
-    //        data: data,
-    //        success: function (data) {
-    //            changeSub();
-    //            $("#bookModal").modal('hide');
-    //            clear();
-    //        },
-    //        error: function (err) {
-    //            alert("Error: " + err.responseText);
-    //        }
-    //    })
-    //}
-    //else {
+    else {
+        var data = {
+            idQClass: idmod,
+            Descr: $("#NameModule").val(),
+            ClassNbr: $("#NumQues").val(),
+            ChuThich: $("#Note").val(),
+            TrangThai: sta
+        }
         $.ajax({
             url: '/Admin/Module/Edit/',
             type: 'POST',
@@ -128,7 +139,7 @@ $("#btnSave").click(function (e) {
                 alert("Error: " + err.responseText);
             }
         })
-   // }
+    }
 });
 function deleteQClass(id)
 {

@@ -6,20 +6,21 @@ namespace Model.EF
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("Answer")]
-    public partial class Answer
+    public partial class DECHUAN_QUESTION
     {
         [Key]
         [Column(Order = 0)]
-        public int ID { get; set; }
+        public int IDAuto { get; set; }
 
         [Key]
         [Column(Order = 1)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int IDThiSinh { get; set; }
+        public int MaDe { get; set; }
 
-        public int DiemSo { get; set; }
+        [Key]
+        [Column(Order = 2)]
+        public Guid QuestionID { get; set; }
 
-        public double? DiemThuc { get; set; }
+        public int QID { get; set; }
     }
 }

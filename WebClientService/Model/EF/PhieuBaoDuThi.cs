@@ -6,25 +6,17 @@ namespace Model.EF
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("AnswerSheet")]
-    public partial class AnswerSheet
+    [Table("PhieuBaoDuThi")]
+    public partial class PhieuBaoDuThi
     {
         [Key]
         [Column(Order = 0)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int IDAnswer { get; set; }
+        public int IDThiSinh { get; set; }
 
         [Key]
         [Column(Order = 1)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int ThuTuCauHoi { get; set; }
-
-        public int Answer { get; set; }
-
-        public Guid? QuestionID { get; set; }
-
-        public int? DapAn { get; set; }
-
-        public int? RemainTime { get; set; }
+        public int IDChiTietCaThi { get; set; }
     }
 }

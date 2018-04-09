@@ -6,15 +6,13 @@ namespace Model.EF
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("DeChuan")]
-    public partial class DeChuan
+    [Table("DECHUAN")]
+    public partial class DECHUAN
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public DeChuan()
+        public DECHUAN()
         {
-            CaThis = new HashSet<CaThi>();
-            DeChuanQuestions = new HashSet<DeChuanQuestion>();
-            DeTrons = new HashSet<DeTron>();
+            DETRONs = new HashSet<DETRON>();
         }
 
         [Key]
@@ -25,6 +23,8 @@ namespace Model.EF
 
         public Guid MaMon { get; set; }
 
+        public int MaCaThi { get; set; }
+
         public int SoDeHoanVi { get; set; }
 
         public bool? TrangThaiTron { get; set; }
@@ -34,12 +34,6 @@ namespace Model.EF
         public bool? Lock { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CaThi> CaThis { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DeChuanQuestion> DeChuanQuestions { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DeTron> DeTrons { get; set; }
+        public virtual ICollection<DETRON> DETRONs { get; set; }
     }
 }

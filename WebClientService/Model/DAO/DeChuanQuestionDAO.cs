@@ -14,22 +14,20 @@ namespace Model.DAO
         {
             db = new WebClientDbContext();
         }
-        public IEnumerable<DeChuanQuestion> GetListAll()
+        public IEnumerable<DECHUAN_QUESTION> GetListAll()
         {
-            IEnumerable<DeChuanQuestion> y = db.DeChuanQuestions.ToList();
-            CloseConnect();
+            IEnumerable<DECHUAN_QUESTION> y = db.DECHUAN_QUESTION.ToList();
             return y;
         }
-        public bool UpdateDeChuanQuestion(DeChuanQuestion PQ)
+        public bool UpdateDeChuanQuestion(DECHUAN_QUESTION PQ)
         {
             try
             {
-                DeChuanQuestion u = db.DeChuanQuestions.Where(p => p.IDAuto == PQ.IDAuto).SingleOrDefault();
+                DECHUAN_QUESTION u = db.DECHUAN_QUESTION.Where(p => p.IDAuto == PQ.IDAuto).SingleOrDefault();
                 u.MaDe = PQ.MaDe;
-                u.QuesID = PQ.QuesID;
+                u.QuestionID = PQ.QuestionID;
                 u.QID = PQ.QID;
                 db.SaveChanges();
-                CloseConnect();
                 return true;
             }
             catch
@@ -41,9 +39,8 @@ namespace Model.DAO
         {
             try
             {
-                DeChuanQuestion u = db.DeChuanQuestions.Single(p => p.IDAuto == id);
-                db.DeChuanQuestions.Remove(u);
-                CloseConnect();
+                DECHUAN_QUESTION u = db.DECHUAN_QUESTION.Single(p => p.IDAuto == id);
+                db.DECHUAN_QUESTION.Remove(u);
                 return true;
             }
             catch

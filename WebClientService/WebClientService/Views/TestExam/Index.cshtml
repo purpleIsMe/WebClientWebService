@@ -4,118 +4,119 @@
 @section Content
 { 
 <div onload="getTest()" class="content">
-    <div id="divleft">
-        <fieldset id="field1" onscroll="true">
-            <legend><span id="list_questions"> Câu 1</span> </legend>
-            <div id="question" onscroll="true">
-                <img src="@ViewBag.PicQues" height=auto width="1100"/>  
-                @*<textarea name="text" id="questions"></textarea>*@
+    <div class="row">
+        <div class="col-md-9 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h3> Thông tin thí sinh</h3>
+                    <div class="x_content">
+                        <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-right">
+                            <div id="field1" onscroll="true">
+                                <div class="col-md-1 col-xs-12">
+                                    <span id="list_questions">
+                                        <input type="text" id="stt" class="form-control" readonly />
+                                    </span>
+                                </div>
+                                <div class="col-md-11 col-xs-12">
+                                    <div id="question" onscroll="true">
+                                        <div></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
-        </fieldset>
-
-        <fieldset id="field2" onscroll="true">
-            <legend>Lựa chọn</legend>
-            <div id="answer">
-                A <span id="answer1">
-                    <img src="@ViewBag.PicAns1" height=auto width="1000"/>  
-                   </span><br/>
-                B <span id = "answer2" >
-                     <img src="@ViewBag.PicAns2" height=auto width="1000" />  
-                  </span> <br/>
-                C <span id = "answer3" >
-                     <img src="@ViewBag.PicAns3" height=auto width="1000" />  
-                  </span><br/>
-                D <span id = "answer4" >
-                     <img src="@ViewBag.PicAns4" height=auto width="1000" />  
-                  </span><br/>
-                <center class="center">
-                    <button id = "back" value="" onclick="lui()"><</button>
-                    <input type = "number" id="cau" value="1" min="0">
-                    <button id = "next" value="" onclick="tien()">></button>
-                </center>
+        </div>
+        <div class="col-md-3 col-xs-12">
+            <div class="x_panel">
+                <div class="x_title">
+                    <h3> Thông tin thí sinh</h3>
+                    <div class="clearfix"></div>
+                    <div class="x_content">
+                        <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+                            <br />
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Mã dự thi</label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="text" id="maduthi" class="form-control" readonly />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Họ và tên</label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="text" id="hoten" class="form-control" readonly />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Môn thi</label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="text" id="monthi" class="form-control" readonly />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Thời gian</label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="text" id="thoigian" class="form-control" readonly />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Ngày thi</label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input type="text" id="ngaythi" class="form-control" readonly />
+                                </div>
+                            </div>
+                            <div>
+                                <center>
+                                    <input id="counttime" style="font-size: 22px">
+                                    <button id="hdsd" style="font-size: 25px; float: right;">?</button>
+                                </center>
+                            </div>
+                            <div>
+                                <button id="start-end" style="font-size: 25px;"> Kết thúc</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
-        </fieldset>
-
+        </div>
     </div>
 
-    <div id = "divright" >
-        @*Bảng thông tin người dự thi*@
-        <fieldset id = "field3">
-            <legend> Thông tin thí sinh</legend>
-            <div id = "info">
-                <table style="width:100%">
-                    <tr>
-                        <td>Mã dự thi</td>
-                        <td>001</td>
-                    </tr>
-                    <tr>
-                        <td>Họ và tên</td>
-                        <td>Nguyễn A</td>
-                    </tr>
-                    <tr>
-                        <td>Môn thi</td>
-                        <td>Test</td>
-                    </tr>
-                    <tr>
-                        <td>Thời gian</td>
-                        <td>60</td>
-                    </tr>
-                    <tr>
-                        <td>phòng thi</td>
-                        <td>Phòng máy B501</td>
-                    </tr>
-                    <tr>
-                        <td>Ngày thi</td>
-                        <td>13/11/2007</td>
-                    </tr>
-                    <tr>
-                        <td>Số máy</td>
-                        <td>21</td>
-                    </tr>
-                    <tr>
-                        <td>Thống kê</td>
-                        <td>0/19</td>
-                    </tr>
-                </table>
-                <center>
-                    <label id = "counttime" style= "font-size: 40px"> 60:00</label>
-                    <button id = "hdsd" style= "font-size: 25px; float: right;">?</button>
-                </center>
-                <center>
-                    <button id = "start-end" style= "font-size: 25px;"> Kết thúc</button>
-                </center>
+    <div class="row">
+        <div class="col-md-9 col-xs-12">
+            <div class="x_panel">
+                <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-right">
+                    <div id="field2" onscroll="true">
+                        <legend>Lựa chọn</legend>
+                        <div id="answer" style="font:20px;">
+                            A <span id="answer1">
+                            </span><br/>
+                            B <span id="answer2">
+                            </span> <br/>
+                            C <span id="answer3">
+                            </span><br/>
+                            D <span id="answer4">
+                            </span><br/>
+                        </div>
+                    </div>
+
+                    <center class="center">
+                        <button id="back" value=""><</button>
+                        <input type="number" id="cau" value="1" min="1" max="@ViewBag.SL">
+                        <button id="next" value="">></button>
+                    </center>
+                </form>
             </div>
-        </fieldset>
-        <fieldset id = "field4">
-            <div id= "choose">
-                <table style= "width:100%">
-                    <tr>
-                        <th> Câu hỏi</th>
-                        <th>A</th>
-                        <th>B</th>
-                        <th>C</th>
-                        <th>D</th>
-
-                    </tr>
-
-                    <tr>
-                        <th>1</th>
-                        <th><input type = "Radio" name= "'.$i.'" value= "A"></th>
-                        <th><input type= "Radio" name= "'.$i.'" value= "B"></th>
-                        <th><input type= "Radio" name= "'.$i.'" value= "C"></th>
-                        <th><input type= "Radio" name= "'.$i.'" value= "D"></th>
-                    </tr>
-                    <tr>
-                        <th> 2 </th>
-                        <th><input type= "Radio" name= "'.$i.'" value= "A"></th>
-                        <th><input type= "Radio" name= "'.$i.'" value= "B"></th>
-                        <th><input type= "Radio" name= "'.$i.'" value= "C"></th>
-                        <th><input type= "Radio" name= "'.$i.'" value= "D"></th>
-                    </tr>
-                </table>
+        </div>
+        <div class="col-md-3 col-xs-12">
+            <div class="x_panel">
+                <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-right">
+                    <div id="choose" style="border:solid inherit">
+                        <table style="width:100%" id="loadans"></table>
+                    </div>
+                </form>
             </div>
-        </fieldset>
+        </div>
     </div>
-
-    </div>
+</div>
 }

@@ -32,20 +32,21 @@ namespace Model.DAO
                                    PicAns1 = a.PicAnswer1,
                                    PicAns2 = a.PicAnswer2,
                                    PicAns3 = a.PicAnswer3,
-                                   PicAns4 = a.PicAnswer4
+                                   PicAns4 = a.PicAnswer4,
+                                   DapAn = (int) a.TheAnswer
                                }).SingleOrDefault();
             return x;
         }
         public List<AllQuestionDTO> getAllQuestionDeTron(int iddetron)
         {
-            List<AllQuestionDTO> o = (from a in db.DeTronQuestions
+            List<AllQuestionDTO> o = (from a in db.DETRON_QUESTION
                                       join b in db.Questions on a.QuestionID equals b.QuestionID
-                                      join c in db.DeTrons on a.IDDeTron equals c.ID
+                                      join c in db.DETRONs on a.IDDeTron equals c.ID
                                       where a.IDDeTron == iddetron
                                       orderby a.IDAuto
                                       select new AllQuestionDTO()
                                       {
-                                          ID = c.ID,
+                                          ID = b.QID,
                                           MaDeTron = c.MaDeTron,
                                           QuestionID = b.QuestionID,
                                           DapAn = a.DapAn,
@@ -53,16 +54,16 @@ namespace Model.DAO
                                           PicAns1 = b.PicAnswer1,
                                           PicAns2 = b.PicAnswer2,
                                           PicAns3 = b.PicAnswer3,
-                                          PicAns4 = b.PicAnswer4
+                                          PicAns4 = b.PicAnswer4,
                                       }).ToList();
             return o;
         }
-        public List<Question> getListQuestionIDModule(int idmodule)
-        {
-            Guid idclass = new QClassDAO().GetListAll().Where(i => i.IDQClass == idmodule).Select(p => p.ClassID).SingleOrDefault();
-            List<Question> x = db.Questions.Where(o => o.ClassID == idclass).ToList();
-            return x;
-        }
+        //public List<Question> getListQuestionIDModule(int idmodule)
+        //{
+        //    Guid idclass = new QClassDAO().GetListAll().Where(i => i.ClassID == idmodule).Select(p => p.ClassID).SingleOrDefault();
+        //    List<Question> x = db.Questions.Where(o => o.ClassID == idclass).ToList();
+        //    return x;
+        //}
         public IEnumerable<Question> ListAllPaging(int page, int pageSize)
         {
             IEnumerable<Question> x = db.Questions.OrderBy(m => m.QuestionID).ToPagedList(page, pageSize);
@@ -98,7 +99,7 @@ namespace Model.DAO
         {
             try
             {
-                Question u = db.Questions.Where(p => p.QuestionID == PQ.QuestionID).SingleOrDefault();
+                Question u = db.Questions.Where(p => p.QID == PQ.QID).SingleOrDefault();
                 u.QuestionNbr = PQ.QuestionNbr;
                 u.ClassID = PQ.ClassID;
                 u.SubjectID = PQ.SubjectID;
@@ -113,11 +114,15 @@ namespace Model.DAO
                 u.Answer5 = PQ.Answer5;
                 u.MaxAnswerLen = PQ.MaxAnswerLen;
                 u.Used = PQ.Used;
-                u.QID = PQ.QID;
                 u.DateAdd = PQ.DateAdd;
                 u.HostName = PQ.HostName;
                 u.UserAccess = PQ.UserAccess;
                 u.Active = PQ.Active;
+                u.PicQuestion = PQ.PicQuestion;
+                u.PicAnswer1 = PQ.PicAnswer1;
+                u.PicAnswer2 = PQ.PicAnswer2;
+                u.PicAnswer3 = PQ.PicAnswer3;
+                u.PicAnswer4 = PQ.PicAnswer4;
                 db.SaveChanges();
                 return true;
             }
@@ -126,11 +131,11 @@ namespace Model.DAO
                 return false;
             }
         }
-        public bool DeleteQuestion(Guid id)
+        public bool DeleteQuestion(int id)
         {
             try
             {
-                Question u = db.Questions.Single(p => p.QuestionID == id);
+                Question u = db.Questions.Single(p => p.QID == id);
                 db.Questions.Remove(u);
                 return true;
             }

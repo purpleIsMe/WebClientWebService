@@ -18,13 +18,11 @@ namespace Model.DAO
         public List<PhanQuyen> GetListAll()
         {
             List<PhanQuyen> y = db.PhanQuyens.ToList();
-            CloseConnect();
             return y;
         }
         public IEnumerable<PhanQuyen> ListAllPaging(int page, int pageSize)
         {
-            IEnumerable<PhanQuyen> x = db.PhanQuyens.OrderBy(m => m.ID).ToPagedList(page, pageSize);
-            CloseConnect();
+            IEnumerable<PhanQuyen> x = db.PhanQuyens.OrderBy(m => m.ID).ToPagedList(page, pageSize); 
             return x;
         }
         public int AddPQ(PhanQuyen PQ)
@@ -33,7 +31,6 @@ namespace Model.DAO
             {
                 db.PhanQuyens.Add(PQ);
                 db.SaveChanges();
-                CloseConnect();
             }
             catch (DbEntityValidationException e)
             {
@@ -62,7 +59,6 @@ namespace Model.DAO
                 u.MaPQ = PQ.MaPQ;
                 u.TenPQ = PQ.TenPQ;
                 db.SaveChanges();
-                CloseConnect();
                 return true;
             }
             catch
@@ -76,7 +72,6 @@ namespace Model.DAO
             {
                 PhanQuyen u = db.PhanQuyens.Single(p => p.ID == id);
                 db.PhanQuyens.Remove(u);
-                CloseConnect();
                 return true;
             }
             catch

@@ -1,20 +1,17 @@
 ﻿using Model.DAO;
 using Model.DTO;
 using System;
-using System.Collections.Generic;
 using System.Web.Mvc;
-using RTE;
-using System.Linq;
+using WebClientService.Common;
 
 namespace WebClientService.Controllers
 {
-    public class TestExamController : Controller
+    public class TestExamController : BaseController
     {
         // GET: TestExam
         public ActionResult Index()
         {
-
-            //AllQuestionDTO xy = new QuestionDAO().getOneQuestion(78);
+            //AllQuestionDTO xy = new QuestionDAO().getOneQuestion(8);
 
             //byte[] Ans4 = xy.PicAns4;
             //byte[] Ans3 = xy.PicAns3;
@@ -54,14 +51,47 @@ namespace WebClientService.Controllers
         [HttpGet]
         public ActionResult getQuestion(int id)
         {
+            string imreBase64Data, imgDataURL;
             var xy = new QuestionDAO().getAllQuestionDeTron(id);
+            foreach (var x in xy)
+            {
+                imreBase64Data = Convert.ToBase64String(x.PicQues);
+                imgDataURL = string.Format("data:image/png;base64,{0}", imreBase64Data);
+                x.sQues = imgDataURL;
+                x.PicQues = null;
+
+                imreBase64Data = Convert.ToBase64String(x.PicAns1);
+                imgDataURL = string.Format("data:image/png;base64,{0}", imreBase64Data);
+                x.sAns1 = imgDataURL;
+                x.PicAns1 = null;
+
+                imreBase64Data = Convert.ToBase64String(x.PicAns2);
+                imgDataURL = string.Format("data:image/png;base64,{0}", imreBase64Data);
+                x.sAns2 = imgDataURL;
+                x.PicAns2 = null;
+
+                imreBase64Data = Convert.ToBase64String(x.PicAns3);
+                imgDataURL = string.Format("data:image/png;base64,{0}", imreBase64Data);
+                x.sAns3 = imgDataURL;
+                x.PicAns3 = null;
+
+                imreBase64Data = Convert.ToBase64String(x.PicAns4);
+                imgDataURL = string.Format("data:image/png;base64,{0}", imreBase64Data);
+                x.sAns4 = imgDataURL;
+                x.PicAns4 = null;
+            }
+
             int sl = xy.Count;
+            ViewBag.SL = sl;
             return Json(xy, JsonRequestBehavior.AllowGet);
-            //return Json(new
-            //{
-            //    result = xy,
-            //    count = sl
-            //});
+        }
+        [HttpGet]
+        public ActionResult getInfo()
+        {
+            var x = (ThiSinhLogin)Session[Constants.THISINH_SESSION];
+            var ts = new ThiSinhDAO().ViewDetailTHISINH(x.ThiSinhID);
+            
+            return Json(ts, JsonRequestBehavior.AllowGet);
         }
     }
 }

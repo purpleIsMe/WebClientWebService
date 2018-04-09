@@ -1,12 +1,12 @@
-﻿using Model.EF;
+﻿using Model.DTO;
+using Model.EF;
 using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Validation;
+using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Model.DAO
 {
@@ -26,26 +26,43 @@ namespace Model.DAO
         {
             return db.QClasses.Where(i => i.ClassNbr == classnbr).ToList();
         }
-        public List<QClass> listWithIDSub(int idsub)
+        public List<QClass> listWithIDSubInt(int idsub)
         {
-            return db.QClasses.Where(l => l.idsu == idsub).ToList();
+            Guid idSubject = db.Subjects.Where(p => p.idSub == idsub).Select(i=>i.SubjectID).SingleOrDefault();
+            return db.QClasses.Where(l => l.SubjectID == idSubject).ToList();
         }
-        public QClass singleIDQClass(int idqclass)
+        public QClass singleIDQClassInt(int idqclass)
         {
-            return db.QClasses.Where(p => p.IDQClass == idqclass).SingleOrDefault();
+            return db.QClasses.Where(p => p.idQClass == idqclass).SingleOrDefault();
         }
         public IEnumerable<QClass> ListAllPaging(int page, int pageSize)
         {
             IEnumerable<QClass> x = db.QClasses.OrderBy(m => m.ClassID).ToPagedList(page, pageSize);
             return x;
         }
-        public Guid AddQClass(QClass PQ)
+        public bool AddQClass(QClass PQ)
         {
             try
             {
-                db.QClasses.Add(PQ);
+                if(PQ.ChuThich == null)
+                {
+                    PQ.ChuThich = "Module mới";
+                }
+                object[] valparams = 
+                {
+                    new SqlParameter("@ClassID",PQ.ClassID),
+                    new SqlParameter("@SubjectID",PQ.SubjectID),
+                    new SqlParameter("@Descr",PQ.Descr),
+                    new SqlParameter("@ClassNbr",PQ.ClassNbr),
+                    new SqlParameter("@ChuThich",PQ.ChuThich),
+                    new SqlParameter("@TrangThai",PQ.TrangThai)
+                };
+                int res = db.Database.ExecuteSqlCommand("Insert_module @ClassID, @SubjectID, @ClassNbr, @Descr, @ChuThich, @TrangThai", valparams);
                 db.SaveChanges();
-                CloseConnect();
+                if (res == 1)
+                    return true;
+                else
+                    return false;
             }
             catch (DbEntityValidationException e)
             {
@@ -57,20 +74,20 @@ namespace Model.DAO
                         Debug.WriteLine("- Property: \"{0}\", Error: \"{1}\"", ve.PropertyName, ve.ErrorMessage);
                     }
                 }
-                throw;
+                return false;
             }
             catch (Exception e)
             {
                 Debug.WriteLine(e.Message);
-                throw;
+                return false;
             }
-            return PQ.ClassID;
+            return true;
         }
         public bool UpdateQClass(QClass PQ)
         {
             try
             {
-                QClass u = db.QClasses.Where(p => p.ClassID == PQ.ClassID || p.IDQClass == PQ.IDQClass).SingleOrDefault();
+                QClass u = db.QClasses.Where(p => p.idQClass == PQ.idQClass).SingleOrDefault();
                 u.SubjectID = PQ.SubjectID;
                 u.ClassNbr = PQ.ClassNbr;
                 u.Descr = PQ.Descr;
@@ -84,26 +101,12 @@ namespace Model.DAO
                 return false;
             }
         }
-        public bool DeleteQClass(Guid id)
+        public bool DeleteQClass(int id)
         {
             try
             {
-                QClass u = db.QClasses.Single(p => p.ClassID == id);
+                QClass u = db.QClasses.Single(p => p.idQClass == id);
                 db.QClasses.Remove(u);
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
-        }
-        public bool DeleteQClassID(int id)
-        {
-            try
-            {
-                QClass u = db.QClasses.Single(p => p.IDQClass == id);
-                db.QClasses.Remove(u);
-                db.SaveChanges();
                 return true;
             }
             catch

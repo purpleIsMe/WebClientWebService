@@ -6,8 +6,7 @@ namespace Model.EF
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("DeChuanQuestion")]
-    public partial class DeChuanQuestion
+    public partial class DETRON_QUESTION
     {
         [Key]
         [Column(Order = 0)]
@@ -16,16 +15,22 @@ namespace Model.EF
         [Key]
         [Column(Order = 1)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int MaDe { get; set; }
+        public int IDDeTron { get; set; }
 
         [Key]
         [Column(Order = 2)]
-        public Guid QuesID { get; set; }
+        public Guid QuestionID { get; set; }
 
-        public int QID { get; set; }
+        public int Answer1 { get; set; }
 
-        public virtual DeChuan DeChuan { get; set; }
+        public int Answer2 { get; set; }
 
-        public virtual Question Question { get; set; }
+        public int Answer3 { get; set; }
+
+        public int Answer4 { get; set; }
+
+        public int DapAn { get; set; }
+
+        public int? TheAnswer { get; set; }
     }
 }

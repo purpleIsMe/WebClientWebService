@@ -13,5 +13,10 @@ namespace Model.DTO
         public byte[] PicAns2 { get; set; }
         public byte[] PicAns3 { get; set; }
         public byte[] PicAns4 { get; set; }
+        public string sQues { get; set; }
+        public string sAns1 { get; set; }
+        public string sAns2 { get; set; }
+        public string sAns3 { get; set; }
+        public string sAns4 { get; set; }
     }
 }

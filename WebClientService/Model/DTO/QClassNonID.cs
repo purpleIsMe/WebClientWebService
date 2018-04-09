@@ -1,13 +1,9 @@
-namespace Model.EF
-{
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data.Entity.Spatial;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
-    [Table("QClass")]
-    public partial class QClass
+namespace Model.DTO
+{
+    public class QClassNonID
     {
         [Key]
         public Guid ClassID { get; set; }
@@ -23,7 +19,5 @@ namespace Model.EF
         public string ChuThich { get; set; }
 
         public bool? TrangThai { get; set; }
-
-        public int idQClass { get; set; }
     }
 }

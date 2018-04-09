@@ -6,15 +6,9 @@ namespace Model.EF
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("DeTron")]
-    public partial class DeTron
+    [Table("DETRON")]
+    public partial class DETRON
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public DeTron()
-        {
-            DeTronQuestions = new HashSet<DeTronQuestion>();
-        }
-
         public int ID { get; set; }
 
         [Required]
@@ -26,9 +20,6 @@ namespace Model.EF
 
         public int MaDeChuan { get; set; }
 
-        public virtual DeChuan DeChuan { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DeTronQuestion> DeTronQuestions { get; set; }
+        public virtual DECHUAN DECHUAN { get; set; }
     }
 }

@@ -18,13 +18,11 @@ namespace Model.DAO
         public IEnumerable<Error> GetListAll()
         {
             IEnumerable<Error> y = db.Errors.ToList();
-            CloseConnect();
             return y;
         }
         public IEnumerable<Error> ListAllPaging(int page, int pageSize)
         {
             IEnumerable<Error> x = db.Errors.OrderBy(m => m.ID).ToPagedList(page, pageSize);
-            CloseConnect();
             return x;
         }
         public int AddPQ(Error PQ)
@@ -33,7 +31,7 @@ namespace Model.DAO
             {
                 db.Errors.Add(PQ);
                 db.SaveChanges();
-                CloseConnect();
+                
             }
             catch (DbEntityValidationException e)
             {
@@ -63,7 +61,6 @@ namespace Model.DAO
                 u.StackTrace = PQ.StackTrace;
                 u.CreateDate = PQ.CreateDate;
                 db.SaveChanges();
-                CloseConnect();
                 return true;
             }
             catch
@@ -77,7 +74,6 @@ namespace Model.DAO
             {
                 Error u = db.Errors.Single(p => p.ID == id);
                 db.Errors.Remove(u);
-                CloseConnect();
                 return true;
             }
             catch

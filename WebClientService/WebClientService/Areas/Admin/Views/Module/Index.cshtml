@@ -1,4 +1,4 @@
-﻿@model Model.EF.QClass
+﻿@model Model.EF.Subject
 @using Model.EF
 @{
     ViewBag.Title = "Index";
@@ -25,15 +25,16 @@
             <div class="panel-body">
                 <div class="col-lg-3">
                     <div class="form-group">
-                        <a href="~/Admin/Module/Create">Thêm mới module</a>
+                        <!--href="~/Admin/Module/Create"-->
+                        <a id="btnCreate" class="btn btn-success" onclick='return createQClass()'>Thêm mới module</a>
                     </div>
                 </div>
                 <div class="col-lg-5">
                     <div class="form-group">
                         @Html.Label("Xin vui lòng chọn môn cần lọc")
 
-                        @Html.DropDownListFor(model => model.idsu, listsubj, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.idsu, "", new { @class = "text-danger" })
+                        @Html.DropDownListFor(model => model.idSub, listsubj, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.idSub, "", new { @class = "text-danger" })
                         <button type="submit" class="btn btn-success" id="filter">Lọc môn thi</button>
                       
                     </div>
@@ -62,6 +63,15 @@
                             </div>
                             <div class="modal-body">
                                 <div class="form-horizontal">
+                                    <div class="form-group" >
+                                        <div class="col-md-10" id="monthi">
+                                           <div>
+                                               @Html.Label("Môn thi")
+                                               @Html.DropDownListFor(model => model.idSub, listsubj, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => model.idSub, "", new { @class = "text-danger" })
+                                           </div>
+                                        </div>
+                                    </div>
                                     <div class="form-group">
                                         <div class="col-md-10">
                                             <input type="hidden" class="form-control" id="Id" />

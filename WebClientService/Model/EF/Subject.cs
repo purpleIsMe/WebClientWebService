@@ -161,7 +161,6 @@ namespace Model.EF
 
         public int? MaxUsed { get; set; }
 
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int ID { get; set; }
+        public int idSub { get; set; }
     }
 }

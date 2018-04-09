@@ -11,35 +11,32 @@ namespace Model.DAO
         {
             db = new WebClientDbContext();
         }
-        public IEnumerable<DeChuan> GetListAll()
+        public IEnumerable<DECHUAN> GetListAll()
         {
-            IEnumerable<DeChuan> y = db.DeChuans.ToList();
-            CloseConnect();
+            IEnumerable<DECHUAN> y = db.DECHUANs.ToList();
             return y;
         }
-        public List<DeChuan> GetListSingleDC(int maDC)
+        public List<DECHUAN> GetListSingleDC(int maDC)
         {
-            List<DeChuan> x = db.DeChuans.Where(i => i.MaDeChuan == maDC).ToList();
-            CloseConnect();
+            List<DECHUAN> x = db.DECHUANs.Where(i => i.MaDeChuan == maDC).ToList();
             return x;
         }
         public void CloseConnect()
         {
             db.Dispose();
         }
-        public bool UpdateDeChuan(DeChuan DeChuanDAO)
+        public bool UpdateDECHUAN(DECHUAN DECHUANDAO)
         {
             try
             {
-                DeChuan u = db.DeChuans.Where(p => p.MaDeChuan == DeChuanDAO.MaDeChuan).SingleOrDefault();
-                u.TenDeChuan = DeChuanDAO.TenDeChuan;
-                u.MaMon = DeChuanDAO.MaMon;
-                u.SoDeHoanVi = DeChuanDAO.SoDeHoanVi;
-                u.TrangThaiTron = DeChuanDAO.TrangThaiTron;
-                u.ThoiGian = DeChuanDAO.ThoiGian;
-                u.Lock = DeChuanDAO.Lock;
+                DECHUAN u = db.DECHUANs.Where(p => p.MaDeChuan == DECHUANDAO.MaDeChuan).SingleOrDefault();
+                u.TenDeChuan = DECHUANDAO.TenDeChuan;
+                u.MaMon = DECHUANDAO.MaMon;
+                u.SoDeHoanVi = DECHUANDAO.SoDeHoanVi;
+                u.TrangThaiTron = DECHUANDAO.TrangThaiTron;
+                u.ThoiGian = DECHUANDAO.ThoiGian;
+                u.Lock = DECHUANDAO.Lock;
                 db.SaveChanges();
-                CloseConnect();
                 return true;
             }
             catch
@@ -47,13 +44,12 @@ namespace Model.DAO
                 return false;
             }
         }
-        public bool DeleteDeChuan(int id)
+        public bool DeleteDECHUAN(int id)
         {
             try
             {
-                DeChuan u = db.DeChuans.Single(p => p.MaDeChuan == id);
-                db.DeChuans.Remove(u);
-                CloseConnect();
+                DECHUAN u = db.DECHUANs.Single(p => p.MaDeChuan == id);
+                db.DECHUANs.Remove(u);
                 return true;
             }
             catch

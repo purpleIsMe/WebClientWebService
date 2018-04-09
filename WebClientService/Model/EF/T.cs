@@ -6,27 +6,20 @@ namespace Model.EF
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("Question")]
-    public partial class Question
+    public partial class T
     {
-        public Guid QuestionID { get; set; }
+        public Guid? QuestionID { get; set; }
 
         [StringLength(50)]
         public string QuestionNbr { get; set; }
 
-        public Guid? ClassID { get; set; }
-
-        public Guid? MentalityTypeID { get; set; }
-
         public Guid? SubjectID { get; set; }
-
-        public Guid? OSubjectID { get; set; }
 
         [Column(TypeName = "image")]
         public byte[] Content { get; set; }
 
-        [Column("Question", TypeName = "image")]
-        public byte[] Question1 { get; set; }
+        [Column(TypeName = "image")]
+        public byte[] Question { get; set; }
 
         public int? NoOfAnswers { get; set; }
 
@@ -47,31 +40,46 @@ namespace Model.EF
         [Column(TypeName = "image")]
         public byte[] Answer5 { get; set; }
 
-        [Column(TypeName = "image")]
-        public byte[] CustomAnswer { get; set; }
-
+        [Key]
+        [Column(Order = 0)]
         public bool Answer1SwapYN { get; set; }
 
+        [Key]
+        [Column(Order = 1)]
         public bool Answer2SwapYN { get; set; }
 
+        [Key]
+        [Column(Order = 2)]
         public bool Answer3SwapYN { get; set; }
 
+        [Key]
+        [Column(Order = 3)]
         public bool Answer4SwapYN { get; set; }
 
+        [Key]
+        [Column(Order = 4)]
         public bool Answer5SwapYN { get; set; }
 
         public int? MaxAnswerLen { get; set; }
 
+        [Key]
+        [Column(Order = 5)]
         public bool SkipAnswersYN { get; set; }
 
+        [Key]
+        [Column(Order = 6)]
         public bool GroupYN { get; set; }
 
+        [Key]
+        [Column(Order = 7)]
         public bool ChildYN { get; set; }
 
         public Guid? ParentID { get; set; }
 
         public int? NoOfChildren { get; set; }
 
+        [Key]
+        [Column(Order = 8)]
         public bool ChildSwapYN { get; set; }
 
         public int? ChildOrderNo { get; set; }
@@ -79,40 +87,5 @@ namespace Model.EF
         public int? TestOrderNo { get; set; }
 
         public int? GroupNo { get; set; }
-
-        [StringLength(8)]
-        public string QVersion { get; set; }
-
-        public short? DiffID { get; set; }
-
-        public int? Used { get; set; }
-
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int QID { get; set; }
-
-        public DateTime? DateAdd { get; set; }
-
-        [StringLength(50)]
-        public string UserAccess { get; set; }
-
-        [StringLength(50)]
-        public string HostName { get; set; }
-
-        public bool? Active { get; set; }
-
-        [Column(TypeName = "image")]
-        public byte[] PicQuestion { get; set; }
-
-        [Column(TypeName = "image")]
-        public byte[] PicAnswer1 { get; set; }
-
-        [Column(TypeName = "image")]
-        public byte[] PicAnswer2 { get; set; }
-
-        [Column(TypeName = "image")]
-        public byte[] PicAnswer3 { get; set; }
-
-        [Column(TypeName = "image")]
-        public byte[] PicAnswer4 { get; set; }
     }
 }

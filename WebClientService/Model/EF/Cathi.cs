@@ -6,34 +6,26 @@ namespace Model.EF
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("CaThi")]
-    public partial class CaThi
+    [Table("CATHI")]
+    public partial class CATHI
     {
         public int ID { get; set; }
 
-        public DateTime GioBD { get; set; }
+        [Required]
+        [StringLength(50)]
+        public string MaKhoaThi { get; set; }
 
-        public DateTime GioKT { get; set; }
+        [StringLength(50)]
+        public string Ca { get; set; }
+
+        public DateTime GioBatDau { get; set; }
+
+        public DateTime GioKetThuc { get; set; }
 
         public DateTime Ngay { get; set; }
 
-        public Guid SubjectID { get; set; }
-
         public bool TrangThai { get; set; }
 
-        public bool HoanThanh { get; set; }
-
-        [StringLength(50)]
-        public string MaGiamThi1 { get; set; }
-
-        [StringLength(50)]
-        public string MaGiamThi2 { get; set; }
-
-        public int? IDDeChuan { get; set; }
-
-        [StringLength(200)]
-        public string TenCaThi { get; set; }
-
-        public virtual DeChuan DeChuan { get; set; }
+        public bool DaHoanThanh { get; set; }
     }
 }

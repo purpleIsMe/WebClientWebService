@@ -1,5 +1,4 @@
 ﻿using Model.EF;
-using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Validation;
@@ -19,11 +18,6 @@ namespace Model.DAO
         {
             List<PhanQuyen> y = db.PhanQuyens.ToList();
             return y;
-        }
-        public IEnumerable<PhanQuyen> ListAllPaging(int page, int pageSize)
-        {
-            IEnumerable<PhanQuyen> x = db.PhanQuyens.OrderBy(m => m.ID).ToPagedList(page, pageSize); 
-            return x;
         }
         public int AddPQ(PhanQuyen PQ)
         {

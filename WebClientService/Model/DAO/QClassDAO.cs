@@ -1,6 +1,4 @@
-﻿using Model.DTO;
-using Model.EF;
-using PagedList;
+﻿using Model.EF;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Validation;
@@ -34,11 +32,6 @@ namespace Model.DAO
         public QClass singleIDQClassInt(int idqclass)
         {
             return db.QClasses.Where(p => p.idQClass == idqclass).SingleOrDefault();
-        }
-        public IEnumerable<QClass> ListAllPaging(int page, int pageSize)
-        {
-            IEnumerable<QClass> x = db.QClasses.OrderBy(m => m.ClassID).ToPagedList(page, pageSize);
-            return x;
         }
         public bool AddQClass(QClass PQ)
         {
@@ -81,7 +74,6 @@ namespace Model.DAO
                 Debug.WriteLine(e.Message);
                 return false;
             }
-            return true;
         }
         public bool UpdateQClass(QClass PQ)
         {

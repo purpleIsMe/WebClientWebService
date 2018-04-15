@@ -3,12 +3,11 @@
 }
 @section Content
 { 
-<div onload="getTest()" class="content">
+<div class="content">
     <div class="row">
         <div class="col-md-9 col-xs-12">
             <div class="x_panel">
                 <div class="x_title">
-                    <h3> Thông tin thí sinh</h3>
                     <div class="x_content">
                         <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-right">
                             <div id="field1" onscroll="true">
@@ -28,54 +27,69 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-3 col-xs-12">
+        <div class="col-md-3 col-xs-11">
             <div class="x_panel">
                 <div class="x_title">
                     <h3> Thông tin thí sinh</h3>
                     <div class="clearfix"></div>
                     <div class="x_content">
-                        <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
-                            <br />
                             <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Mã dự thi</label>
-                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-11">Mã dự thi</label>
+                                <div class="col-md-8 col-sm-8 col-xs-11">
                                     <input type="text" id="maduthi" class="form-control" readonly />
                                 </div>
                             </div>
+                        <br />
                             <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Họ và tên</label>
-                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-11">Họ và tên</label>
+                                <div class="col-md-8 col-sm-8 col-xs-11">
                                     <input type="text" id="hoten" class="form-control" readonly />
                                 </div>
                             </div>
+                        <br /> 
                             <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Môn thi</label>
-                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-11">Môn thi</label>
+                                <div class="col-md-8 col-sm-8 col-xs-11">
                                     <input type="text" id="monthi" class="form-control" readonly />
                                 </div>
                             </div>
+                        <br />
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-11">Ngày thi</label>
+                            <div class="col-md-8 col-sm-8 col-xs-11">
+                                <input type="text" id="ngaythi" class="form-control" readonly />
+                            </div>
+                        </div>
+                        <br /> 
                             <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Thời gian</label>
-                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-11">Thời gian</label>
+                                <div class="col-md-8 col-sm-8 col-xs-11">
                                     <input type="text" id="thoigian" class="form-control" readonly />
                                 </div>
                             </div>
+                        <br />  <br />
+                        <div>
+                            <br />
+                            <div class="col-md-4 col-sm-1 col-xs-11"></div>
+                            <div class="col-md-3 col-sm-3 col-xs-11">
+                                <button id="start-end" style="font-size: 20px;" class="btn btn-success">Bắt đầu</button>
+                            </div>
+                            <div class="col-md-4 col-sm-1 col-xs-11"></div>
+                            <br />
+                        </div>
+                        <br /><br />
                             <div class="form-group">
-                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Ngày thi</label>
-                                <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <input type="text" id="ngaythi" class="form-control" readonly />
+                                
+                                <div class="col-md-8 col-sm-8 col-xs-11">
+                                    <center><input id="counttime" style="font-size: 22px" class="form-control" readonly></center>
+                                </div>
+                                <div class="col-md-3 col-sm-3 col-xs-11">
+                                    <center><button id="hdsd" style="font-size: 21px;" class="btn btn-info">?</button></center>
                                 </div>
                             </div>
-                            <div>
-                                <center>
-                                    <input id="counttime" style="font-size: 22px">
-                                    <button id="hdsd" style="font-size: 25px; float: right;">?</button>
-                                </center>
-                            </div>
-                            <div>
-                                <button id="start-end" style="font-size: 25px;"> Kết thúc</button>
-                            </div>
-                        </form>
+                        <br /> 
+                            
+
                     </div>
                 </div>
             </div>
@@ -85,10 +99,9 @@
     <div class="row">
         <div class="col-md-9 col-xs-12">
             <div class="x_panel">
-                <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-right">
                     <div id="field2" onscroll="true">
                         <legend>Lựa chọn</legend>
-                        <div id="answer" style="font:20px;">
+                        <div id="answer" style="font:25px; float:right;" class="col-md-11 col-sm-11 col-xs-12">
                             A <span id="answer1">
                             </span><br/>
                             B <span id="answer2">
@@ -99,22 +112,22 @@
                             </span><br/>
                         </div>
                     </div>
-
-                    <center class="center">
-                        <button id="back" value=""><</button>
-                        <input type="number" id="cau" value="1" min="1" max="@ViewBag.SL">
-                        <button id="next" value="">></button>
-                    </center>
-                </form>
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <center class="center">
+                            <button id="back" value="" class="btn btn-primary"><</button>
+                            <input type="number" id="cau" value="1" min="1" max="@ViewBag.SL">
+                            <button id="next" value="" class="btn btn-primary">></button>
+                        </center>
+                    </div>
+                
             </div>
         </div>
-        <div class="col-md-3 col-xs-12">
+        <div class="col-md-3 col-xs-11">
             <div class="x_panel">
-                <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-right">
-                    <div id="choose" style="border:solid inherit">
+                <br />
+                    <div id="choose" style="border:solid inherit; font-size: 22px;">
                         <table style="width:100%" id="loadans"></table>
                     </div>
-                </form>
             </div>
         </div>
     </div>

@@ -5,9 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Validation;
+using System.Data.SqlClient;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WebClientService.Common;
 
 namespace Model.DAO
@@ -119,7 +118,7 @@ namespace Model.DAO
         public int FindThiSinh(string maduthi, string password)
         {
             int x = -1;
-            x = dataContext.THISINHs.Where(i => i.MaDuThi == maduthi && i.Password == password).Select(p=>p.ID).SingleOrDefault();
+            x = dataContext.THISINHs.Where(i => i.MaDuThi == maduthi && i.Password == password).Select(p => p.ID).SingleOrDefault();
             return x;
         }
         public InfoStudent ViewDetailTHISINH(int id)
@@ -137,7 +136,7 @@ namespace Model.DAO
                                  HoTen = a.HoTen,
                                  GioiTinh = a.GioiTinh,
                                  MaCaThi = a.MaCaThi,
-                                 MaDeThi= a.MaDeThi,
+                                 MaDeThi = a.MaDeThi,
                                  TrangThai = a.TrangThai,
                                  SoMay = a.SoMay,
                                  DaHoanThanh = a.DaHoanThanh,
@@ -148,7 +147,7 @@ namespace Model.DAO
                              }).SingleOrDefault();
             return y;
         }
-     
+
         public bool UpdateActive(THISINH ts)
         {
             THISINH x = dataContext.THISINHs.Where(l => l.ID == ts.ID).SingleOrDefault();
@@ -163,7 +162,7 @@ namespace Model.DAO
         public int LogIn(string UserName, string passWord)
         {
             var result = dataContext.THISINHs.Where(x => x.MaDuThi == UserName).SingleOrDefault();
-           
+
             if (result == null)
             {
                 return 3;//tai khoan khong ton tai
@@ -176,6 +175,8 @@ namespace Model.DAO
                 {
                     return 1;
                 }
+                if (result.TrangThai == false)
+                    return 5;//tai khoan da bi khoa
                 else
                     return 2; // mat khau khong dung
             }
@@ -189,6 +190,40 @@ namespace Model.DAO
         public List<THISINH> showListAll()
         {
             return dataContext.THISINHs.ToList();
+        }
+        public bool UpdateActiveTimeThiSinh(int idts, int tg, bool hoanthanh, bool trangthai, string somay)
+        {
+            try
+            {
+                object[] valparams =
+                {
+                    new SqlParameter("@IDThiSinh",idts),
+                    new SqlParameter("@TrangThai",trangthai),
+                    new SqlParameter("@SoMay",somay),
+                    new SqlParameter("@DaHoanThanh",hoanthanh),
+                    new SqlParameter("@ThoiGian",tg)
+                };
+                int res = dataContext.Database.ExecuteSqlCommand("update_thisinh @IDThiSinh, @TrangThai, @SoMay, @DaHoanThanh, @ThoiGian", valparams);
+                dataContext.SaveChanges();
+            }
+            catch (DbEntityValidationException e)
+            {
+                foreach (var eve in e.EntityValidationErrors)
+                {
+                    Debug.WriteLine("- Entity of type \"{0}\", in state \"{1}\" has the following validation errors: ", eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        Debug.WriteLine("- Property: \"{0}\", Error: \"{1}\"", ve.PropertyName, ve.ErrorMessage);
+                    }
+                }
+                return false;
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.Message);
+                return false;
+            }
+            return true;
         }
     }
 }

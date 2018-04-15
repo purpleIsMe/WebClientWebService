@@ -1,5 +1,4 @@
 ﻿using Model.EF;
-using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Validation;
@@ -20,11 +19,7 @@ namespace Model.DAO
             List<Subject> y = db.Subjects.ToList();
             return y;
         }
-        public List<Subject> ListAllPaging(int page, int pageSize)
-        {
-            List<Subject> x = db.Subjects.OrderBy(m => m.SubjectID).ToPagedList(page, pageSize).ToList();
-            return x;
-        }
+       
         public List<Subject> ShowAllSubID(int id)
         {
             return db.Subjects.Where(i => i.idSub == id).ToList();

@@ -1,5 +1,6 @@
 ﻿using Model.DAO;
 using Model.DTO;
+using Model.EF;
 using System;
 using System.Web.Mvc;
 using WebClientService.Common;
@@ -11,48 +12,15 @@ namespace WebClientService.Controllers
         // GET: TestExam
         public ActionResult Index()
         {
-            //AllQuestionDTO xy = new QuestionDAO().getOneQuestion(8);
-
-            //byte[] Ans4 = xy.PicAns4;
-            //byte[] Ans3 = xy.PicAns3;
-            //byte[] Ans2 = xy.PicAns2;
-            //byte[] Ans1 = xy.PicAns1;
-            //byte[] Ques = xy.PicQues;
-
-            //string imreBase64Data = Convert.ToBase64String(Ans4);
-            //string imgDataURL = string.Format("data:image/png;base64,{0}", imreBase64Data);
-            ////Passing image data in viewbag to view  
-            //ViewBag.PicAns4 = imgDataURL;
-
-
-            //imreBase64Data = Convert.ToBase64String(Ans3);
-            //imgDataURL = string.Format("data:image/png;base64,{0}", imreBase64Data);
-            ////Passing image data in viewbag to view  
-            //ViewBag.PicAns3 = imgDataURL;
-
-            //imreBase64Data = Convert.ToBase64String(Ans2);
-            //imgDataURL = string.Format("data:image/png;base64,{0}", imreBase64Data);
-            ////Passing image data in viewbag to view  
-            //ViewBag.PicAns2 = imgDataURL;
-
-            //imreBase64Data = Convert.ToBase64String(Ans1);
-            //imgDataURL = string.Format("data:image/png;base64,{0}", imreBase64Data);
-            ////Passing image data in viewbag to view  
-            //ViewBag.PicAns1 = imgDataURL;
-
-            //imreBase64Data = Convert.ToBase64String(Ques);
-            //imgDataURL = string.Format("data:image/png;base64,{0}", imreBase64Data);
-            ////Passing image data in viewbag to view  
-            //ViewBag.PicQues = imgDataURL;
-
-
             return View();
         }
         [HttpGet]
-        public ActionResult getQuestion(int id)
+        public ActionResult getQuestion()
         {
+            var x1 = (ThiSinhLogin)Session[Constants.THISINH_SESSION];
+            var ts = new ThiSinhDAO().ViewDetailTHISINH(x1.ThiSinhID);
             string imreBase64Data, imgDataURL;
-            var xy = new QuestionDAO().getAllQuestionDeTron(id);
+            var xy = new QuestionDAO().getAllQuestionDeTron(ts.MaDeThi);
             foreach (var x in xy)
             {
                 imreBase64Data = Convert.ToBase64String(x.PicQues);
@@ -85,13 +53,52 @@ namespace WebClientService.Controllers
             ViewBag.SL = sl;
             return Json(xy, JsonRequestBehavior.AllowGet);
         }
+        int id;
         [HttpGet]
         public ActionResult getInfo()
         {
             var x = (ThiSinhLogin)Session[Constants.THISINH_SESSION];
             var ts = new ThiSinhDAO().ViewDetailTHISINH(x.ThiSinhID);
-            
+            id = ts.MaDeThi;
             return Json(ts, JsonRequestBehavior.AllowGet);
         }
+        [HttpPost]
+        public ActionResult saveAns(AnswerSheetTS a)
+        {
+            AnswerDAO dao = new AnswerDAO();
+            AnswerSheet ans = new AnswerSheet();
+            Answer an = new Answer();
+            var l = (ThiSinhLogin)Session[Constants.THISINH_SESSION];
+            int ida = dao.FindIDAnswer(l.ThiSinhID);
+            bool x = true, y = true;
+            //request data from json save answer
+            an.DiemThuc = a.DiemThuc;
+            an.DiemSo = a.DiemSo;
+            an.ID = ida;
+            x = dao.UpdateAnswerScore(an);
+
+            //request data from json save answersheet
+            for (int i = 0; i < a.answerSheet.Count; i++)
+            {
+                ans.RemainTime = a.RemainTime;
+                ans.IDAnswer = ida;
+                ans.QuestionID = a.answerSheet[i].QuestionID;
+                ans.ThuTuCauHoi = a.answerSheet[i].ThuTuCauHoi;
+                ans.DapAn = a.answerSheet[i].DapAn;
+                ans.Answer = a.answerSheet[i].Answer;
+                y = dao.AddAnswerSheet(ans);
+            }
+            //request datada from json save sv
+            ThiSinhDAO ts = new ThiSinhDAO();
+            bool m = ts.UpdateActiveTimeThiSinh(ida, a.RemainTime, true, true, null);
+
+            bool kq = false;
+            if (x == true && y == true && m==true)
+                kq = true;
+            return Json(new { result = kq });
+        }
+
+
+
     }
 }

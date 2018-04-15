@@ -110,14 +110,6 @@
     <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
       <HintPath>..\..\..\WebThiTN\WebClient\WebClient.Data\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
     </Reference>
-    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
-      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
-      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -166,7 +158,8 @@
     <Compile Include="DAO\ThiSinhDAO.cs" />
     <Compile Include="DAO\UserDAO.cs" />
     <Compile Include="DTO\AllQuestionDTO.cs" />
-    <Compile Include="DTO\ChangeQuestion.cs" />
+    <Compile Include="DTO\AnswerAAnswerSheet.cs" />
+    <Compile Include="DTO\AnswerSheetTS.cs" />
     <Compile Include="DTO\InfoStudent.cs" />
     <Compile Include="DTO\QClassNonID.cs" />
     <Compile Include="EF\Administration.cs" />
@@ -211,11 +204,6 @@
     <Compile Include="EF\WebClientDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
-  <ItemGroup>
-    <None Include="App.config" />
-    <None Include="packages.config" />
-  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\WebClientService\WebClientService.csproj">
       <Project>{72284085-15EE-47CC-8E1A-816946149970}</Project>
@@ -223,7 +211,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\PagedList.css" />
+    <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\System.Data.SQLite.Core.1.0.106.0\build\net451\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.106.0\build\net451\System.Data.SQLite.Core.targets')" />

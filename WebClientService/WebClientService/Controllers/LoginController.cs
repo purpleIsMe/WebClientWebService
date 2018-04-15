@@ -40,11 +40,21 @@ namespace WebClientService.Controllers
                     TSSession.ThiSinhName = THISINH.MaDuThi;
                     TSSession.ThiSinhID = THISINH.ID;
                     Session.Add(Constants.THISINH_SESSION, TSSession);
-                    return RedirectToAction("Index", "TestExam");
+
+                    //save answer
+                    Answer an = new Answer();
+                    an.IDThiSinh = THISINH.ID;
+                    an.DiemSo = 0;
+                    an.DiemThuc = 0;
+                    var kq = new AnswerDAO().AddAnswer(an);
+                    if (kq < 1)
+                        ModelState.AddModelError("", "Tài khoản không thể tạo answer");
+                    else
+                        return RedirectToAction("Index", "TestExam");
                 }
                 if (result == 4)
                 {
-                    ModelState.AddModelError("", "Tài khoản đã thi hoàn tất");
+                    ModelState.AddModelError("", "Tài khoản đã hoàn thành bài thi");
                 }
                 if (result == 3)
                 {
@@ -53,6 +63,10 @@ namespace WebClientService.Controllers
                 if (result == 2)
                 {
                     ModelState.AddModelError("", "Mật khẩu không đúng. Xin vui lòng kiểm tra lại!");
+                }
+                if (result == 5)
+                {
+                    ModelState.AddModelError("", "Tài khoản này đã bị khóa. Xin vui lòng kiểm tra lại!");
                 }
                 else
                 {

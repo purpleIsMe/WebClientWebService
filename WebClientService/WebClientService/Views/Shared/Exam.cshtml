@@ -56,9 +56,25 @@
 <body>
     @RenderSection("Content", required: true)
     
-    <script type="text/javascript" src="/Assets/Admin/vendor/jquery/jquery.min.js"></script>
-    <script type="text/javascript" src="/Assets/Admin/vendor/bootstrap/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="/Assets/Client/js/Exam/testExam.js"></script>
+    <script src="~/Assets/Client/js/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="../../Assets/Client/js/Exam/testExam.js"></script>
     <script type="text/javascript" src="~/Assets/Client/js/bootstrap/bootstrap.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#next').bind('click', function (event) {
+                var id = $('#cau').val();
+                id++;
+                $('#cau').val(id);
+            });
+            $('#back').bind('click', function (event) {
+                var id = $('#cau').val();
+                id--;
+                
+                if(id>0)
+                $('#cau').val(id);
+            });
+        });
+    </script>
+    
 </body>
 </html>

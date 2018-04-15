@@ -1,5 +1,4 @@
 ﻿using Model.EF;
-using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Validation;
@@ -19,11 +18,6 @@ namespace Model.DAO
         {
             IEnumerable<Error> y = db.Errors.ToList();
             return y;
-        }
-        public IEnumerable<Error> ListAllPaging(int page, int pageSize)
-        {
-            IEnumerable<Error> x = db.Errors.OrderBy(m => m.ID).ToPagedList(page, pageSize);
-            return x;
         }
         public int AddPQ(Error PQ)
         {

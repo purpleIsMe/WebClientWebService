@@ -1,6 +1,5 @@
 ﻿using Model.DTO;
 using Model.EF;
-using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Validation;
@@ -64,11 +63,6 @@ namespace Model.DAO
         //    List<Question> x = db.Questions.Where(o => o.ClassID == idclass).ToList();
         //    return x;
         //}
-        public IEnumerable<Question> ListAllPaging(int page, int pageSize)
-        {
-            IEnumerable<Question> x = db.Questions.OrderBy(m => m.QuestionID).ToPagedList(page, pageSize);
-            return x;
-        }
         public bool AddPQ(Question PQ)
         {
             try

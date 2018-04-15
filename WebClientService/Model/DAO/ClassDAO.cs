@@ -1,5 +1,4 @@
 ﻿using Model.EF;
-using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Infrastructure;
@@ -18,12 +17,6 @@ namespace Model.DAO
         public ClassDAO()
         {
             dataContext = new WebClientDbContext();
-        }
-        public IEnumerable<Class> ListAllPaging(int page, int pageSize)
-        {
-            IEnumerable<Class> x = dataContext.Classes.OrderBy(m => m.IDClass).ToPagedList(page, pageSize);
-            CloseConnect();
-            return x;
         }
         public int AddClass(Class Class)
         {

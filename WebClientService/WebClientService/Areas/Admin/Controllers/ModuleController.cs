@@ -20,19 +20,19 @@ namespace WebClientService.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Create(QClass sub)
         {
-            bool idclass=false;
+            bool idclass = false;
             if (ModelState.IsValid)
             {
                 var dao = new QClassDAO();
                 Guid id = new SubjectDAO().GetListAll().Where(i => i.idSub == sub.idQClass).Select(l => l.SubjectID).SingleOrDefault();
                 sub.SubjectID = id;
                 sub.ClassID = Guid.NewGuid();
-                idclass = dao.AddQClass(sub);                
+                idclass = dao.AddQClass(sub);
             }
 
             return Json(idclass, JsonRequestBehavior.AllowGet);
         }
- 
+
         [HttpPost]
         public ActionResult Edit(QClass sub)
         {
@@ -69,7 +69,6 @@ namespace WebClientService.Areas.Admin.Controllers
                 result = x
             });
         }
-
 
         public void listsubject(int id = -1)
         {

@@ -497,7 +497,7 @@
     <Content Include="Assets\Client\js\jquery-easing\profile2-128.png" />
     <Content Include="Assets\Client\js\jquery-easing\user-128.png" />
     <Content Include="Assets\Client\js\jquery-easing\user_male2-128.png" />
-    <Content Include="Assets\Client\js\jquery\jquery.js" />
+    <Content Include="Assets\Client\js\jquery\jquery.min.js" />
     <Content Include="Assets\Client\js\masonry\masonry.min.js" />
     <Content Include="Assets\Client\js\masonry\masonry.pkgd.min.js" />
     <Content Include="Assets\Client\js\mixitup\jquery.mixitup.min.js" />

@@ -1,12 +1,9 @@
 ﻿using Model.EF;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Validation;
 using System.Diagnostics;
 using System.Linq;
-using PagedList.Mvc;
-using PagedList;
 
 namespace Model.DAO
 {
@@ -17,11 +14,7 @@ namespace Model.DAO
         {
             db = new WebClientDbContext();
         }
-        public IEnumerable<User> ListAllPaging(int page, int pageSize)
-        {
-            IEnumerable<User> x = db.Users.OrderBy(m => m.ID).ToPagedList(page, pageSize);
-            return x;
-        }
+        
         public List<User> ViewAll()
         {
             List<User> x = db.Users.ToList();

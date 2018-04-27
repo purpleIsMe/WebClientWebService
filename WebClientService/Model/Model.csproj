@@ -140,19 +140,17 @@
   <ItemGroup>
     <Compile Include="Abstract\Auditable.cs" />
     <Compile Include="Abstract\IAuditable.cs" />
-    <Compile Include="Content\CathiModule.cs" />
-    <Compile Include="Content\ModuleModel.cs" />
+    <Compile Include="Content\ImportData.cs" />
     <Compile Include="Content\SubjectModel.cs" />
     <Compile Include="DAO\AnswerDAO.cs" />
     <Compile Include="DAO\CaThiDAO.cs" />
     <Compile Include="DAO\ClassDAO.cs" />
     <Compile Include="DAO\DeChuanDAO.cs" />
-    <Compile Include="DAO\DeChuanQuestionDAO.cs" />
-    <Compile Include="DAO\ErrorDAO.cs" />
-    <Compile Include="DAO\FeedBackDAO.cs" />
+    <Compile Include="DAO\KhoaThiDAO.cs" />
     <Compile Include="DAO\PhanQuyenDAO.cs" />
     <Compile Include="DAO\QClassDAO.cs" />
     <Compile Include="DAO\QuestionDAO.cs" />
+    <Compile Include="DAO\RoomDAO.cs" />
     <Compile Include="DAO\StudentDAO.cs" />
     <Compile Include="DAO\SubjectDAO.cs" />
     <Compile Include="DAO\ThiSinhDAO.cs" />
@@ -160,6 +158,9 @@
     <Compile Include="DTO\AllQuestionDTO.cs" />
     <Compile Include="DTO\AnswerAAnswerSheet.cs" />
     <Compile Include="DTO\AnswerSheetTS.cs" />
+    <Compile Include="DTO\dechuan.cs" />
+    <Compile Include="DTO\DetailSchedule.cs" />
+    <Compile Include="DTO\detron.cs" />
     <Compile Include="DTO\InfoStudent.cs" />
     <Compile Include="DTO\QClassNonID.cs" />
     <Compile Include="EF\Administration.cs" />
@@ -175,12 +176,9 @@
     <Compile Include="EF\DETRON_QUESTION.cs" />
     <Compile Include="EF\Error.cs" />
     <Compile Include="EF\FeedBack.cs" />
-    <Compile Include="EF\Footer.cs" />
     <Compile Include="EF\GIAMTHI.cs" />
     <Compile Include="EF\KHOATHI.cs" />
     <Compile Include="EF\LogIn.cs" />
-    <Compile Include="EF\Menu.cs" />
-    <Compile Include="EF\MenuGroup.cs" />
     <Compile Include="EF\Music.cs" />
     <Compile Include="EF\Page.cs" />
     <Compile Include="EF\PhanQuyen.cs" />
@@ -194,7 +192,6 @@
     <Compile Include="EF\Report.cs" />
     <Compile Include="EF\Student.cs" />
     <Compile Include="EF\Subject.cs" />
-    <Compile Include="EF\SupportOnline.cs" />
     <Compile Include="EF\SystemConfig.cs" />
     <Compile Include="EF\T.cs" />
     <Compile Include="EF\Tag.cs" />

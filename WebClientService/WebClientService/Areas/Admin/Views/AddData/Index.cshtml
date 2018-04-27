@@ -9,23 +9,23 @@
 }
 @section Header
 {
-    THÊM MỚI MODULE
+    THÊM MỚI CÂU HỎI
 }
 <div class="row">
     <div class="col-lg-12">
         <div class="panel panel-default">
             <div class="panel-heading">
-                Nhập thông tin module
+                Import dữ liệu
             </div>
             <div class="panel-body">
                 <div class="row">
                     <div class="col-lg-6">
+                        
                         @using (Html.BeginForm("Index", "AddData", FormMethod.Post, new { enctype = "multipart/form-data" }))
                         {
                             @Html.AntiForgeryToken()
 
                             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
                             <div class="form-group">
                                 @Html.Label("Chọn môn thi", htmlAttributes: new { @class = "control-label col-md-6" })
 
@@ -48,7 +48,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                @Html.Label("message", mess, new { @class = "text-danger" })
+                                @Html.Label("", mess, new { @class = "text-danger" })
                             </div>
                         }
                     </div>

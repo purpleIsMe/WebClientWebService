@@ -25,12 +25,9 @@ namespace Model.EF
         public virtual DbSet<DETRON_QUESTION> DETRON_QUESTION { get; set; }
         public virtual DbSet<Error> Errors { get; set; }
         public virtual DbSet<FeedBack> FeedBacks { get; set; }
-        public virtual DbSet<Footer> Footers { get; set; }
         public virtual DbSet<GIAMTHI> GIAMTHIs { get; set; }
         public virtual DbSet<KHOATHI> KHOATHIs { get; set; }
         public virtual DbSet<LogIn> LogIns { get; set; }
-        public virtual DbSet<Menu> Menus { get; set; }
-        public virtual DbSet<MenuGroup> MenuGroups { get; set; }
         public virtual DbSet<Music> Musics { get; set; }
         public virtual DbSet<Page> Pages { get; set; }
         public virtual DbSet<PhanQuyen> PhanQuyens { get; set; }
@@ -44,7 +41,6 @@ namespace Model.EF
         public virtual DbSet<Report> Reports { get; set; }
         public virtual DbSet<Student> Students { get; set; }
         public virtual DbSet<Subject> Subjects { get; set; }
-        public virtual DbSet<SupportOnline> SupportOnlines { get; set; }
         public virtual DbSet<SystemConfig> SystemConfigs { get; set; }
         public virtual DbSet<Tag> Tags { get; set; }
         public virtual DbSet<THISINH> THISINHs { get; set; }
@@ -103,12 +99,6 @@ namespace Model.EF
                 .Property(e => e.MaKhoaThi)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<MenuGroup>()
-                .HasMany(e => e.Menus)
-                .WithRequired(e => e.MenuGroup)
-                .HasForeignKey(e => e.IDGroup)
-                .WillCascadeOnDelete(false);
-
             modelBuilder.Entity<Page>()
                 .Property(e => e.Alias)
                 .IsUnicode(false);
@@ -132,15 +122,7 @@ namespace Model.EF
                 .IsUnicode(false);
 
             modelBuilder.Entity<Student>()
-                .Property(e => e.Skype)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<Student>()
                 .Property(e => e.Email)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<Student>()
-                .Property(e => e.Zalo)
                 .IsUnicode(false);
 
             modelBuilder.Entity<Student>()

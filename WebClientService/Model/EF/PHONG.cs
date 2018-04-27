@@ -22,5 +22,6 @@ namespace Model.EF
         public string GhiChu { get; set; }
 
         public bool TrangThai { get; set; }
+        public int id { get; set; }
     }
 }

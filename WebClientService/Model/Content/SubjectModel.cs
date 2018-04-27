@@ -9,7 +9,7 @@ namespace Model.Content
         public List<Subject> Subjects{ get; set; }
         public int SelectedModule { get; set; }
         public List<QClass> Modules { get; set; }
-
+        public string nameModule { get; set; }
         public string Link { get; set; }
     }
 }

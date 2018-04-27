@@ -53,7 +53,7 @@ namespace Model.DAO
                                           PicAns1 = b.PicAnswer1,
                                           PicAns2 = b.PicAnswer2,
                                           PicAns3 = b.PicAnswer3,
-                                          PicAns4 = b.PicAnswer4,
+                                          PicAns4 = b.PicAnswer4
                                       }).ToList();
             return o;
         }
@@ -63,7 +63,7 @@ namespace Model.DAO
         //    List<Question> x = db.Questions.Where(o => o.ClassID == idclass).ToList();
         //    return x;
         //}
-        public bool AddPQ(Question PQ)
+        public bool AddQuestion(Question PQ)
         {
             try
             {
@@ -142,6 +142,31 @@ namespace Model.DAO
         {
             db.Dispose();
         }
-
+        public bool AddQuestionTemp(QuestionTemp PQ)
+        {
+            try
+            {
+                db.QuestionTemps.Add(PQ);
+                db.SaveChanges();
+            }
+            catch (DbEntityValidationException e)
+            {
+                foreach (var eve in e.EntityValidationErrors)
+                {
+                    Debug.WriteLine("- Entity of type \"{0}\", in state \"{1}\" has the following validation errors: ", eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        Debug.WriteLine("- Property: \"{0}\", Error: \"{1}\"", ve.PropertyName, ve.ErrorMessage);
+                    }
+                }
+                return false;
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.Message);
+                return false;
+            }
+            return true;
+        }
     }
 }

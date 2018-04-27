@@ -8,62 +8,145 @@ using System.Data;
 using WebClientService.Common;
 using System.Data.Entity.Validation;
 using Model.DAO;
+using System.Linq;
 
 namespace WebClientService.Areas.Admin.Controllers
 {
-    public class StudentsController : BaseController
+    public class StudentsController : Controller
     {
         // GET: Admin/Students
         [HttpGet]
         public ActionResult Index()
         {
-            if (!GetListPQ())
-            {
-                return RedirectToAction("Index", "Login");
-            }
             return View();
         }
-
+        
+        public ActionResult GetListUsers()
+        {
+            List<User> users = new UserDAO().ViewListForIDPQ(4);
+            return Json(users.Select(x=>new {ID=x.ID,Name=x.Name }),JsonRequestBehavior.AllowGet);
+        }       
+        public ActionResult GetListClass(int userid=1)
+        {
+            List<Class> classes = new ClassDAO().ClassesOfLecturer(userid);
+            return Json(classes.Select(i=>new { IDClass=i.IDClass,NameClass=i.NameClass,IDLecturer = i.IDLecturer,TrangThai=i.TrangThai}), JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult GetListStudentByClass(int classid = -1)
+        {
+            var dao1 = new StudentDAO();
+            List<Student> x = dao1.FiltStudentByClass(classid);
+            return Json(x.Select(i => new
+            {
+                ID = i.ID,
+                Name = i.Name,
+                Born = i.Born.ToShortDateString(),
+                Address = i.Address,
+                Position = i.Position,
+                Mobile = i.Mobile,
+                Email = i.Email,
+                Active = i.Active,
+                Password = i.Password,
+                UserName = i.UserName,
+                Status = i.Status,
+                CreateDate = i.CreateDate,
+                CreateBy = i.CreateBy,
+                IDClass = i.IDClass,
+                IDLecturer = i.IDLecturer,
+                Gender = i.Gender,
+                CMND = i.CMND
+            }),
+             JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult GetListStudentByLecture(int useid = -1)
+        {
+            var dao1 = new StudentDAO();
+            List<Student> x = dao1.FiltStudent(useid);
+            return Json(x.Select(i => new {
+                ID = i.ID,
+                Name = i.Name, 
+                Born = i.Born.ToShortDateString(),
+                Address = i.Address,
+                Position = i.Position,
+                Mobile = i.Mobile,
+                Email = i.Email,
+                Active = i.Active,
+                Password = i.Password,
+                UserName = i.UserName,
+                Status = i.Status,
+                CreateDate = i.CreateDate,
+                CreateBy = i.CreateBy,
+                IDClass = i.IDClass,
+                IDLecturer = i.IDLecturer,
+                Gender = i.Gender,
+                CMND = i.CMND}), 
+                JsonRequestBehavior.AllowGet);
+        }
+        //get, create, edit, delete info student
         [HttpGet]
-        public ActionResult Edit(int id)
+        public ActionResult Get(int id)
         {
-            GetListClass();
-            var model = new StudentDAO().ViewDetailStudent(id);
-            ViewBag.editstu = model;
-            return View(model);
+            var student = new StudentDAO().ViewDetailStudent(id);
+            return Json(student, JsonRequestBehavior.AllowGet);
         }
-
-        public bool GetListPQ(int idclasschoose = -1)
+        [HttpPost]
+        public JsonResult Delete(int idm)
         {
-            var x = (UserLogin)Session[Constants.USER_SESSION];
-
-            if (x != null)
+            var x = new StudentDAO().DeleteStudent(idm);
+            return Json(new
             {
-                var dao = new ClassDAO();
-
-                ViewBag.ID = new SelectList(dao.ClassesOfLecturer(x.UserID), "IDClass", "NameClass", idclasschoose);
-                var dao1 = new StudentDAO();
-                ViewBag.ListStu = new List<Student>(dao1.FiltStudent(x.UserID));
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+                result = x
+            });
         }
-
-        public void GetListClass(int idclass = -1)
+        [HttpPost]
+        public ActionResult Create(Student stu)
         {
-            var session = (UserLogin)Session[Constants.USER_SESSION];
-            var dao = new ClassDAO();
-            ViewBag.IDClass = new SelectList(dao.ClassesOfLecturer(session.UserID), "IDClass", "NameClass", idclass);
+            bool idstudent = false;
+            if (ModelState.IsValid)
+            {
+                var dao = new StudentDAO();
+                idstudent = dao.AddStudent(stu);
+            }
+
+            return Json(idstudent, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
-        public ActionResult Index(HttpPostedFileBase FileUpload, Class cl)
+        public ActionResult Edit(Student stu)
+        {
+            bool kq = false;
+            if (ModelState.IsValid)
+            {
+                var dao = new StudentDAO();
+                
+                if (dao.UpdateStudent(stu))
+                {
+                    kq = true;
+                }
+                else
+                {
+                    kq = false;
+                }
+            }
+
+            return Json(kq, JsonRequestBehavior.AllowGet);
+        }
+        //upload file
+        static int classid, lectid;
+        public void getInfoLecClass(int idclass, int idlect)
+        {
+            classid = idclass;
+            lectid = idlect;
+        }
+        [HttpGet]
+        public ActionResult Upload()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Upload(HttpPostedFileBase FileUpload)
         {
             StudentDAO stu = new StudentDAO();
-
+            var x = (UserLogin)Session[Constants.USER_SESSION];
             if (FileUpload != null)
             {
                 // tdata.ExecuteCommand("truncate table OtherCompanyAssets");  
@@ -92,36 +175,32 @@ namespace WebClientService.Areas.Admin.Controllers
                     {
                         try
                         {
-                            if (ds.Tables[0].Rows[i][1].ToString() != "" && ds.Tables[0].Rows[i][2].ToString() != "" && ds.Tables[0].Rows[i][2].ToString() != null && ds.Tables[0].Rows[i][10].ToString() != null
-   && ds.Tables[0].Rows[i][7].ToString() != "")
+                            if (ds.Tables[0].Rows[i][1].ToString() != "" && ds.Tables[0].Rows[i][2].ToString() != "" && ds.Tables[0].Rows[i][7].ToString() != "")
                             {
                                 Student TU = new Student();
-                                TU.Name = ds.Tables[0].Rows[i][1].ToString();
-                                TU.Address = ds.Tables[0].Rows[i][2].ToString();
-                                TU.Born = DateTime.Parse(ds.Tables[0].Rows[i][3].ToString());
-                                TU.Email = ds.Tables[0].Rows[i][4].ToString();
-                                TU.Mobile = ds.Tables[0].Rows[i][5].ToString();
-                                TU.Facebook = ds.Tables[0].Rows[i][6].ToString();
-                                TU.Zalo = ds.Tables[0].Rows[i][7].ToString();
-                                TU.Skype = ds.Tables[0].Rows[i][8].ToString();
-                                TU.UserName = ds.Tables[0].Rows[i][9].ToString();
-                                if (!String.IsNullOrEmpty(ds.Tables[0].Rows[i][10].ToString()))
-                                {
-                                    var encrypted = Encryptor.MD5Hash(ds.Tables[0].Rows[i][10].ToString());
-                                    TU.Password = encrypted;
-                                }
-                                TU.IDClass = cl.IDClass;
+                                TU.UserName = ds.Tables[0].Rows[i][1].ToString();
+                                TU.Name = ds.Tables[0].Rows[i][2].ToString();
+                                TU.Gender = Boolean.Parse(ds.Tables[0].Rows[i][3].ToString());
+                                TU.Born = DateTime.Parse(ds.Tables[0].Rows[i][4].ToString());
+                                TU.Address = ds.Tables[0].Rows[i][5].ToString();
+                                TU.Mobile = ds.Tables[0].Rows[i][6].ToString();
+                                TU.Email = ds.Tables[0].Rows[i][7].ToString();
+                                TU.CMND = ds.Tables[0].Rows[i][8].ToString();
+                                TU.Password = ds.Tables[0].Rows[i][9].ToString();
+                                TU.IDClass = classid;
                                 TU.Status = true;
-                                TU.Status = false;
                                 TU.Position = "Student";
                                 TU.Active = true;
+                                TU.IDLecturer = lectid;
+                                TU.CreateBy = x.UserID;
+                                TU.CreateDate = DateTime.Now;
                                 stu.AddStudent(TU);
 
                             }
                             else
                             {
-                                ModelState.AddModelError("", "Xin điền đầy đủ các trường bắt buộc như tên, địa chỉ, năm sinh, mật khẩu, biệt danh");
-                                return RedirectToAction("Index", "Students");
+                                ModelState.AddModelError("mess", "Xin điền đầy đủ các trường bắt buộc như tên, địa chỉ, năm sinh, mật khẩu, biệt danh");
+                                return RedirectToAction("Upload", "Students");
                             }
                         }
 
@@ -145,71 +224,46 @@ namespace WebClientService.Areas.Admin.Controllers
                     {
                         System.IO.File.Delete(pathToExcelFile);
                     }
-                    ModelState.AddModelError("", "Import thành công tất cả sinh viên");
-                    return RedirectToAction("Index", "Students");
+                    ModelState.AddModelError("mess", "Import thành công tất cả sinh viên");
+                    return RedirectToAction("Upload", "Students");
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Chỉ cho phép import các loại file excel phiên bản từ 2013 -> 2017");
-                    return RedirectToAction("Index", "Students");
+                    ModelState.AddModelError("mess", "Chỉ cho phép import các loại file excel phiên bản từ 2013 -> 2017");
+                    return RedirectToAction("Upload", "Students");
                 }
             }
             else
             {
                 if (FileUpload == null)
-                    ModelState.AddModelError("", "Xin vui lòng chọn file Excel");
-                return RedirectToAction("Index", "Students");
+                    ModelState.AddModelError("mess", "Xin vui lòng chọn file Excel");
+                return RedirectToAction("Upload", "Students");
             }
         }
 
+        //convert student to thisinh
+        [HttpGet]
+        public ActionResult Convert()
+        {
+            return View();
+        }
         [HttpPost]
-        public ActionResult Edit(Student stu)
+        public ActionResult ConvertStudentToThiSinh(int idcathi, int idclass)
         {
-            if (ModelState.IsValid)
-            {
-                var dao = new StudentDAO();
-                //if (!String.IsNullOrEmpty(stu.Password))
-                //{
-                //    var encrypted = Encryptor.MD5Hash(stu.Password);
-                //    stu.Password = encrypted;
-                //}
-                //stu.Password = pass;
-                //stu.idlecturer = 1;
-                stu.CreateDate = DateTime.Now;
-                stu.Active = true;
-                stu.Status = true;
-                var result = dao.UpdateStudent(stu);
-                if (result)
-                {
-                    return RedirectToAction("Index", "Students");
-                }
-                else
-                {
-                    ModelState.AddModelError("", "Cập nhật sinh viên thất bại");
-                }
-            }
-            return View("Index");
+            var kq = new StudentDAO().ConvertStudentToThiSinh(idcathi, idclass);
+            return Json(kq, JsonRequestBehavior.AllowGet);
         }
-
-        [HttpDelete]
-        public ActionResult Delete(int id)
+        [HttpPost]
+        public ActionResult PhanDeTS(int idcathi)
         {
-            if (ModelState.IsValid)
-            {
-                if (new StudentDAO().DeleteStudent(id))
-                {
-                    return RedirectToAction("Index", "Students");
-                }
-            }
-            return View("Index");
+            var kq = new DeChuanDAO().PhanDeChoThiSinh(idcathi);
+            return Json(kq, JsonRequestBehavior.AllowGet);
         }
-
-        public FileResult DownloadExcel()
+        [HttpGet]
+        public ActionResult GetListThiSinh(int id)
         {
-            string path = "/Doc/Users.xlsx";
-            return File(path, "application/vnd.ms-excel", "Users.xlsx");
+            var student = new ThiSinhDAO().showListByIDCaChiTiet(id);
+            return Json(student, JsonRequestBehavior.AllowGet);
         }
-
-
     }
 }

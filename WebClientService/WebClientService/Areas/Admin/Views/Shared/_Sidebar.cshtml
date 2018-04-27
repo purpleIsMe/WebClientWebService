@@ -15,10 +15,49 @@
                 <a href="#"><i class="fa fa-gears"></i> Quản lý tài khoản<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li>
+                        <a href="~/Admin/">Quản lý phân quyền()</a>
+                    </li>                   
+                     <li>
                         <a href="~/Admin/Users">Quản trị và giảng viên</a>
                     </li>
                     <li>
-                        <a href="~/Admin/Students">Sinh viên</a>
+                        <a href="~/Admin/Users/Create">Thêm mới tài khoản</a>
+                    </li>
+                    <li>
+                        <a href="#">Sinh viên<span class="fa arrow"></span></a>
+                        <ul class="nav nav-third-level">
+                            <li>
+                                <a href="~/Admin/Students/Upload">Thêm danh sách sinh viên</a>
+                            </li>
+                            <li>
+                                <a href="~/Admin/Students">Quản lý sinh viên</a>
+                            </li>
+                            <li>
+                                <a href="~/Admin/Students/Convert">Cấp tài khoản thi cho sinh viên()</a>
+                            </li>
+                        </ul>
+                        
+                    </li>
+                </ul>
+                <!-- /.nav-second-level -->
+            </li>
+            <li>
+                <a href="#"><i class="fa fa-gears"></i> Quản lý chung<span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li>
+                        <a href="~/Admin/Classes">Quán lý danh sách lớp</a>
+                    </li>
+                    <li>
+                        <a href="~/Admin/Schedule">Quản lý ca thi()</a>
+                    </li>
+                    <li>
+                        <a href="~/Admin/Schedule/Detail">Quản lý chi tiết ca thi()</a>
+                    </li>
+                    <li>
+                        <a href="~/Admin/Rooms">Quản lý phòng</a>
+                    </li>
+                    <li>
+                        <a href="~/Admin/KhoaThi">Quản lý khóa thi</a>
                     </li>
                 </ul>
                 <!-- /.nav-second-level -->
@@ -27,7 +66,7 @@
                 <a href="#"><i class="fa fa-wrench fa-fw"></i> Cấu trúc đề<span class="fa arrow"></span></a>
                 <ul class="nav nav-second-level">
                     <li>
-                        <a href="#">Môn thi</a>
+                        <a href="#">Môn thi<span class="fa arrow"></span></a>
                         <ul class="nav nav-third-level">
                             <li>
                                 <a href="~/Admin/Subject/Create">Tạo môn thi</a>
@@ -38,15 +77,10 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="#">Module</a>
-                        <ul class="nav nav-third-level">
-                            <li>
-                                <a href="~/Admin/Module/Create">Tạo module</a>
-                            </li>
-                            <li>
-                                <a href="~/Admin/Module">Quản lý module</a>
-                            </li>
-                        </ul>
+                        <a href="~/Admin/Module">Quản lý module</a>
+                    </li>
+                    <li>
+                        <a href="~/Admin/AddData">Import câu hỏi</a>
                     </li>
                 </ul>
                 <!-- /.nav-third-level -->
@@ -58,7 +92,15 @@
                         <a href="~/Admin/Exam/Import">Import đề thi</a>
                     </li>
                     <li>
-                        <a href="~/Admin/Exam">Quản lý</a>
+                        <a href="#">Quản lý đề thi<span class="fa arrow"></span></a>
+                        <ul class="nav nav-third-level">
+                            <li>
+                                <a href="~/Admin/MakeTest">Quản lý đề chuẩn</a>
+                            </li>
+                            <li>
+                                <a href="~/Admin/MakeTest/DeTron">Quản lý đề trộn</a>
+                            </li>
+                        </ul>
                     </li>
                 </ul>
                 <!-- /.nav-second-level -->

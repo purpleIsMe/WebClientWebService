@@ -1,7 +1,7 @@
 ﻿$(document).ready(function () {
     document.getElementById('cau').setAttribute("disabled", "disabled");
     getInfo();
-    alert("Lưu ý sau khi hoàn thành bài thi và nhấn nút Kết thúc.\nBạn sẽ được xem điểm và đáp án trong vòng 10p\nBạn sẽ không thể quay lại thi được nữa");
+    alert("Lưu ý sau khi hoàn thành bài thi và nhấn nút Kết thúc.\nBạn sẽ được xem điểm và đáp án trong vòng 10 phút\nBạn sẽ không thể quay lại thi được nữa");
     getTest(numAns);
 });
 var idde;
@@ -106,7 +106,7 @@ function saveAnswer()
         contentType: "application/json; charset=utf-8",
         data: jsonStr1,
         success: function (data) {
-            alert("save answersheet");
+            alert("Bạn đã hoàn thành xong bài thi. Xin chúc mừng!!!");
         },
         error: function (err) {
             alert("Error: " + err.responseText);
@@ -217,12 +217,18 @@ function clock(i)
                 $("#counttime").val("00:00");
                 alert("Thời gian làm bài đã kết thúc");
                 clearInterval(k);
-                setTimeout(window.history.back(-1), 10000000);
+                var interval_obj = setInterval(function () {
+                    window.history.back(-1);
+                    clearInterval(interval_obj);
+                }, 600000);
             }
         }
         else {
             clearInterval(k);
-            setTimeout(window.history.back(-1), 10000000);
+            var interval_obj = setInterval(function () {
+                window.history.back(-1);
+                clearInterval(interval_obj);
+            }, 600000);
         }
     }, 1000);
 }

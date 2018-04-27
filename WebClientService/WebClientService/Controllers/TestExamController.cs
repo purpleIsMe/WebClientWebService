@@ -2,6 +2,8 @@
 using Model.DTO;
 using Model.EF;
 using System;
+using System.Net;
+using System.Net.Sockets;
 using System.Web.Mvc;
 using WebClientService.Common;
 
@@ -90,7 +92,8 @@ namespace WebClientService.Controllers
             }
             //request datada from json save sv
             ThiSinhDAO ts = new ThiSinhDAO();
-            bool m = ts.UpdateActiveTimeThiSinh(ida, a.RemainTime, true, true, null);
+            
+            bool m = ts.UpdateActiveTimeThiSinh(l.ThiSinhID, a.RemainTime, true, true, GetLocalIPAddress());
 
             bool kq = false;
             if (x == true && y == true && m==true)
@@ -98,7 +101,18 @@ namespace WebClientService.Controllers
             return Json(new { result = kq });
         }
 
-
+        public static string GetLocalIPAddress()
+        {
+            var host = Dns.GetHostEntry(Dns.GetHostName());
+            foreach (var ip in host.AddressList)
+            {
+                if (ip.AddressFamily == AddressFamily.InterNetwork)
+                {
+                    return ip.ToString();
+                }
+            }
+            throw new Exception("No network adapters with an IPv4 address in the system!");
+        }
 
     }
 }

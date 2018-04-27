@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
 using System.Data.SQLite;
+using System.Drawing;
 
 namespace WebClientService.Areas.Admin.Controllers
 {
@@ -28,11 +29,12 @@ namespace WebClientService.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult Index(SubjectModel q, HttpPostedFileBase file)
         {
+            q.nameModule = new QClassDAO().singleIDQClassInt(q.SelectedModule).Descr;
             if (file != null && file.ContentLength > 0 && q.SelectedSubject != 0)
             {
                 try
                 {
-                    string path = Path.Combine(Server.MapPath("~/Doc"),
+                    string path = Path.Combine(Server.MapPath("~/Doc/"+q.nameModule),
                                                Path.GetFileName(file.FileName));
                     file.SaveAs(path);
 
@@ -42,9 +44,9 @@ namespace WebClientService.Areas.Admin.Controllers
                     if (!SqLite2SqlServerQuestion(path, subID, classID))
                         ViewBag.Message = "Không thể lưu các câu hỏi này";
                     else
-                        ViewBag.Message = "ok";
+                    { ViewBag.Message = "Import danh sách câu hỏi thành công!!!"; }
 
-                    ViewBag.Message = "File uploaded successfully";
+                   // ViewBag.Message = "Import danh sách câu h?i thành công!!!";
                 }
                 catch (Exception ex)
                 {
@@ -87,7 +89,7 @@ namespace WebClientService.Areas.Admin.Controllers
 
                     if (reader.Read())
                     {
-                        SQLiteDataReader rs = SelectTable("Question", sqconn);
+                        SQLiteDataReader rs = SelectTable("[Question]", sqconn);
                         while (rs.Read())
                         {
                             if (!SaveQuestion(rs, SubjectID, classid))
@@ -95,12 +97,15 @@ namespace WebClientService.Areas.Admin.Controllers
                                 return false;
                             }
                         }
+                        return true;
                     }
+                    else return false;
                 }
-                return true;
+                return false;
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                //ViewBag.Message = "ERROR:" + e.Message.ToString();
                 return false;
             } // catch
         }
@@ -108,7 +113,7 @@ namespace WebClientService.Areas.Admin.Controllers
         {
             string Campo;
             int i;
-            Question q = new Question();
+            QuestionTemp q = new QuestionTemp();
 
             for (i = 0; i < rs.FieldCount; i++)
             {
@@ -129,28 +134,31 @@ namespace WebClientService.Areas.Admin.Controllers
                         q.QuestionNbr = rs.GetString(i);
                         break;
                     case "Content":
-                        //q.Content = ReadMsWordHavePic((Byte[])rs.GetValue(i));
                         q.Content = (Byte[])rs.GetValue(i);// != DBNull.Value ? (Byte[])rs.GetValue(i) : null;
                         break;
                     case "Question":
-                        //q.Question1 = ReadMsWordHavePic((Byte[])rs.GetValue(i));
-                        q.Question1 = (Byte[])rs.GetValue(i);// != DBNull.Value ? (Byte[])rs.GetValue(i) : null;
+                        q.Question = (Byte[])rs.GetValue(i);// != DBNull.Value ? (Byte[])rs.GetValue(i) : null;
+                      //  q.PicQuestion = imageToByteArray(byteArrayToImage((byte[])rs.GetValue(i)));
+                        //q.PicQuestion = System.IO.File.ReadAllBytes(((byte[])rs.GetValue(i));
                         break;
                     case "Answer1":
-                        //q.Answer1 = ReadMsWordHavePic((Byte[])rs.GetValue(i));
                         q.Answer1 = (Byte[])rs.GetValue(i);// != DBNull.Value ? (Byte[])rs.GetValue(i) : null;
+                     //   q.PicAnswer1 = imageToByteArray(byteArrayToImage((byte[])rs.GetValue(i)));
                         break;
                     case "Answer2":
                         //q.Answer2 = ReadMsWordHavePic((Byte[])rs.GetValue(i));
                         q.Answer2 = (Byte[])rs.GetValue(i);// != DBNull.Value ? (Byte[])rs.GetValue(i) : null;
+                       // q.PicAnswer2 = imageToByteArray(byteArrayToImage((byte[])rs.GetValue(i)));
                         break;
                     case "Answer3":
                         //q.Answer3 = ReadMsWordHavePic((Byte[])rs.GetValue(i));
                         q.Answer3 = (Byte[])rs.GetValue(i);// != DBNull.Value ? (Byte[])rs.GetValue(i) : null;
+                       // q.PicAnswer3 = imageToByteArray(byteArrayToImage((byte[])rs.GetValue(i)));
                         break;
                     case "Answer4":
                         //q.Answer4 = ReadMsWordHavePic((Byte[])rs.GetValue(i));
                         q.Answer4 = (Byte[])rs.GetValue(i);// != DBNull.Value ? (Byte[])rs.GetValue(i) : null;
+                       // q.PicAnswer4 = imageToByteArray(byteArrayToImage((byte[])rs.GetValue(i)));
                         break;
                     case "NoOfAnswers":
                         q.NoOfAnswers = rs.GetInt32(i);// (int)rs.GetValue(i);
@@ -184,11 +192,25 @@ namespace WebClientService.Areas.Admin.Controllers
                     maxlength = a[j];
             }
             q.MaxAnswerLen = maxlength;
-            if (!new QuestionDAO().AddPQ(q))
+            if (!new QuestionDAO().AddQuestionTemp(q))
             {
                 return false;
             }
             return true;
+        }
+        public static Image byteArrayToImage(byte[] byteArrayIn)
+        {
+            MemoryStream ms = new MemoryStream(byteArrayIn);
+            //Image returnImage = Image.FromStream(ms);
+            Image returnImage = (Bitmap)((new ImageConverter()).ConvertFrom(byteArrayIn));
+            return returnImage;
+
+        }
+        public static byte[] imageToByteArray(System.Drawing.Image imageIn)
+        {
+            MemoryStream ms = new MemoryStream();
+            imageIn.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+            return ms.ToArray();
         }
         private static string CreateSQLiteConnectionString(string sqlitePath, string password)
         {
@@ -204,11 +226,11 @@ namespace WebClientService.Areas.Admin.Controllers
         }
         public void listsubject(int id = -1)
         {
-            ViewBag.ListSubject = new SelectList(new SubjectDAO().GetListAll(), "ID", "Descr", id);
+            ViewBag.ListSubject = new SelectList(new SubjectDAO().GetListAll(), "idSub", "Descr", id);
         }
         public void listmodule(int idsub = -1)
         {
-            ViewBag.ListModule = new SelectList(new QClassDAO().listWithIDSubInt(idsub), "IDQClass", "Descr", idsub);
+            ViewBag.ListModule = new SelectList(new QClassDAO().listWithIDSubInt(idsub), "idQClass", "Descr", idsub);
         }
     }
 }

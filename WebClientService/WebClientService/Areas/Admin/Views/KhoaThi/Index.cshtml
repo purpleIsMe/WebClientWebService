@@ -1,0 +1,80 @@
+﻿@model Model.EF.KHOATHI
+@using Model.EF
+@{
+    ViewBag.Title = "Index";
+    Layout = "/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+@section js
+{
+    <script src="~/Assets/Admin/js/khoathi.js"></script>
+}
+@section Header
+{
+    DANH SÁCH KHÓA THI
+}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                DANH SÁCH KHÓA THI
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <div class="col-lg-3">
+                    <div class="form-group">
+                        <a id="btnCreate" class="btn btn-success" onclick='return createKhoaThi()'>Thêm mới khóa thi</a>
+                    </div>
+                </div>
+                <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                    <thead>
+                        <tr>
+                            <th>Điều khiển</th>
+                            <th>Mã khóa thi</th>
+                            <th>Tên khóa thi</th>
+                            <th>Trạng thái</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+
+                <div class="modal fade" id="bookModal">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title"><label id="title"></label></h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-horizontal">
+                                    <div class="form-group">
+                                        <div class="col-md-10">
+                                            <label>Mã khóa thi</label>
+                                            <input type="text" id="MaKhoaThi" class="form-control" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-10">
+                                            <label>Tên khóa thi</label>
+                                            <input type="text" id="TenKhoaThi" class="form-control" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-10">
+                                            <label>Trạng thái</label>
+                                            <input type="checkbox" id="TrangThai" class="form-control" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" id="btnClose" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                                <button type="button" id="btnSave" class="btn btn-primary">Cập nhật</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

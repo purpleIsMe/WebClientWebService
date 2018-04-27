@@ -24,26 +24,24 @@ namespace Model.EF
         [StringLength(100)]
         public string Position { get; set; }
 
+        [StringLength(100)]
+        public string Skype { get; set; }
+
         [Required]
         [StringLength(15)]
         public string Mobile { get; set; }
 
         [StringLength(100)]
-        public string Skype { get; set; }
-
-        [StringLength(100)]
         public string Email { get; set; }
 
+        public bool Active { get; set; }
+
+        public int IDPhanQuyen { get; set; }
         [StringLength(100)]
         public string Zalo { get; set; }
 
         [StringLength(100)]
         public string Facebook { get; set; }
-
-        public bool Active { get; set; }
-
-        public int IDPhanQuyen { get; set; }
-
         [Required]
         [StringLength(200)]
         public string Password { get; set; }

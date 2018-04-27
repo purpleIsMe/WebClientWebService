@@ -30,16 +30,7 @@ namespace Model.EF
         public string Mobile { get; set; }
 
         [StringLength(100)]
-        public string Skype { get; set; }
-
-        [StringLength(100)]
         public string Email { get; set; }
-
-        [StringLength(100)]
-        public string Zalo { get; set; }
-
-        [StringLength(100)]
-        public string Facebook { get; set; }
 
         public bool Active { get; set; }
 
@@ -60,5 +51,8 @@ namespace Model.EF
         public int IDClass { get; set; }
 
         public int? IDLecturer { get; set; }
+        public bool Gender { get; set; }
+        [StringLength(20)]
+        public string CMND { get; set; }
     }
 }

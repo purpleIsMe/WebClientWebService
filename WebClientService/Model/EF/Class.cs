@@ -16,5 +16,6 @@ namespace Model.EF
 
         [StringLength(200)]
         public string NameClass { get; set; }
+        public bool TrangThai { get; set; }
     }
 }

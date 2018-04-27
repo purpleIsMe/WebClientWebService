@@ -67,7 +67,7 @@ function getDetailQClass(id)
             $("#NameModule").val(data.Descr);
             $("#NumQues").val(data.ClassNbr);
             $("#Note").val(data.ChuThich);
-            $("#Status").val(data.TrangThai);
+            $("#Status").prop('checked', data.TrangThai);
             isUpdatable = true;
             $("#bookModal").modal('show');
         },

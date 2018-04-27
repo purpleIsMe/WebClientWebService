@@ -31,11 +31,12 @@ namespace WebClientService.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                var l = (UserLogin)Session[Constants.USER_SESSION];
                 var dao = new UserDAO();
                 var encrypted = Encryptor.MD5Hash(user.Password);
                 user.Password = encrypted;
                 user.CreateDate = DateTime.Now;
-
+                user.CreateBy = l.UserID;
                 long id = dao.AddUser(user);
                 if (id > 0)
                 {
@@ -43,7 +44,7 @@ namespace WebClientService.Areas.Admin.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Thêm user thất bại");
+                    ModelState.AddModelError("", "Thêm tài khoản thất bại");
                 }
             }
             return View("Index");

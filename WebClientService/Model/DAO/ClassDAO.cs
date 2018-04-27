@@ -5,8 +5,6 @@ using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Validation;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 
 namespace Model.DAO
@@ -18,7 +16,7 @@ namespace Model.DAO
         {
             dataContext = new WebClientDbContext();
         }
-        public int AddClass(Class Class)
+        public bool AddClass(Class Class)
         {
             try
             {
@@ -28,7 +26,7 @@ namespace Model.DAO
             catch (DbUpdateException e)
             {
                 Debug.Write(e.ToString());
-                throw;
+                return false;
             }
             catch (DbEntityValidationException e)
             {
@@ -40,9 +38,9 @@ namespace Model.DAO
                         Debug.WriteLine("- Property: \"{0}\", Error: \"{1}\"", ve.PropertyName, ve.ErrorMessage);
                     }
                 }
-                throw;
+                return false;
             }
-            return Class.IDClass;
+            return true;
         }
         public bool UpdateClass(Class ClassDAO)
         {
@@ -105,6 +103,14 @@ namespace Model.DAO
         public List<Class> ClassesOfLecturer(int id)
         {
             return dataContext.Classes.Where(i => i.IDLecturer == id).ToList();
+        }
+        public List<Class> ClassesNoneLecturer()
+        {
+            return dataContext.Classes.ToList();
+        }
+        public Class getInfoClass(int id)
+        {
+            return dataContext.Classes.Where(p => p.IDClass == id).SingleOrDefault();
         }
     }
 }

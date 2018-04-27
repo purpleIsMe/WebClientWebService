@@ -5,6 +5,7 @@ namespace Model.EF
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
+    using System.Web.UI.WebControls;
 
     [Table("QuestionTemp")]
     public partial class QuestionTemp
@@ -100,5 +101,20 @@ namespace Model.EF
         public string HostName { get; set; }
 
         public bool? Active { get; set; }
+
+        [Column(TypeName = "image")]
+        public byte[] PicQuestion { get; set; }
+
+        [Column(TypeName = "image")]
+        public byte[] PicAnswer1 { get; set; }
+
+        [Column(TypeName = "image")]
+        public byte[] PicAnswer2 { get; set; }
+
+        [Column(TypeName = "image")]
+        public byte[] PicAnswer3 { get; set; }
+
+        [Column(TypeName = "image")]
+        public byte[] PicAnswer4 { get; set; }
     }
 }

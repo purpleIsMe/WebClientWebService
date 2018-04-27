@@ -1,0 +1,96 @@
+﻿@{
+    ViewBag.Title = "DeTron";
+    Layout = "/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@section js
+{
+    <script src="~/Assets/Admin/js/dechuan.js"></script>
+}
+@section Header
+{
+    QUẢN LÝ ĐỀ TRỘN
+}
+<div class="row">
+    <div class="col-lg-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Thông tin ca thi
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <label>Khóa thi</label>
+                    </div>
+                    <div class="col-md-7">
+                        <select style="width:90%; height:35px" id="khoathi"></select>
+                    </div>
+                </div><br /><br />
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <label>Ca thi</label>
+                    </div>
+                    <div class="col-md-7">
+                        <select style="width:90%; height:35px" id="cathi"></select>
+                    </div>
+                </div><br /><br />
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <label>Môn thi</label>
+                    </div>
+                    <div class="col-md-7">
+                        <select style="width:90%; height:35px" id="monthi"></select>
+                    </div>
+                </div>
+                <br /><br />
+                <div class="form-group">
+                    <div class="col-md-4">
+                        <center> <button id="tronde" class="btn btn-success" >Trộn đề</button></center>
+                    </div>
+                    <div class="col-md-4">
+                        <center> <button id="khoade" class="btn btn-bitbucket">Khóa đề</button></center>
+                    </div>
+                    <div class="col-md-4">
+                        <center> <button id="mokhoa" class="btn btn-info">Mở khóa đề</button></center>
+                    </div>
+                </div><br /><br />
+                <table class="table table-striped table-bordered table-hover" id="bangdechuan">
+                    <thead>
+                        <tr>
+                            <th>Xử lý</th>
+                            <th>Mã đề chuẩn</th>
+                            <th>Tên đề chuẩn</th>
+                            <th>Môn thi</th>
+                            <th>Số lượng đề trộn</th>
+                            <th>Thời gian</th>
+                            <th>Khóa đề</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Danh sách đề trộn
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <table class="table" id="bangdetron">
+                    <thead>
+                        <tr>
+                            <th>Mã đề trộn</th>
+                            <th>Tên đề trộn</th>
+                            <th>Mã đề chuẩn</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -191,6 +191,10 @@ namespace Model.DAO
         {
             return dataContext.THISINHs.ToList();
         }
+        public List<THISINH> showListByIDCaChiTiet(int idcachitiet)
+        {
+            return dataContext.THISINHs.Where(i=>i.MaCaThi == idcachitiet).ToList();
+        }
         public bool UpdateActiveTimeThiSinh(int idts, int tg, bool hoanthanh, bool trangthai, string somay)
         {
             try
@@ -203,7 +207,7 @@ namespace Model.DAO
                     new SqlParameter("@DaHoanThanh",hoanthanh),
                     new SqlParameter("@ThoiGian",tg)
                 };
-                int res = dataContext.Database.ExecuteSqlCommand("update_thisinh @IDThiSinh, @TrangThai, @SoMay, @DaHoanThanh, @ThoiGian", valparams);
+                dataContext.Database.ExecuteSqlCommand("update_thisinh @IDThiSinh, @TrangThai, @SoMay, @DaHoanThanh, @ThoiGian", valparams);
                 dataContext.SaveChanges();
             }
             catch (DbEntityValidationException e)
